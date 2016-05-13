@@ -2,20 +2,31 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>Make a polynomial from your name!</title>
+  <title>Polynomial to Name!</title>
   <script src="./build/mathbox-bundle.js"></script>
   <link rel="stylesheet" href="./build/mathbox.css">
+
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.5.1/katex.min.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.5.1/katex.min.js"></script>
+
   <meta name="viewport" content="initial-scale=1, maximum-scale=1">
 </head>
 <body>
-  <div style="display: none">
-    <select id="button" style="padding: 10 30px; font-size: inherit;"><option value="HTML">HTML</option></select>
-  </div>
+
+
+Hello World!    
+<input type="text" id="userInput"=>give me input</input>
+<button onclick="test()">Submit</button>
+
+
+
 
   <script>
-    var button = document.querySelector('#button');
+
+
+//  var symbol = document.getElementsByTagName("userInput")[0].value;
+
+//    var button = document.querySelector('#button');
     var symbols = [
       'B',
       'r',
@@ -25,38 +36,15 @@
       'e',
       'n',
       '!',
-/*      '\\upsilon',
-      '\\gamma',
-      '\\varpi',
-      '\\phi',
-      '\\delta',
-      '\\kappa',
-      '\\rho',
-      '\\varphi',
-      '\\epsilon',
-      '\\lambda',
-      '\\varrho',
-      '\\chi',
-      '\\varepsilon',
-      '\\mu',
-      '\\sigma',
-      '\\psi',
-      '\\zeta',
-      '\\nu',
-      '\\varsigma',
-      '\\omega',
-      '\\eta',
-      'i',
- */
     ];
 
     // Define VDOM handler to clone real DOM elements
-    var clone = MathBox.DOM.createClass({
-      render: function (el, props, children) {
-        var button = children.cloneNode(true);
-        return button;
-      },
-    });
+//   var clone = MathBox.DOM.createClass({
+//      render: function (el, props, children) {
+//        var button = children.cloneNode(true);
+//        return button;
+//      },
+//    });
 
     // Define VDOM handler to format 'latex' into an HTML span
     var latex = MathBox.DOM.createClass({
@@ -306,4 +294,8 @@
 
   </script>
 </body>
+
+
+
+
 </html>
