@@ -29,6 +29,7 @@ Hello World!
 //  var symbol = document.getElementsByTagName("userInput")[0].value;
 
 //    var button = document.querySelector('#button');
+
     var symbols = [
       'B',
       'r',
@@ -39,6 +40,7 @@ Hello World!
       'n',
       '!',
     ];
+
 
     // Define VDOM handler to clone real DOM elements
 //   var clone = MathBox.DOM.createClass({
@@ -294,10 +296,15 @@ Hello World!
 
 */
 
+
+
   // This function will fire everytime a keypress occurs in the name input
   // TODO: deal with copy/paste and other inputs.
   d3.select('#name-input').on('keyup', function(event){
-    console.log(this.value);
+//    console.log(this.value);
+    var test = this.value;
+    console.log(test[0]);        
+    console.log(test);            
   })
   </script>
 </body>
