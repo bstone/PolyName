@@ -1,0 +1,22 @@
+{
+  "name": "polyname",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/b-stone/PolyName.git"
+  },
+  "author": "Jim Vallandingham <vlandham@gmail.com> (http://vallandingham.me/)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/b-stone/PolyName/issues"
+  },
+  "homepage": "https://github.com/b-stone/PolyName#readme",
+  "devDependencies": {
+    "http-server": "^0.9.0"
+  }
+}
