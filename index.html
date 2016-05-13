@@ -3,8 +3,9 @@
 <head>
   <meta charset="utf-8">
   <title>Polynomial to Name!</title>
-  <script src="./build/mathbox-bundle.js"></script>
-  <link rel="stylesheet" href="./build/mathbox.css">
+  <script src="./lib/mathbox-bundle.js"></script>
+  <script src="./lib/d3.js"></script>
+  <link rel="stylesheet" href="./lib/mathbox.css">
 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.5.1/katex.min.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.5.1/katex.min.js"></script>
@@ -14,9 +15,8 @@
 <body>
 
 
-Hello World!    
+Hello World!
 <input type="text" id="userInput"=>give me input</input>
-<button onclick="test()">Submit</button>
 
 
 
@@ -53,7 +53,7 @@ Hello World!
         return el('span', this.props);
       }
     });
-    
+
     mathbox = mathBox({
       plugins: ['core', 'controls', 'cursor'],
       controls: {
@@ -183,7 +183,7 @@ Hello World!
     .end();
 */
 
-/*    
+/*
     view.interval({
       width: 48,
       expr: function (emit, x, i, t) {
@@ -237,7 +237,7 @@ Hello World!
     });
 */
 
-/*  
+/*
     view.interval({
       width: 48,
       expr: function (emit, x, i, t) {
