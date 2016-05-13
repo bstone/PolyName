@@ -15,8 +15,10 @@
 <body>
 
 
+<p>
 Hello World!
-<input type="text" id="userInput"=>give me input</input>
+<input type="text" id="name-input"=></input>
+</p>
 
 
 
@@ -292,6 +294,11 @@ Hello World!
 
 */
 
+  // This function will fire everytime a keypress occurs in the name input
+  // TODO: deal with copy/paste and other inputs.
+  d3.select('#name-input').on('keyup', function(event){
+    console.log(this.value);
+  })
   </script>
 </body>
 
