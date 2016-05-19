@@ -11,13 +11,35 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.5.1/katex.min.js"></script>
 <!---->
   <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+
+      <style type="text/css">
+      /* No style rules here yet */   
+    </style>
 </head>
-<body>
+<body>    
 
 <p>
-Hello World!
+Type numbers here 
 <input type="text" id="name-input"=></input>
 </p>
+    <script type="text/javascript">
+      
+      //Width and height
+      var w = 800;
+      var h = 800;
+      
+      //Data
+//      var dataset = [ 5, 10, 15, 20, 25 ];
+      
+      //Create SVG element
+     var svg = d3.select("body")
+            .append("svg")
+            .attr("width", w)
+            .attr("height", h);    
+
+
+    </script>
+
 
 
 
@@ -173,7 +195,7 @@ console.log(view);
 */            
 
  
-
+/*
 
 
 //    var button = document.querySelector('#button');
@@ -276,8 +298,32 @@ console.log(view);
   // This function will fire everytime a keypress occurs in the name input
   // TODO: deal with copy/paste and other inputs.
   d3.select('#name-input').on('keyup', function(event){
-    var test = this.value;
-    console.log(test);    
+    var dataset = this.value;
+
+    console.log(dataset);   
+
+      var circles = svg.selectAll("circle")
+          .data(dataset)
+          .enter()
+          .append("circle");
+
+      circles.attr("cx", function(d, i) {
+//          d = d.charCodeAt();
+            return (i * 50) + 25;
+          })
+           .attr("cy", h/2)
+           .attr("r", function(d) {
+            d = d.charCodeAt();            
+            return d;
+           })
+           .attr("fill", "yellow")
+           .attr("stroke", "orange")
+           .attr("stroke-width", function(d) {
+            d = d.charCodeAt();            
+            return d/2;
+           });
+
+console.log(circles);
   })
   </script>
 </body>
