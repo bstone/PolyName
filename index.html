@@ -22,7 +22,8 @@
 Type your name here 
 <input type="text" id="name-input"=></input>
 </p>
-<p id="click-here">Click here to view points.</p>
+<p id="view-points">Click here to view points.</p>
+<p id="view-poly">Click here to view Polynomial.</p>
 <!--
     <script type="text/javascript">
       
@@ -188,13 +189,13 @@ Type your name here
 
   });
 
-  d3.select('#click-here')
+  d3.select('#view-points')
     .on("click", function() {
 //      alert("Hey, don't click that!");
 
       for (var i = 0; i < username.length; i++) {
-        pointset.push([i-5,username[i].charCodeAt()-100]);
-        console.log([i,username[i].charCodeAt()-100])
+        pointset.push([i-5,-(username[i].charCodeAt()-100)]);
+        console.log([i,-(username[i].charCodeAt()-100)])
       }
 
       console.log("pointset");
@@ -202,6 +203,36 @@ Type your name here
 //      pointset = [2,30];
 
       view.select('#data').set('data', [ pointset]);
+
+
+    });
+ 
+
+  d3.select('#view-poly')
+    .on("click", function() {
+//      alert("Hey, don't click that!");
+
+//      for (var i = 0; i < username.length; i++) {
+//        pointset.push([i-5,username[i].charCodeAt()-100]);
+//        console.log([i,username[i].charCodeAt()-100])
+//      }
+
+var data =
+  view.interval({
+    expr: function (emit, x, i, t) {
+      emit(x, 20*Math.sin(x + t));
+    },
+    width: 64,
+    channels: 2,
+  });
+
+  var curve =
+  view.line({
+    width: 5,
+    color: '#3090FF',
+  });
+
+//      view.select('#data').set('data', [ pointset]);
 
 
     });
