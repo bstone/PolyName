@@ -5,6 +5,7 @@
   <title>Polynomial from Name!</title>
   <script src="./lib/mathbox-bundle.js"></script>
   <script src="./lib/d3.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
   <link rel="stylesheet" href="./lib/mathbox.css">
 <!--
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.5.1/katex.min.css">
@@ -34,11 +35,19 @@ function newName() {
 }
 
 function deleteChar() {
-    location.reload();
+  var e = jQuery.Event("keydown");
+  e.which = 8; // # Some key code value
+  e.keyCode = 8
+  $("input").trigger(e);
+//    location.reload();
 }
 
 function addChar() {
-    location.reload();
+  var e = jQuery.Event("keydown");
+  e.which = 58; // # Some key code value
+  e.keyCode = 58
+  $("input").trigger(e);
+//    location.reload();
 }
 </script>
 
