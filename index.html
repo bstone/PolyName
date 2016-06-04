@@ -124,7 +124,7 @@ Type your name here
    view.array({
 //      items: 1,
       channels: 2,
-      live: true,
+      live: false,
       id: 'data',
       // data: is set below
     }).swizzle({
@@ -194,7 +194,7 @@ Type your name here
 //      alert("Hey, don't click that!");
 
       for (var i = 0; i < username.length; i++) {
-        pointset.push([i-5,-(username[i].charCodeAt()-100)]);
+        pointset.push([i-5,-(username[i].charCodeAt()-77)]);
         console.log([i-5,-(username[i].charCodeAt()-100)])
       }
 
@@ -250,11 +250,6 @@ Type your name here
 
           xfunBuilder[k] = arrayProduct(xfunBuilder[k]);
 
-//          for (var i = 0; i < xfunBuilder[k].length; i += 1) {  
-//            // s += array[i];  // sum
-//            xfun *= xfunBuilder[k][i];  //product
-//          }  
-
 
         }
 
@@ -272,8 +267,8 @@ Type your name here
 //        console.log([i,username[i].charCodeAt()-100])
 //      }
 
-        console.log("pointset");
-        console.log(pointset);
+//        console.log("pointset");
+//        console.log(pointset);
 
 /*
 
@@ -289,12 +284,12 @@ Type your name here
           }
         }
 //*/        
-console.log("lagrange"); 
-console.log(lagrange(-5));
-console.log(lagrange(-4));
-console.log(lagrange(-3));
-console.log(lagrange(-2));
-console.log(lagrange(-1));
+//console.log("lagrange"); 
+//console.log(lagrange(-5));
+//console.log(lagrange(-4));
+//console.log(lagrange(-3));
+//console.log(lagrange(-2));
+//console.log(lagrange(-1));
 
 
 var data =
