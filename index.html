@@ -195,18 +195,73 @@ Type your name here
 
       for (var i = 0; i < username.length; i++) {
         pointset.push([i-5,-(username[i].charCodeAt()-100)]);
-        console.log([i,-(username[i].charCodeAt()-100)])
+        console.log([i-5,-(username[i].charCodeAt()-100)])
       }
 
       console.log("pointset");
-      console.log(pointset[0][0]);
+      console.log(pointset);
 //      pointset = [2,30];
 
       view.select('#data').set('data', [ pointset]);
 
 
     });
- 
+
+  function arrayProduct(a) {
+    var p = 1;
+    for (var i = 0; i < a.length; i += 1) {      
+      // s += array[i];  // sum
+      p *= a[i];  //product
+    }
+
+    return p;
+  }
+
+  function arraySum(a) {
+    var s = 0;
+    for (var i = 0; i < a.length; i += 1) {      
+       s += a[i];  // sum
+      //p *= a[i];  //product
+    }
+
+    return s;
+  }  
+
+
+// Make this a function 
+  var xfunBuilder=[];
+
+  function lagrange(x) {
+    xfunBuilder=[];   
+
+
+        for (var k = 0; k < username.length; k++) {
+          xfunBuilder.push([]); 
+          
+          for (var j = 0; j < username.length; j++) {
+            
+            if (j != k) {
+              xfunBuilder[k].push((x - pointset[j][0])/(pointset[k][0]-pointset[j][0]));
+            }
+
+          }
+
+          xfunBuilder[k].push(pointset[k][1]);
+
+          xfunBuilder[k] = arrayProduct(xfunBuilder[k]);
+
+//          for (var i = 0; i < xfunBuilder[k].length; i += 1) {  
+//            // s += array[i];  // sum
+//            xfun *= xfunBuilder[k][i];  //product
+//          }  
+
+
+        }
+
+        return arraySum(xfunBuilder);
+  }
+
+
 
   d3.select('#view-poly')
     .on("click", function() {
@@ -217,28 +272,38 @@ Type your name here
 //        console.log([i,username[i].charCodeAt()-100])
 //      }
 
+        console.log("pointset");
         console.log(pointset);
 
-        var xfunBuilder=[];
-        var x;
+/*
+
+        var x = 100;
         var xfun; 
+
         for (var k = 0; k < username.length; k++) {
           xfunBuilder.push([]); 
           for (var j = 0; j < username.length; j++) {
             if (j != k) {
-              xfunBuilder[k].push((100 - pointset[j][0])/(pointset[k][0]-pointset[j][0]));
+              xfunBuilder[k].push((x - pointset[j][0])/(pointset[k][0]-pointset[j][0]));
             }
           }
         }
-console.log(xfunBuilder[0]); 
+//*/        
+console.log("lagrange"); 
+console.log(lagrange(-5));
+console.log(lagrange(-4));
+console.log(lagrange(-3));
+console.log(lagrange(-2));
+console.log(lagrange(-1));
+
 
 var data =
   view.interval({
     expr: function (emit, x) {
 
-       emit(x, 20*x*x+3);
+       emit(x, lagrange(x));
     },
-    width: 3,
+    width: 512,
     channels: 2,
   });
 
