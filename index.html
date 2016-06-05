@@ -13,7 +13,7 @@
 <!---->
   <meta name="viewport" content="initial-scale=1, maximum-scale=1">
 
-      <style type="text/css">
+    <style type="text/css">
       /* No style rules here yet */   
     </style>
 </head>
@@ -161,31 +161,7 @@ d3.select('#add-char')
   d3.select('#name-input').on('keyup', function(event){
     username = this.value;
     console.log(username);
-
-    /*
-    // Add some data
-    var data =
-      view.interval({
-        expr: function (emit, x, i, t) {
-          emit(x, Math.sin(x + 0));
-        },
-        width: 32,
-        channels: 2,
-      });
-
-
-    // Draw some points
-    var points =
-      view
-      .point({
-        size: 10,
-        color: '#3090FF',
-      });
-    */
-
-
-
-  });
+    });
 
   d3.select('#view-points')
     .on("click", function() {
