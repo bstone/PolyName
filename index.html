@@ -35,6 +35,17 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.5.1/katex.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.5.1/katex.min.js"></script>
   <!---->
+    <style type="text/css">
+
+      #canvasElement {
+        background-color: #FFF;
+        cursor: default;
+        display:inline;
+        z-index:2;
+        padding-bottom: 10px;
+      }
+
+    </style>
   </head>
 
   <body role="document">
@@ -56,20 +67,26 @@
     </nav>
 
 
-     <div class="container theme-showcase" role="main" style="padding-top: 70px;
-    padding-bottom: 30px;"> 
-
+    <div class="container theme-showcase" role="main" style="padding-top: 70px; padding-bottom: 30px;"> 
 
       <div class="page-header">
         <h1>Type your name: <input type="text" id="name-input"=></input></h1>
       </div>
+
       <p>
         <button id="view-points" type="button" class="btn btn-lg btn-primary">View Points</button>
         <button id="view-poly" type="button" class="btn btn-lg btn-primary">View Polynomial</button>
         <button id="delete-char" type="button" class="btn btn-lg btn-primary">Delete Letter</button>
         <button id="add-char" type="button" class="btn btn-lg btn-primary">Add Letter</button>
-        <button onclick="newName()" type="button" class="btn btn-lg btn-primary">Reload and enter a different name</button>
+        <button onclick="newName()" type="button" class="btn btn-lg btn-primary">Refresh</button>
       </p>
+
+      <div class="container">
+        <div id="canvasElement"></div>
+      </div>
+
+    </div>
+
 
 
 <!--      
@@ -114,6 +131,7 @@
 
 
 <script>
+
 function newName() {
     location.reload();
 }
@@ -353,52 +371,8 @@ function multiplyMatrices(m1, m2) {
 
 d3.select('#view-poly')
     .on("click", function() {
-//      alert("Hey, don't click that!");
 
-//      for (var i = 0; i < username.length; i++) {
-//        pointset.push([i-5,username[i].charCodeAt()-100]);
-//        console.log([i,username[i].charCodeAt()-100])
-//      }
-
-//        console.log("pointset");
-//        console.log(pointset);
-
-/*
-
-        var x = 100;
-        var xfun; 
-
-        for (var k = 0; k < username.length; k++) {
-          xfunBuilder.push([]); 
-          for (var j = 0; j < username.length; j++) {
-            if (j != k) {
-              xfunBuilder[k].push((x - pointset[j][0])/(pointset[k][0]-pointset[j][0]));
-            }
-          }
-        }
-//*/        
-//console.log("lagrange"); 
-//console.log(lagrange(-5));
-//console.log(lagrange(-4));
-//console.log(lagrange(-3));
-//console.log(lagrange(-2));
-//console.log(lagrange(-1));
-//console.log(math.inv(4));
   console.table(vandermonde(pointset));
-
-
-//var m1 = vandermonde(pointset); // [[1,2],[3,4]];
-//var m1 = [[1,2],[3,4]];
-//var m2 = matrix_invert(m1);
-
-//console.table(m1);
-//console.table(m2);
-
-//var mResult = multiplyMatrices(m1, m2);
-
-/*In Google Chrome and Firefox you can do:*/
-
-//console.table(mResult);
 
   var data =
     view.interval({
