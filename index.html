@@ -42,35 +42,10 @@ d3.select('#delete-char')
 
 d3.select('#add-char')
   .on("click", function() {
-    username = username+"a";
+    if (username.length < pointset.length) {
+      username = username+"a";
+    }
   });
-
-</script>
-
-<!--
-    <script type="text/javascript">
-      
-      //Width and height
-      var w = 800;
-      var h = 800;
-      
-      //Data
-//      var dataset = [ 5, 10, 15, 20, 25 ];
-      
-      //Create SVG element
-     var svg = d3.select("body")
-            .append("svg")
-            .attr("width", w)
-            .attr("height", h);    
-
-
-    </script>
-<!---->
-
-
-
-
-  <script>
 
 
 ///*
@@ -147,7 +122,7 @@ d3.select('#add-char')
    view.array({
 //      items: 1,
       channels: 2,
-      live: false,
+      live: true,
       id: 'data',
       // data: is set below
     }).swizzle({
@@ -217,7 +192,7 @@ d3.select('#add-char')
 //      alert("Hey, don't click that!");
 
       for (var i = 0; i < username.length; i++) {
-        pointset.push([i-5,-(username[i].charCodeAt()-77)]);
+        pointset.push([i-Math.floor(username.length/2),-(username[i].charCodeAt()-77)]);
         console.log([i-5,-(username[i].charCodeAt()-100)])
       }
 
