@@ -7,6 +7,7 @@
   <script src="./lib/d3.js"></script>
   <link rel="stylesheet" href="./lib/mathbox.css">
 <!--
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.5.1/katex.min.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.5.1/katex.min.js"></script>
 <!---->
@@ -22,8 +23,30 @@
 Type your name here 
 <input type="text" id="name-input"=></input>
 </p>
-<p id="view-points">Click here to view points.</p>
-<p id="view-poly">Click here to view Polynomial.</p>
+<button id="view-points">Click here to view points.</button>
+<button id="view-poly">Click here to view Polynomial.</button>
+<button id="delete-char">Delete letter from name</button>
+<button id="add-char">Add letter back to name</button>
+<button onclick="newName()">Reload and enter a different name</button>
+
+<script>
+function newName() {
+    location.reload();
+}
+
+d3.select('#delete-char')
+  .on("click", function() {
+    username = username.slice(0,username.length-1);
+  });
+
+
+d3.select('#add-char')
+  .on("click", function() {
+    username = username+"a";
+  });
+
+</script>
+
 <!--
     <script type="text/javascript">
       
@@ -229,9 +252,9 @@ Type your name here
 
 
 // Make this a function 
-  var xfunBuilder=[];
+var xfunBuilder=[];
 
-  function lagrange(x) {
+function lagrange(x) {
     xfunBuilder=[];   
 
 
@@ -256,9 +279,44 @@ Type your name here
         return arraySum(xfunBuilder);
   }
 
+  
+
+function vandermonde (a) {
+
+    var vand = [];
+
+    for(var k = 0; k < a.length; k++) {
+      vand.push([]);
+
+      for (var i = 0; i < a.length; i++) {
+        vand[k].push(Math.pow(a[k][0],a.length - i -1));
+      }
+
+    }
+
+    return vand;
+  }
 
 
-  d3.select('#view-poly')
+
+function multiplyMatrices(m1, m2) {
+    var result = [];
+    for (var i = 0; i < m1.length; i++) {
+        result[i] = [];
+        for (var j = 0; j < m2[0].length; j++) {
+            var sum = 0;
+            for (var k = 0; k < m1[0].length; k++) {
+                sum += m1[i][k] * m2[k][j];
+            }
+            result[i][j] = sum;
+        }
+    }
+    return result;
+}
+
+
+
+d3.select('#view-poly')
     .on("click", function() {
 //      alert("Hey, don't click that!");
 
@@ -290,28 +348,43 @@ Type your name here
 //console.log(lagrange(-3));
 //console.log(lagrange(-2));
 //console.log(lagrange(-1));
+//console.log(math.inv(4));
+  console.table(vandermonde(pointset));
 
 
-var data =
-  view.interval({
-    expr: function (emit, x) {
+//var m1 = vandermonde(pointset); // [[1,2],[3,4]];
+//var m1 = [[1,2],[3,4]];
+//var m2 = matrix_invert(m1);
 
-       emit(x, lagrange(x));
-    },
-    width: 512,
-    channels: 2,
-  });
+//console.table(m1);
+//console.table(m2);
 
-  var curve =
-  view.line({
-    width: 5,
-    color: '#3090FF',
-  });
+//var mResult = multiplyMatrices(m1, m2);
+
+/*In Google Chrome and Firefox you can do:*/
+
+//console.table(mResult);
+
+  var data =
+    view.interval({
+      expr: function (emit, x) {
+
+         emit(x, lagrange(x));
+      },
+      width: 512,
+      channels: 2,
+    });
+
+    var curve =
+    view.line({
+      width: 5,
+      color: '#3090FF',
+    });
 
 //      view.select('#data').set('data', [ pointset]);
 
 
-    });
+  });
  
 
 /*
