@@ -76,7 +76,7 @@
       <div class="row">
 
         <div class="col-md-2">
-          <p><button id="view-points" type="button" class="btn btn-lg btn-primary">View Points</button></p>
+<!--          <p><button id="view-points" type="button" class="btn btn-lg btn-primary">View Points</button></p> -->
           <p><button id="view-poly" type="button" class="btn btn-lg btn-primary">View Polynomial</button></p>
           <p><button id="delete-char" type="button" class="btn btn-lg btn-primary">Delete Letter</button></p>
           <p><button id="add-char" type="button" class="btn btn-lg btn-primary">Add Letter</button></p>
@@ -134,8 +134,9 @@ document.getElementById('container').appendChild( divContainer );
 
 //three.renderer = new THREE.WebGLRenderer();
 
-width  = 800; //window.innerWidth-300;
-height = 500; //window.innerHeight-100;
+width  = Math.min(800,window.innerWidth);
+height = width/2; //width/2; //window.innerHeight-100;
+
 
 three.renderer.setSize( width, height); 
 divContainer.appendChild( three.renderer.domElement );
@@ -241,20 +242,43 @@ d3.select('#name-input').on('keyup', function(event){
     console.log(username);
     });
 
-d3.select('#view-points')
+d3.select('#view-poly')
     .on("click", function() {
 //      alert("Hey, don't click that!");
 
       for (var i = 0; i < username.length; i++) {
         pointset.push([i-Math.floor(username.length/2),-(username[i].charCodeAt()-77)]);
-        console.log([i-5,-(username[i].charCodeAt()-100)])
+//        console.log([i-5,-(username[i].charCodeAt()-100)])
       }
 
-      console.log("pointset");
-      console.log(pointset);
+//      console.log("pointset");
+//      console.log(pointset);
 //      pointset = [2,30];
+      
+      view.select('#data').set('data', [ pointset]);
 
-view.select('#data').set('data', [ pointset]);
+//        console.table(vandermonde(pointset));
+
+  var data =
+    view.interval({
+      expr: function (emit, x) {
+
+         emit(x, lagrange(x));
+      },
+      width: 512,
+      channels: 2,
+    });
+
+    var curve =
+    view.line({
+      width: 5,
+      color: '#3090FF',
+    });
+
+    d3.select("#view-poly").html("Success!").classed("btn btn-lg btn-success", true); 
+
+//    document.getElementById("view-poly").disabled = true; // Turns button off, but I don't like the looks.
+//    d3.select("#view-poly").attr( 'id', 'null');
 
 
     });
@@ -343,7 +367,7 @@ function multiplyMatrices(m1, m2) {
     return result;
 }
 
-
+/*
 
 d3.select('#view-poly')
     .on("click", function() {
@@ -370,7 +394,7 @@ d3.select('#view-poly')
 
 
   });
- 
+//*/ 
 
 /*
 
