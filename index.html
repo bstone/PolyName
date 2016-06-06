@@ -73,60 +73,20 @@
         <h1>Type your name: <input type="text" id="name-input"=></input></h1>
       </div>
 
-      <p>
-        <button id="view-points" type="button" class="btn btn-lg btn-primary">View Points</button>
-        <button id="view-poly" type="button" class="btn btn-lg btn-primary">View Polynomial</button>
-        <button id="delete-char" type="button" class="btn btn-lg btn-primary">Delete Letter</button>
-        <button id="add-char" type="button" class="btn btn-lg btn-primary">Add Letter</button>
-        <button onclick="newName()" type="button" class="btn btn-lg btn-primary">Refresh</button>
-      </p>
+      <div style="width: 15%; float: left;">
+        <p><button id="view-points" type="button" class="btn btn-lg btn-primary">View Points</button></p>
+        <p><button id="view-poly" type="button" class="btn btn-lg btn-primary">View Polynomial</button></p>
+        <p><button id="delete-char" type="button" class="btn btn-lg btn-primary">Delete Letter</button></p>
+        <p><button id="add-char" type="button" class="btn btn-lg btn-primary">Add Letter</button></p>
+        <p><button onclick="newName()" type="button" class="btn btn-lg btn-primary">Refresh</button></p>
+      </div>
 
-      <div class="container">
+      <div id="container" class="container" style="margin-left: 15%; width: 75%;">
         <div id="canvasElement"></div>
       </div>
 
     </div>
 
-
-
-<!--      
-      <p>
-        <button type="button" class="btn btn-lg btn-default">Default</button>
-        <button type="button" class="btn btn-lg btn-primary">Primary</button>
-        <button type="button" class="btn btn-lg btn-success">Success</button>
-        <button type="button" class="btn btn-lg btn-info">Info</button>
-        <button type="button" class="btn btn-lg btn-warning">Warning</button>
-        <button type="button" class="btn btn-lg btn-danger">Danger</button>
-        <button type="button" class="btn btn-lg btn-link">Link</button>
-      </p>
-      <p>
-        <button type="button" class="btn btn-default">Default</button>
-        <button type="button" class="btn btn-primary">Primary</button>
-        <button type="button" class="btn btn-success">Success</button>  
-        <button type="button" class="btn btn-info">Info</button>
-        <button type="button" class="btn btn-warning">Warning</button>
-        <button type="button" class="btn btn-danger">Danger</button>
-        <button type="button" class="btn btn-link">Link</button>
-      </p>
-      <p>
-        <button type="button" class="btn btn-sm btn-default">Default</button>
-        <button type="button" class="btn btn-sm btn-primary">Primary</button>
-        <button type="button" class="btn btn-sm btn-success">Success</button>
-        <button type="button" class="btn btn-sm btn-info">Info</button>
-        <button type="button" class="btn btn-sm btn-warning">Warning</button>
-        <button type="button" class="btn btn-sm btn-danger">Danger</button>
-        <button type="button" class="btn btn-sm btn-link">Link</button>
-      </p>
-      <p>
-        <button type="button" class="btn btn-xs btn-default">Default</button>
-        <button type="button" class="btn btn-xs btn-primary">Primary</button>
-        <button type="button" class="btn btn-xs btn-success">Success</button>
-        <button type="button" class="btn btn-xs btn-info">Info</button>
-        <button type="button" class="btn btn-xs btn-warning">Warning</button>
-        <button type="button" class="btn btn-xs btn-danger">Danger</button>
-        <button type="button" class="btn btn-xs btn-link">Link</button>
-      </p>
--->
 
 
 
@@ -166,6 +126,12 @@ if (mathbox.fallback) throw "WebGL not supported"
 var three = mathbox.three;
 three.renderer.setClearColor(new THREE.Color(0xFFFFFF), 1.0);
 
+divContainer = document.getElementById( 'canvasElement');
+document.getElementById('container').appendChild( divContainer );
+
+//three.renderer = new THREE.WebGLRenderer();
+three.renderer.setSize( 700, 500); 
+divContainer.appendChild( three.renderer.domElement );
 
 //d3.selectAll('#canvasElement').append('three.canvas');
 //console.log(mathbox);
@@ -603,8 +569,48 @@ d3.select('#view-poly')
 console.log(circles);
   })
 */  
+
+
   </script>
 
+<!--      
+      <p>
+        <button type="button" class="btn btn-lg btn-default">Default</button>
+        <button type="button" class="btn btn-lg btn-primary">Primary</button>
+        <button type="button" class="btn btn-lg btn-success">Success</button>
+        <button type="button" class="btn btn-lg btn-info">Info</button>
+        <button type="button" class="btn btn-lg btn-warning">Warning</button>
+        <button type="button" class="btn btn-lg btn-danger">Danger</button>
+        <button type="button" class="btn btn-lg btn-link">Link</button>
+      </p>
+      <p>
+        <button type="button" class="btn btn-default">Default</button>
+        <button type="button" class="btn btn-primary">Primary</button>
+        <button type="button" class="btn btn-success">Success</button>  
+        <button type="button" class="btn btn-info">Info</button>
+        <button type="button" class="btn btn-warning">Warning</button>
+        <button type="button" class="btn btn-danger">Danger</button>
+        <button type="button" class="btn btn-link">Link</button>
+      </p>
+      <p>
+        <button type="button" class="btn btn-sm btn-default">Default</button>
+        <button type="button" class="btn btn-sm btn-primary">Primary</button>
+        <button type="button" class="btn btn-sm btn-success">Success</button>
+        <button type="button" class="btn btn-sm btn-info">Info</button>
+        <button type="button" class="btn btn-sm btn-warning">Warning</button>
+        <button type="button" class="btn btn-sm btn-danger">Danger</button>
+        <button type="button" class="btn btn-sm btn-link">Link</button>
+      </p>
+      <p>
+        <button type="button" class="btn btn-xs btn-default">Default</button>
+        <button type="button" class="btn btn-xs btn-primary">Primary</button>
+        <button type="button" class="btn btn-xs btn-success">Success</button>
+        <button type="button" class="btn btn-xs btn-info">Info</button>
+        <button type="button" class="btn btn-xs btn-warning">Warning</button>
+        <button type="button" class="btn btn-xs btn-danger">Danger</button>
+        <button type="button" class="btn btn-xs btn-link">Link</button>
+      </p>
+-->
 
 
 
