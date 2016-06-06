@@ -73,16 +73,19 @@
         <h1>Type your name: <input type="text" id="name-input" autofocus="autofocus"></input></h1>
       </div>
 
-      <div style="width: 15%; float: left;">
-        <p><button id="view-points" type="button" class="btn btn-lg btn-primary">View Points</button></p>
-        <p><button id="view-poly" type="button" class="btn btn-lg btn-primary">View Polynomial</button></p>
-        <p><button id="delete-char" type="button" class="btn btn-lg btn-primary">Delete Letter</button></p>
-        <p><button id="add-char" type="button" class="btn btn-lg btn-primary">Add Letter</button></p>
-        <p><button onclick="newName()" type="button" class="btn btn-lg btn-primary">Refresh</button></p>
-      </div>
+      <div class="row">
 
-      <div id="container" class="container" style="margin-left: 15%;">
-        <div id="canvasElement"></div>
+        <div class="col-md-2">
+          <p><button id="view-points" type="button" class="btn btn-lg btn-primary">View Points</button></p>
+          <p><button id="view-poly" type="button" class="btn btn-lg btn-primary">View Polynomial</button></p>
+          <p><button id="delete-char" type="button" class="btn btn-lg btn-primary">Delete Letter</button></p>
+          <p><button id="add-char" type="button" class="btn btn-lg btn-primary">Add Letter</button></p>
+          <p><button onclick="newName()" type="button" class="btn btn-lg btn-primary">Refresh</button></p>
+        </div>
+
+        <div id="container" class="col-md-8">
+          <div id="canvasElement"></div>
+        </div>
       </div>
 
     </div>
@@ -160,7 +163,7 @@ var camera =
       mathbox
       .camera({
         proxy: true,
-        position: [0, 0, 3],
+        position: [0, 0, 2],
       });
 
 
