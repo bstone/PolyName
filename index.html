@@ -7,7 +7,7 @@
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <meta name="Generate a polynomial from your name" content="">
     <meta name="Branden Stone" content="">
-    <link rel="icon" href="../../favicon.ico"> 
+<!--    <link rel="icon" href="../../favicon.ico"> -->
 
     <title>Polynomial from Name!</title>
 
@@ -161,14 +161,16 @@ var mathbox = mathBox({
         //klass: THREE.TrackballControls,
       },
     });
-    if (mathbox.fallback) throw "WebGL not supported"
+if (mathbox.fallback) throw "WebGL not supported"
 
-    var three = mathbox.three;
-    three.renderer.setClearColor(new THREE.Color(0xFFFFFF), 1.0);
+var three = mathbox.three;
+three.renderer.setClearColor(new THREE.Color(0xFFFFFF), 1.0);
 
 
+//d3.selectAll('#canvasElement').append('three.canvas');
+//console.log(mathbox);
 
-    var colors = {
+var colors = {
       x: 0xFF4136,   // red
       y: 0xFFDC00,   // yellow
       z: 0x0074D9,   // blue
@@ -183,7 +185,7 @@ var mathbox = mathBox({
 
 
     // Place camera
-    var camera =
+var camera =
       mathbox
       .camera({
         proxy: true,
@@ -192,7 +194,7 @@ var mathbox = mathBox({
 
 
     // 2D cartesian
-    var view =
+var view =
       mathbox
       .cartesian({
         range: [[-10, 10], [-50, 50]],
@@ -200,7 +202,7 @@ var mathbox = mathBox({
       });
 
     // Axes + grid
-    view
+view
       .axis({
         axis: 1,
         width: 3,
@@ -216,12 +218,12 @@ var mathbox = mathBox({
       });
 
     // Make axes black
-    mathbox.select('axis').set('color', 'black');
+mathbox.select('axis').set('color', 'black');
 
     // Calibrate focus distance for units
-    mathbox.set('focus', 3);
+mathbox.set('focus', 3);
 
-   view.array({
+view.array({
 //      items: 1,
       channels: 2,
       live: true,
@@ -241,7 +243,7 @@ var mathbox = mathBox({
       size: 18,
     })
 
-  var pointset = [];
+var pointset = [];
 
   view.select('#data').set('data', [ pointset]);
 //console.log(view.select('#data')); 
@@ -258,14 +260,14 @@ var mathbox = mathBox({
       ])
 */            
 
-  var username;
+var username;
 
-  d3.select('#name-input').on('keyup', function(event){
+d3.select('#name-input').on('keyup', function(event){
     username = this.value;
     console.log(username);
     });
 
-  d3.select('#view-points')
+d3.select('#view-points')
     .on("click", function() {
 //      alert("Hey, don't click that!");
 
@@ -278,12 +280,12 @@ var mathbox = mathBox({
       console.log(pointset);
 //      pointset = [2,30];
 
-      view.select('#data').set('data', [ pointset]);
+view.select('#data').set('data', [ pointset]);
 
 
     });
 
-  function arrayProduct(a) {
+function arrayProduct(a) {
     var p = 1;
     for (var i = 0; i < a.length; i += 1) {      
       // s += array[i];  // sum
@@ -293,7 +295,7 @@ var mathbox = mathBox({
     return p;
   }
 
-  function arraySum(a) {
+function arraySum(a) {
     var s = 0;
     for (var i = 0; i < a.length; i += 1) {      
        s += a[i];  // sum
@@ -612,7 +614,7 @@ console.log(circles);
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script>window.jQuery || document.write('<script src="./lib/jquery.min.js"><\/script>')</script>
     <script src="./lib/bootstrap.min.js"></script>
-    <script src="./lib/docs.min.js"></script>
+<!--    <script src="./lib/docs.min.js"></script>-->
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script src="./lib/ie10-viewport-bug-workaround.js"></script>
 
