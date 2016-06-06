@@ -78,8 +78,8 @@
         <div class="col-md-2">
 <!--          <p><button id="view-points" type="button" class="btn btn-lg btn-primary">View Points</button></p> -->
           <p><button id="view-poly" type="button" class="btn btn-lg btn-primary">View Polynomial</button></p>
-          <p><button id="delete-char" type="button" class="btn btn-lg btn-primary">Delete Letter</button></p>
-          <p><button id="add-char" type="button" class="btn btn-lg btn-primary">Add Letter</button></p>
+          <p><button id="delete-char" type="button" class="btn btn-lg btn-primary" disabled="true">Delete Letter</button></p>
+          <p><button id="add-char" type="button" class="btn btn-lg btn-primary" disabled="true">Add Letter</button></p>
           <p><button onclick="newName()" type="button" class="btn btn-lg btn-primary">Refresh</button></p>
         </div>
 
@@ -277,7 +277,11 @@ d3.select('#view-poly')
 
     d3.select("#view-poly").html("Success!").classed("btn btn-lg btn-success", true); 
 
-//    document.getElementById("view-poly").disabled = true; // Turns button off, but I don't like the looks.
+    document.getElementById("delete-char").disabled = false; // Turns button off, but I don't like the looks.
+//    d3.select("#add-char").attr( 'disabled', 'false'); // why doesn't this work? It seems to change it, but nothing happens.
+    document.getElementById("add-char").disabled = false; // Turns button off, but I don't like the looks.
+
+    document.getElementById("view-poly").disabled = true; // Turns button off, but I don't like the looks.
 //    d3.select("#view-poly").attr( 'id', 'null');
 
 
