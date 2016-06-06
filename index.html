@@ -70,7 +70,7 @@
     <div class="container theme-showcase" role="main" style="padding-top: 70px; padding-bottom: 30px;"> 
 
       <div class="page-header">
-        <h1>Type your name: <input type="text" id="name-input"=></input></h1>
+        <h1>Type your name: <input type="text" id="name-input" autofocus="autofocus"></input></h1>
       </div>
 
       <div style="width: 15%; float: left;">
@@ -81,7 +81,7 @@
         <p><button onclick="newName()" type="button" class="btn btn-lg btn-primary">Refresh</button></p>
       </div>
 
-      <div id="container" class="container" style="margin-left: 15%; width: 75%;">
+      <div id="container" class="container" style="margin-left: 15%;">
         <div id="canvasElement"></div>
       </div>
 
@@ -130,10 +130,15 @@ divContainer = document.getElementById( 'canvasElement');
 document.getElementById('container').appendChild( divContainer );
 
 //three.renderer = new THREE.WebGLRenderer();
-three.renderer.setSize( 700, 500); 
+
+width  = 800; //window.innerWidth-300;
+height = 500; //window.innerHeight-100;
+
+three.renderer.setSize( width, height); 
 divContainer.appendChild( three.renderer.domElement );
 
-//d3.selectAll('#canvasElement').append('three.canvas');
+
+//d3.selectAll('#canvasElement').append(three.renderer.domElement);
 //console.log(mathbox);
 
 var colors = {
