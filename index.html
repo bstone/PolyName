@@ -7,7 +7,7 @@
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <meta name="Generate a polynomial from your name" content="">
     <meta name="Branden Stone" content="">
-<!--    <link rel="icon" href="../../favicon.ico"> -->
+
 
     <title>Polynomial from Name!</title>
 
@@ -261,7 +261,7 @@ d3.select('#view-poly')
 
   var data =
     view.interval({
-      expr: function (emit, x) {
+      expr: function (emit, x, t) {
 
          emit(x, lagrange(x));
       },
