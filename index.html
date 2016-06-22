@@ -138,6 +138,8 @@ document.getElementById('container').appendChild( divContainer );
 width  = Math.min(800,window.innerWidth);
 height = width/2; //width/2; //window.innerHeight-100;
 
+console.log(width);
+console.log(window.innerWidth);
 
 three.renderer.setSize( width, height); 
 divContainer.appendChild( three.renderer.domElement );
@@ -217,7 +219,7 @@ view.array({
 */
     .point({
       color: colors.x,
-      size: 40,
+      size: window.innerWidth*0.016,
       zIndex: 1,
     }).text({
       font: 'Helvetica',
@@ -232,7 +234,7 @@ view.array({
     .label({
       color: 'white', //'#30A0FF',
       snap: false,
-      size: 60,
+      size: window.innerWidth*0.023,
       offset: [0, 0],
       depth: .5,
       zIndex: 1,
@@ -302,7 +304,7 @@ d3.select('#view-poly')
 //          factorX: 1,
 //          factorY: 1,
           }).line({
-          width: 10,
+          width: window.innerWidth*0.004,
           color: '#3090FF',
           });
 
