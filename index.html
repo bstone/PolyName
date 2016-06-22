@@ -7,7 +7,7 @@
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <meta name="Generate a polynomial from your name" content="">
     <meta name="Branden Stone" content="">
-<!--    <link rel="icon" href="../../favicon.ico"> -->
+
 
     <title>Polynomial from Name!</title>
 
@@ -155,11 +155,7 @@ var colors = {
       xyz: 0x654321, // brown
     }
 
-    // Do stuff with mathbox,
-    // for example: (see docs/intro.md)
-
-
-    // Place camera
+// Place camera
 var camera =
       mathbox
       .camera({
@@ -168,7 +164,7 @@ var camera =
       });
 
 
-    // 2D cartesian
+// 2D cartesian
 var view =
       mathbox
       .cartesian({
@@ -176,7 +172,7 @@ var view =
         scale: [2, 1],
       });
 
-    // Axes + grid
+// Axes + grid
 view
       .axis({
         axis: 1,
@@ -188,14 +184,16 @@ view
       })
       .grid({
         width: 2,  
-        divideX: 50,
-        divideY: 25,        
+        niceX: true,
+        niceY: true, 
+//        divideX: 50,
+//        divideY: 25,        
       });
 
-    // Make axes black
+// Make axes black
 mathbox.select('axis').set('color', 'black');
 
-    // Calibrate focus distance for units
+// Calibrate focus distance for units
 mathbox.set('focus', 3);
 
 view.array({
@@ -236,6 +234,8 @@ var pointset = [];
 */            
 
 var username;
+var maxVal = -100;
+var minVal = 100;
 
 d3.select('#name-input').on('keyup', function(event){
     username = this.value;
@@ -244,45 +244,70 @@ d3.select('#name-input').on('keyup', function(event){
 
 d3.select('#view-poly')
     .on("click", function() {
-//      alert("Hey, don't click that!");
 
+      // Shifting points to be displayed in initial grid
       for (var i = 0; i < username.length; i++) {
         pointset.push([i-Math.floor(username.length/2),-(username[i].charCodeAt()-77)]);
-//        console.log([i-5,-(username[i].charCodeAt()-100)])
       }
 
-//      console.log("pointset");
-//      console.log(pointset);
-//      pointset = [2,30];
-      
-      view.select('#data').set('data', [ pointset]);
+//      view.select('#data').set('data', [ pointset]);
 
-//        console.table(vandermonde(pointset));
+      var data =
+        view.interval({
+          expr: function (emit, x) {
 
-  var data =
-    view.interval({
-      expr: function (emit, x) {
+            emit(x, lagrange(x));
+            },
+          width: 512,
+          channels: 2,
+          live: true, // allows for the delete letter and add letter feature
+//          factorX: 1,
+//          factorY: 1,
+          });
 
-         emit(x, lagrange(x));
-      },
-      width: 512,
-      channels: 2,
-    });
+      var curve =
+        view.line({
+          width: 5,
+          color: '#3090FF',
+          });
 
-    var curve =
-    view.line({
-      width: 5,
-      color: '#3090FF',
-    });
+      var valIndex = pointset[0][0];
+      var tmpLag;  
 
-    d3.select("#view-poly").html("Success!").classed("btn btn-lg btn-success", true); 
+      while (valIndex < Math.floor(username.length/2-1/2)) {
+        tmpLag = lagrange(valIndex);
+        if (tmpLag > maxVal) {maxVal = tmpLag};            
+        if (tmpLag < minVal) {minVal = tmpLag};                    
+        valIndex = valIndex + 1/2; // characters of name are spaced by one
+      }
 
-    document.getElementById("delete-char").disabled = false; // Turns button off, but I don't like the looks.
+// console.log(maxVal);
+
+      d3.select("#view-poly").html("Success!").classed("btn btn-lg btn-success", true); 
+
+      document.getElementById("delete-char").disabled = false; // Turns button off, but I don't like the looks.
 //    d3.select("#add-char").attr( 'disabled', 'false'); // why doesn't this work? It seems to change it, but nothing happens.
-    document.getElementById("add-char").disabled = false; // Turns button off, but I don't like the looks.
+      document.getElementById("add-char").disabled = false; // Turns button off, but I don't like the looks.
 
-    document.getElementById("view-poly").disabled = true; // Turns button off, but I don't like the looks.
+      document.getElementById("view-poly").disabled = true; // Turns button off, but I don't like the looks.
 //    d3.select("#view-poly").attr( 'id', 'null');
+
+    var n = -pointset[0][0];
+
+    var play = mathbox.play({
+      target: 'cartesian',
+      pace: 5,
+//      to: 2,
+      loop: false,
+      script: [
+//        {props: {factorX: 1, factorY: 1},
+        {props: {range: [[-10, 10], [-50, 50]]}},
+        {props: {range: [[pointset[0][0]-2, -pointset[0][0]+2], [Math.floor(minVal)-200, Math.ceil(maxVal)+200]]}},        
+//        {props: {factorX: -pointset[0][0], factorY: maxVal},
+//        {props: {line.set("color", "red")},        
+//        {props: {range: [[-2, 2], [-1, 1]]}},
+      ]
+    });
 
 
     });
