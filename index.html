@@ -70,7 +70,7 @@
     <div class="container theme-showcase" role="main" style="padding-top: 70px; padding-bottom: 30px;"> 
 
       <div class="page-header">
-        <h1>Type your name: <input type="text" id="name-input" autofocus="autofocus"></input></h1>
+        <h1 id="typed-name">Type your name: <input type="text" id="name-input" autofocus="autofocus"></input></h1>
       </div>
 
       <div class="row">
@@ -80,7 +80,7 @@
           <p><button id="view-poly" type="button" class="btn btn-lg btn-primary">View Polynomial</button></p>
           <p><button id="delete-char" type="button" class="btn btn-lg btn-primary" disabled="true">Delete Letter</button></p>
           <p><button id="add-char" type="button" class="btn btn-lg btn-primary" disabled="true">Add Letter</button></p>
-          <p><button onclick="newName()" type="button" class="btn btn-lg btn-primary">Refresh</button></p>
+          <p><button onclick="newName()" type="button" class="btn btn-lg btn-primary">Reset</button></p>
         </div>
 
         <div id="container" class="col-md-8">
@@ -98,6 +98,7 @@
 function newName() {
     location.reload();
 }
+
 
 d3.select('#delete-char')
   .on("click", function() {
@@ -257,7 +258,7 @@ view.select('#data').set('data', [ pointset]);
 
 
 
-
+var usernameToPrint;
 // help with scaling
 var maxVal = -100;
 var minVal = 100;
@@ -266,6 +267,7 @@ d3.select('#name-input').on('keyup', function(event){
 //    console.log(this.value.substr(this.value.length - 1).match(/[a-z]/i) != null);  
 //    if (this.value.substr(this.value.length - 1).match(/[a-z]/i)[0] != null) {
         username = this.value.toLowerCase();
+        usernameToPrint = this.value;
         console.log(username);
 //        console.log(username[0].match(/[a-z]/i) != null);
 //    }
@@ -318,6 +320,8 @@ d3.select('#view-poly')
 // console.log(maxVal);
 
       d3.select("#view-poly").html("Success!").classed("btn btn-lg btn-success", true); 
+
+      d3.select("#typed-name").html(usernameToPrint+" = P(x)");
 
       document.getElementById("delete-char").disabled = false; // Turns button off, but I don't like the looks.
 //    d3.select("#add-char").attr( 'disabled', 'false'); // why doesn't this work? It seems to change it, but nothing happens.
