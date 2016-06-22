@@ -196,6 +196,9 @@ mathbox.select('axis').set('color', 'black');
 // Calibrate focus distance for units
 mathbox.set('focus', 3);
 
+var usernameLabel = []; // initialize for labels
+var username; // initialize for labels
+
 view.array({
 //      items: 1,
       channels: 2,
@@ -213,13 +216,31 @@ view.array({
 */
     .point({
       color: colors.x,
-      size: 18,
+      size: 40,
       zIndex: 1,
+    })    .text({
+      font: 'Helvetica',
+//      style: 'bold',
+      width:  50,
+      height: 5,
+      sdf: 0,
+      expr: function (emit, i, j, time) {
+        emit(usernameLabel[i]);
+      },
     })
+    .label({
+      color: 'white', //'#30A0FF',
+      snap: false,
+      size: 60,
+      offset: [0, 0],
+      depth: .5,
+      zIndex: 1,
+    });
+
 
 var pointset = [];
 
-  view.select('#data').set('data', [ pointset]);
+view.select('#data').set('data', [ pointset]);
 //console.log(view.select('#data')); 
 
 
@@ -235,7 +256,7 @@ var pointset = [];
 */            
 
 
-var username;
+
 
 // help with scaling
 var maxVal = -100;
@@ -256,6 +277,8 @@ d3.select('#view-poly')
 
 //      console.log(username.match(/[a-z]/g));
       username = username.match(/[a-z]/g);
+      usernameLabel = username;
+      console.log(usernameLabel);
 
       // Shifting points to be displayed in initial grid
       for (var i = 0; i < username.length; i++) {
@@ -276,64 +299,10 @@ d3.select('#view-poly')
           live: true, // allows for the delete letter and add letter feature
 //          factorX: 1,
 //          factorY: 1,
-          });
-
-      var curve =
-        view.line({
+          }).line({
           width: 5,
           color: '#3090FF',
           });
-
-
-/*
-   var symbols = username;
-
-
-       // Define VDOM handler to format 'latex' into an HTML span
-    var latex = MathBox.DOM.createClass({
-      render: function (el) {
-        this.props.innerHTML = katex.renderToString(this.children);
-        return el('span', this.props);
-      }
-    });
-
-
-    view.html({
-      width:  8,
-      height: 1,
-      expr: function (emit, el, i) {
-        // Emit Characters
-        var color = ['#30D0FF','#30A0FF'][i%2];
-        emit(el(latex, {style: {color: color}}, symbols[i]));
-      },
-    })
-    .dom({
-      snap: false,
-      offset: [0, 32],
-      depth: 0,
-      zoom: 1,
-      outline: 2,
-      size: 30,
-    });
-
-//*/
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
       var valIndex = pointset[0][0];
@@ -367,7 +336,7 @@ d3.select('#view-poly')
       script: [
 //        {props: {factorX: 1, factorY: 1},
         {props: {range: [[-10, 10], [-50, 50]]}},
-        {props: {range: [[pointset[0][0]-2, -pointset[0][0]+2], [Math.floor(minVal)-200, Math.ceil(maxVal)+200]]}},        
+        {props: {range: [[pointset[0][0]-3, -pointset[0][0]+3], [Math.floor(minVal)-200, Math.ceil(maxVal)+200]]}},        
 //        {props: {factorX: -pointset[0][0], factorY: maxVal},
 //        {props: {line.set("color", "red")},        
 //        {props: {range: [[-2, 2], [-1, 1]]}},
@@ -375,6 +344,15 @@ d3.select('#view-poly')
     });
 
 
+    });
+
+
+       // Define VDOM handler to format 'latex' into an HTML span
+    var latex = MathBox.DOM.createClass({
+      render: function (el) {
+        this.props.innerHTML = katex.renderToString(this.children);
+        return el('span', this.props);
+      }
     });
 
 function arrayProduct(a) {
@@ -461,38 +439,8 @@ function multiplyMatrices(m1, m2) {
     return result;
 }
 
+
 /*
-
-d3.select('#view-poly')
-    .on("click", function() {
-
-  console.table(vandermonde(pointset));
-
-  var data =
-    view.interval({
-      expr: function (emit, x) {
-
-         emit(x, lagrange(x));
-      },
-      width: 512,
-      channels: 2,
-    });
-
-    var curve =
-    view.line({
-      width: 5,
-      color: '#3090FF',
-    });
-
-//      view.select('#data').set('data', [ pointset]);
-
-
-  });
-//*/ 
-
- 
-/*
-
 //    var button = document.querySelector('#button');
 
     var symbols =     [
