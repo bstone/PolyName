@@ -57,9 +57,11 @@
         width: 3,
       })
       .grid({
-        width: 2,  
-        divideX: 20,
-        divideY: 10,        
+        width: 2, 
+        niceX: true,
+        niceY: true, 
+//        divideX: 20,
+//        divideY: 10,        
       });
 
     // Make axes black
@@ -151,10 +153,12 @@
       script: [
         {props: {range: [[-2, 2], [-1, 1]]}},
         {props: {range: [[-4, 4], [-2, 2]]}},
+//        {props: {line.set("color", "red")},        
 //        {props: {range: [[-2, 2], [-1, 1]]}},
       ]
     });
-
+curve.set('color', 'red');
+/*
     view.interval({
         expr: function (emit, x, i, t) {
           emit(t-2, Math.sin(t-2));
