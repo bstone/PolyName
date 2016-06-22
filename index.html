@@ -30,7 +30,7 @@
     <script src="./lib/mathbox-bundle.js"></script>
     <script src="./lib/d3.js"></script>
     <link rel="stylesheet" href="./lib/mathbox.css">
-  <!--
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.5.1/katex.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.5.1/katex.min.js"></script>
@@ -214,6 +214,7 @@ view.array({
     .point({
       color: colors.x,
       size: 18,
+      zIndex: 1,
     })
 
 var pointset = [];
@@ -233,21 +234,33 @@ var pointset = [];
       ])
 */            
 
+
 var username;
+
+// help with scaling
 var maxVal = -100;
 var minVal = 100;
 
 d3.select('#name-input').on('keyup', function(event){
-    username = this.value;
-    console.log(username);
+//    console.log(this.value.substr(this.value.length - 1).match(/[a-z]/i) != null);  
+//    if (this.value.substr(this.value.length - 1).match(/[a-z]/i)[0] != null) {
+        username = this.value.toLowerCase();
+        console.log(username);
+//        console.log(username[0].match(/[a-z]/i) != null);
+//    }
     });
+
 
 d3.select('#view-poly')
     .on("click", function() {
 
+//      console.log(username.match(/[a-z]/g));
+      username = username.match(/[a-z]/g);
+
       // Shifting points to be displayed in initial grid
       for (var i = 0; i < username.length; i++) {
-        pointset.push([i-Math.floor(username.length/2),-(username[i].charCodeAt()-77)]);
+          pointset.push([i-Math.floor(username.length/2),-(username[i].charCodeAt()-110)]);
+//          console.log(username[i].charCodeAt());
       }
 
 //      view.select('#data').set('data', [ pointset]);
@@ -270,6 +283,58 @@ d3.select('#view-poly')
           width: 5,
           color: '#3090FF',
           });
+
+
+/*
+   var symbols = username;
+
+
+       // Define VDOM handler to format 'latex' into an HTML span
+    var latex = MathBox.DOM.createClass({
+      render: function (el) {
+        this.props.innerHTML = katex.renderToString(this.children);
+        return el('span', this.props);
+      }
+    });
+
+
+    view.html({
+      width:  8,
+      height: 1,
+      expr: function (emit, el, i) {
+        // Emit Characters
+        var color = ['#30D0FF','#30A0FF'][i%2];
+        emit(el(latex, {style: {color: color}}, symbols[i]));
+      },
+    })
+    .dom({
+      snap: false,
+      offset: [0, 32],
+      depth: 0,
+      zoom: 1,
+      outline: 2,
+      size: 30,
+    });
+
+//*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
       var valIndex = pointset[0][0];
       var tmpLag;  
@@ -425,79 +490,8 @@ d3.select('#view-poly')
   });
 //*/ 
 
-/*
-
-    // Draw a curve
-    var curve =
-      view
-      .line({
-        width: 5,
-        color: '#3090FF',
-      });
-
-
-
-
-    // Draw vectors
-    var vector =
-      view.interval({
-        expr: function (emit, x, i, t) {
-          emit(x, 0);
-          emit(x, -Math.sin(x + t));
-        },
-        width: 64,
-        channels: 2,
-        items: 2,
-      })
-      .vector({
-        end: true,
-        width: 5,
-        color: '#50A000',
-      });
-    
-    // Draw ticks and labels
-    var scale =
-      view.scale({
-        divide: 10,
-      });
-    
-    var ticks =
-      view.ticks({
-        width: 5,
-        size: 15,
-        color: 'black',
-      });
-    
-    var format =
-      view.format({
-        digits: 2,
-        weight: 'bold',
-      });
-
-    var labels =
-      view.label({
-        color: 'red',
-        zIndex: 1,
-      });
-          
-    // Animate
-    var play = mathbox.play({
-      target: 'cartesian',
-      pace: 5,
-      to: 2,
-      loop: true,
-      script: [
-        {props: {range: [[-2, 2], [-1, 1]]}},
-        {props: {range: [[-4, 4], [-2, 2]]}},
-        {props: {range: [[-2, 2], [-1, 1]]}},
-      ]
-    });
-*/            
-
  
 /*
-
-
 
 //    var button = document.querySelector('#button');
 
