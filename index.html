@@ -20,6 +20,8 @@
 
     <!-- Custom styles for this template -->
     <link href="./css/theme.css" rel="stylesheet">
+    <link href="./css/nouislider.min.css" rel="stylesheet">
+
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -30,6 +32,7 @@
     <script src="./lib/mathbox-bundle.js"></script>
     <script src="./lib/d3.js"></script>
     <link rel="stylesheet" href="./lib/mathbox.css">
+    <script src="./lib/nouislider.min.js"></script>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.5.1/katex.min.css">
@@ -88,6 +91,8 @@
         </div>
       </div>
 
+       <span style="display:inline-block; width:60px;">&#8202; Scale:</span><div class="noUi-extended" id="scale-slider" style="vertical-align:middle;"></div><br>
+
     </div>
 
 
@@ -113,6 +118,17 @@ d3.select('#add-char')
     }
   });
 
+
+// Initialize sliders
+var scaleSlider = document.getElementById('scale-slider');
+noUiSlider.create(scaleSlider, {
+    start: [1500],
+    tooltips: true,
+    range: {
+  'min': [0],
+  'max': [6000]
+}
+});
 
 ///*
 var mathbox = mathBox({
@@ -350,16 +366,9 @@ d3.select('#view-poly')
     });
 
 
+
     });
 
-
-       // Define VDOM handler to format 'latex' into an HTML span
-    var latex = MathBox.DOM.createClass({
-      render: function (el) {
-        this.props.innerHTML = katex.renderToString(this.children);
-        return el('span', this.props);
-      }
-    });
 
 function arrayProduct(a) {
     var p = 1;
@@ -387,7 +396,6 @@ var xfunBuilder=[];
 
 function lagrange(x) {
     xfunBuilder=[];   
-
 
         for (var k = 0; k < username.length; k++) {
           xfunBuilder.push([]); 
