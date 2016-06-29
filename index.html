@@ -548,12 +548,12 @@ function makePoly(points) {
     } else {
       polynomial = L[0];
     }
-    
+
   } 
 
   for (var q=1; q < points.length; q++) {
     if (L[q] != 0) {
-      polynomial = polynomial + sign[q] + L[q] + "x^" + q;
+      polynomial = polynomial + sign[q] + L[q] + "x <sup>" + q + "</sup> ";
     }
 
   }
