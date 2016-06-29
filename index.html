@@ -156,8 +156,8 @@ document.getElementById('container').appendChild( divContainer );
 width  = Math.min(800,window.innerWidth);
 height = width/2; //width/2; //window.innerHeight-100;
 
-console.log(width);
-console.log(window.innerWidth);
+//console.log(width);
+//console.log(window.innerWidth);
 
 three.renderer.setSize( width, height); 
 divContainer.appendChild( three.renderer.domElement );
@@ -300,7 +300,7 @@ d3.select('#view-poly')
 //      console.log(username.match(/[a-z]/g));
       username = username.match(/[a-z]/g);
       usernameLabel = username;
-      console.log(usernameLabel);
+//      console.log(usernameLabel);
 
       // Shifting points to be displayed in initial grid
       for (var i = 0; i < username.length; i++) {
@@ -309,6 +309,7 @@ d3.select('#view-poly')
       }
 
 //      view.select('#data').set('data', [ pointset]);
+console.log(pointset);
 
       var data =
         view.interval({
@@ -382,6 +383,7 @@ function arrayProduct(a) {
     return p;
   }
 
+
 function arraySum(a) {
     var s = 0;
     for (var i = 0; i < a.length; i += 1) {      
@@ -396,6 +398,7 @@ function arraySum(a) {
 // Make this a function 
 var xfunBuilder=[];
 
+// Actual Lagrange Polynomial function
 function lagrange(x) {
     xfunBuilder=[];   
 
@@ -421,7 +424,7 @@ function lagrange(x) {
   }
 
   
-
+// Creation of Vandermonde (Not Used)
 function vandermonde (a) {
 
     var vand = [];
@@ -439,7 +442,7 @@ function vandermonde (a) {
   }
 
 
-
+// Multiplication of Matrices (Not Used)
 function multiplyMatrices(m1, m2) {
     var result = [];
     for (var i = 0; i < m1.length; i++) {
@@ -456,6 +459,7 @@ function multiplyMatrices(m1, m2) {
 }
 
 
+// Multiplication of polynomials viewed as arrays
 function polyProd(A,B) {
   var C = [];
 
@@ -472,23 +476,25 @@ function polyProd(A,B) {
   return C;
 }
 
-console.log(polyProd([1],[2,-3]));
-console.log(polyProd([1,-1],[1,1,1,1,1]));
 
+// Creates the polynomial to be displayed
 function makePoly(points) {
   
+  // Initial Vars
   var numer = [];  
   var denom = [];
-  var L = []; // final polynomial
+  var L = []; // final polynomial array
   var sign = [];  
 
+  // Initialize Vars
   for(var i = 0; i < points.length ; i++) {
     numer[i] = [1];
     denom[i] = 1;
     L[i] = 0;
-    sign[i] = "+";
+    sign[i] = " + ";
   }
 
+  // Creates numerator and denominator of l_i(x)
   for(var j = 0; j < points.length ; j++) {
       for(var k = 0; k < points.length ; k++) {
         if (j!=k) {
@@ -498,6 +504,7 @@ function makePoly(points) {
       }
   }
 
+  // Uses Fraction.js to preserve rational numbers
   var y = [];
 
   for(var l=0; l < points.length; l++) {
@@ -505,70 +512,67 @@ function makePoly(points) {
 
     for(var m=0; m < points.length; m++) {
       numer[l][m] = y[l].mul(numer[l][m]).div(denom[l]);
-      console.log(numer[l][m]);
+//      console.log(numer[l][m]);
     }
   }
 
 
-
-
+  // Defines polynomial as an array
   for(var n=0; n < points.length; n++) {
     for(var p=0; p < points.length; p++) {
       L[n] = numer[p][n].add(L[n]);
-//      console.log(numer[n][p]);
-//      console.log(L[n]);
-//      console.log([n,p]);
     }
 
     if (L[n].n != 0) {
 
       if (L[n].s == -1) {
-        sign[n] = "-";
+        sign[n] = " - ";
       }
 
       if (L[n].d == 1) {
         L[n] = L[n].n.toString();
 
       } else {
-        L[n] = L[n].n.toString()+"/"+L[n].d.toString();
+//        L[n] = "<sup>"+ L[n].n.toString()+"</sup>&frasl;<sub>"+L[n].d.toString()+"</sub>";
+//        L[n] = L[n].n.toString()+" &frasl; "+L[n].d.toString();
+        L[n] = L[n].n.toString()+"/"+L[n].d.toString();   
       }
 
     } else {
       L[n] = "0";
     }
 
+    L[n].fontcolor("green");
   }
 
+  // Creates the polynomial to be viewed
   var polynomial = "";
+  var coeffColor = "#A9A9A9";
 
   if (L[0] != 0) {
 
-    if (sign[0] == "-") {
-      polynomial = sign[0] + L[0];
+    if (sign[0] == " - ") {
+      polynomial = sign[0] + "<span style='color:"+coeffColor+"'>" + L[0] + "</span>";
     } else {
-      polynomial = L[0];
+      polynomial = "<span style='color:"+coeffColor+"'>" + L[0] + "</span>";
     }
 
   } 
 
   for (var q=1; q < points.length; q++) {
     if (L[q] != 0) {
-      polynomial = polynomial + sign[q] + L[q] + "x <sup>" + q + "</sup> ";
+      if (q == 1) {
+        polynomial = polynomial + sign[q] + "<span style='color:"+coeffColor+"'>" + L[q] + "</span> x ";
+      } else {
+        polynomial = polynomial + sign[q] + "<span style='color:"+coeffColor+"'>" + L[q] + "</span> x<sup>" + q + "</sup> ";
+      }
     }
 
   }
 
-
-
-console.log(y[0].n);
-  var frac = y[0] //new Fraction(points[0][1],denom[0]);
-  frac = frac.mul(-5);
-console.log((frac.s*frac.n).toString()+"/"+frac.d.toString());
-
   return polynomial;
 }
 
-console.log(makePoly([[1,2],[2,3],[3,4],[4,5]]));
 /*
 //    var button = document.querySelector('#button');
 
