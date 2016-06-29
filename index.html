@@ -382,6 +382,7 @@ function arrayProduct(a) {
     return p;
   }
 
+
 function arraySum(a) {
     var s = 0;
     for (var i = 0; i < a.length; i += 1) {      
@@ -396,6 +397,7 @@ function arraySum(a) {
 // Make this a function 
 var xfunBuilder=[];
 
+// Actual Lagrange Polynomial function
 function lagrange(x) {
     xfunBuilder=[];   
 
@@ -421,7 +423,7 @@ function lagrange(x) {
   }
 
   
-
+// Creation of Vandermonde (Not Used)
 function vandermonde (a) {
 
     var vand = [];
@@ -439,7 +441,7 @@ function vandermonde (a) {
   }
 
 
-
+// Multiplication of Matrices (Not Used)
 function multiplyMatrices(m1, m2) {
     var result = [];
     for (var i = 0; i < m1.length; i++) {
@@ -456,6 +458,7 @@ function multiplyMatrices(m1, m2) {
 }
 
 
+// Multiplication of polynomials viewed as arrays
 function polyProd(A,B) {
   var C = [];
 
@@ -472,16 +475,17 @@ function polyProd(A,B) {
   return C;
 }
 
-console.log(polyProd([1],[2,-3]));
-console.log(polyProd([1,-1],[1,1,1,1,1]));
 
+// Creates the polynomial to be displayed
 function makePoly(points) {
   
+  // Initial Vars
   var numer = [];  
   var denom = [];
-  var L = []; // final polynomial
+  var L = []; // final polynomial array
   var sign = [];  
 
+  // Initialize Vars
   for(var i = 0; i < points.length ; i++) {
     numer[i] = [1];
     denom[i] = 1;
@@ -489,6 +493,7 @@ function makePoly(points) {
     sign[i] = "+";
   }
 
+  // Creates numerator and denominator of l_i(x)
   for(var j = 0; j < points.length ; j++) {
       for(var k = 0; k < points.length ; k++) {
         if (j!=k) {
@@ -498,6 +503,7 @@ function makePoly(points) {
       }
   }
 
+  // Uses Fraction.js to preserve rational numbers
   var y = [];
 
   for(var l=0; l < points.length; l++) {
@@ -510,14 +516,10 @@ function makePoly(points) {
   }
 
 
-
-
+  // Defines polynomial as an array
   for(var n=0; n < points.length; n++) {
     for(var p=0; p < points.length; p++) {
       L[n] = numer[p][n].add(L[n]);
-//      console.log(numer[n][p]);
-//      console.log(L[n]);
-//      console.log([n,p]);
     }
 
     if (L[n].n != 0) {
@@ -539,6 +541,7 @@ function makePoly(points) {
 
   }
 
+  // Creates the polynomial to be viewed
   var polynomial = "";
 
   if (L[0] != 0) {
@@ -558,17 +561,10 @@ function makePoly(points) {
 
   }
 
-
-
-console.log(y[0].n);
-  var frac = y[0] //new Fraction(points[0][1],denom[0]);
-  frac = frac.mul(-5);
-console.log((frac.s*frac.n).toString()+"/"+frac.d.toString());
-
   return polynomial;
 }
 
-console.log(makePoly([[1,2],[2,3],[3,4],[4,5]]));
+
 /*
 //    var button = document.querySelector('#button');
 
