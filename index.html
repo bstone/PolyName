@@ -20,6 +20,8 @@
 
     <!-- Custom styles for this template -->
     <link href="./css/theme.css" rel="stylesheet">
+    <link href="./css/nouislider.min.css" rel="stylesheet">
+
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -30,7 +32,10 @@
     <script src="./lib/mathbox-bundle.js"></script>
     <script src="./lib/d3.js"></script>
     <link rel="stylesheet" href="./lib/mathbox.css">
+    <script src="./lib/nouislider.min.js"></script>
+    <script src="./lib/fraction.min.js"></script>
 
+<!--
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.5.1/katex.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.5.1/katex.min.js"></script>
@@ -87,7 +92,9 @@
           <div id="canvasElement"></div>
         </div>
       </div>
-
+<!--
+       <span style="display:inline-block; width:60px;">&#8202; Scale:</span><div class="noUi-extended" id="scale-slider" style="vertical-align:middle;"></div><br>
+-->
     </div>
 
 
@@ -113,7 +120,18 @@ d3.select('#add-char')
     }
   });
 
-
+/*
+// Initialize sliders
+var scaleSlider = document.getElementById('scale-slider');
+noUiSlider.create(scaleSlider, {
+    start: [1500],
+    tooltips: true,
+    range: {
+  'min': [0],
+  'max': [6000]
+}
+});
+//*/
 ///*
 var mathbox = mathBox({
       plugins: ['core', 'controls', 'cursor', 'mathbox'],
@@ -323,7 +341,7 @@ d3.select('#view-poly')
 
       d3.select("#view-poly").html("Success!").classed("btn btn-lg btn-success", true); 
 
-      d3.select("#typed-name").html(usernameToPrint+" = P(x)");
+      d3.select("#typed-name").html(usernameToPrint+" = " + makePoly(pointset));
 
       document.getElementById("delete-char").disabled = false; // Turns button off, but I don't like the looks.
 //    d3.select("#add-char").attr( 'disabled', 'false'); // why doesn't this work? It seems to change it, but nothing happens.
@@ -350,16 +368,9 @@ d3.select('#view-poly')
     });
 
 
+
     });
 
-
-       // Define VDOM handler to format 'latex' into an HTML span
-    var latex = MathBox.DOM.createClass({
-      render: function (el) {
-        this.props.innerHTML = katex.renderToString(this.children);
-        return el('span', this.props);
-      }
-    });
 
 function arrayProduct(a) {
     var p = 1;
@@ -387,7 +398,6 @@ var xfunBuilder=[];
 
 function lagrange(x) {
     xfunBuilder=[];   
-
 
         for (var k = 0; k < username.length; k++) {
           xfunBuilder.push([]); 
@@ -446,6 +456,119 @@ function multiplyMatrices(m1, m2) {
 }
 
 
+function polyProd(A,B) {
+  var C = [];
+
+  for(var i = 0; i < A.length+B.length - 1; i++) {
+    C[i] = 0;
+  }
+
+  for(var j=0; j < A.length; j++) {
+    for(var k=0; k < B.length; k++) {
+      C[j+k] = C[j+k] + A[j]*B[k];
+    }
+  }
+
+  return C;
+}
+
+console.log(polyProd([1],[2,-3]));
+console.log(polyProd([1,-1],[1,1,1,1,1]));
+
+function makePoly(points) {
+  
+  var numer = [];  
+  var denom = [];
+  var L = []; // final polynomial
+  var sign = [];  
+
+  for(var i = 0; i < points.length ; i++) {
+    numer[i] = [1];
+    denom[i] = 1;
+    L[i] = 0;
+    sign[i] = "+";
+  }
+
+  for(var j = 0; j < points.length ; j++) {
+      for(var k = 0; k < points.length ; k++) {
+        if (j!=k) {
+          numer[j] = polyProd(numer[j],[-points[k][0],1]);          
+          denom[j] = denom[j]*(points[j][0]-points[k][0]);          
+        }
+      }
+  }
+
+  var y = [];
+
+  for(var l=0; l < points.length; l++) {
+    y[l] = new Fraction(points[l][1]);
+
+    for(var m=0; m < points.length; m++) {
+      numer[l][m] = y[l].mul(numer[l][m]).div(denom[l]);
+      console.log(numer[l][m]);
+    }
+  }
+
+
+
+
+  for(var n=0; n < points.length; n++) {
+    for(var p=0; p < points.length; p++) {
+      L[n] = numer[p][n].add(L[n]);
+//      console.log(numer[n][p]);
+//      console.log(L[n]);
+//      console.log([n,p]);
+    }
+
+    if (L[n].n != 0) {
+
+      if (L[n].s == -1) {
+        sign[n] = "-";
+      }
+
+      if (L[n].d == 1) {
+        L[n] = L[n].n.toString();
+
+      } else {
+        L[n] = L[n].n.toString()+"/"+L[n].d.toString();
+      }
+
+    } else {
+      L[n] = "0";
+    }
+
+  }
+
+  var polynomial = "";
+
+  if (L[0] != 0) {
+
+    if (sign[0] == "-") {
+      polynomial = sign[0] + L[0];
+    } else {
+      polynomial = L[0];
+    }
+
+  } 
+
+  for (var q=1; q < points.length; q++) {
+    if (L[q] != 0) {
+      polynomial = polynomial + sign[q] + L[q] + "x <sup>" + q + "</sup> ";
+    }
+
+  }
+
+
+
+console.log(y[0].n);
+  var frac = y[0] //new Fraction(points[0][1],denom[0]);
+  frac = frac.mul(-5);
+console.log((frac.s*frac.n).toString()+"/"+frac.d.toString());
+
+  return polynomial;
+}
+
+console.log(makePoly([[1,2],[2,3],[3,4],[4,5]]));
 /*
 //    var button = document.querySelector('#button');
 
