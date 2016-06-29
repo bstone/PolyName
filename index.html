@@ -156,8 +156,8 @@ document.getElementById('container').appendChild( divContainer );
 width  = Math.min(800,window.innerWidth);
 height = width/2; //width/2; //window.innerHeight-100;
 
-console.log(width);
-console.log(window.innerWidth);
+//console.log(width);
+//console.log(window.innerWidth);
 
 three.renderer.setSize( width, height); 
 divContainer.appendChild( three.renderer.domElement );
@@ -300,7 +300,7 @@ d3.select('#view-poly')
 //      console.log(username.match(/[a-z]/g));
       username = username.match(/[a-z]/g);
       usernameLabel = username;
-      console.log(usernameLabel);
+//      console.log(usernameLabel);
 
       // Shifting points to be displayed in initial grid
       for (var i = 0; i < username.length; i++) {
@@ -309,6 +309,7 @@ d3.select('#view-poly')
       }
 
 //      view.select('#data').set('data', [ pointset]);
+console.log(pointset);
 
       var data =
         view.interval({
@@ -490,7 +491,7 @@ function makePoly(points) {
     numer[i] = [1];
     denom[i] = 1;
     L[i] = 0;
-    sign[i] = "+";
+    sign[i] = " + ";
   }
 
   // Creates numerator and denominator of l_i(x)
@@ -511,7 +512,7 @@ function makePoly(points) {
 
     for(var m=0; m < points.length; m++) {
       numer[l][m] = y[l].mul(numer[l][m]).div(denom[l]);
-      console.log(numer[l][m]);
+//      console.log(numer[l][m]);
     }
   }
 
@@ -525,45 +526,52 @@ function makePoly(points) {
     if (L[n].n != 0) {
 
       if (L[n].s == -1) {
-        sign[n] = "-";
+        sign[n] = " - ";
       }
 
       if (L[n].d == 1) {
         L[n] = L[n].n.toString();
 
       } else {
-        L[n] = L[n].n.toString()+"/"+L[n].d.toString();
+//        L[n] = "<sup>"+ L[n].n.toString()+"</sup>&frasl;<sub>"+L[n].d.toString()+"</sub>";
+//        L[n] = L[n].n.toString()+" &frasl; "+L[n].d.toString();
+        L[n] = L[n].n.toString()+"/"+L[n].d.toString();   
       }
 
     } else {
       L[n] = "0";
     }
 
+    L[n].fontcolor("green");
   }
 
   // Creates the polynomial to be viewed
   var polynomial = "";
+  var coeffColor = "#A9A9A9";
 
   if (L[0] != 0) {
 
-    if (sign[0] == "-") {
-      polynomial = sign[0] + L[0];
+    if (sign[0] == " - ") {
+      polynomial = sign[0] + "<span style='color:"+coeffColor+"'>" + L[0] + "</span>";
     } else {
-      polynomial = L[0];
+      polynomial = "<span style='color:"+coeffColor+"'>" + L[0] + "</span>";
     }
 
   } 
 
   for (var q=1; q < points.length; q++) {
     if (L[q] != 0) {
-      polynomial = polynomial + sign[q] + L[q] + "x <sup>" + q + "</sup> ";
+      if (q == 1) {
+        polynomial = polynomial + sign[q] + "<span style='color:"+coeffColor+"'>" + L[q] + "</span> x ";
+      } else {
+        polynomial = polynomial + sign[q] + "<span style='color:"+coeffColor+"'>" + L[q] + "</span> x<sup>" + q + "</sup> ";
+      }
     }
 
   }
 
   return polynomial;
 }
-
 
 /*
 //    var button = document.querySelector('#button');
