@@ -51,6 +51,15 @@ d3.select('#add-char')
     }
   });
 
+  function newName() {
+    location.reload();
+  }
+
+d3.select('#reset')
+  .on("click", function() {
+    newName();
+  });
+
 /*
 // Initialize sliders
 var scaleSlider = document.getElementById('scale-slider');
@@ -223,7 +232,10 @@ d3.select('#view-poly').on("click", function() {
 
 function setupVis(nameArray) {
 
+  view.select('#vector').remove();
+
   view.interval({
+    id:'vector',
     expr: function (emit, x, i, time) {
       var t = time/1.25 - 5;
       if (x < t && x < nameArray.length) {
@@ -238,22 +250,9 @@ function setupVis(nameArray) {
     color: colors.ln,
   });
 
-
-  d3.select("#view-poly").html("Success!").classed("btn btn-lg btn-success", true);
-
   d3.select("#poly-name").html(usernameToPrint+" = " + makePoly(pointset));
 
-  document.getElementById("delete-char").disabled = false; // Turns button off, but I don't like the looks.
-  document.getElementById("add-char").disabled = false; // Turns button off, but I don't like the looks.
-
-  //    d3.select("#add-char").attr( 'disabled', 'false'); // why doesn't this work? It seems to change it, but nothing happens.
-
-  document.getElementById("view-poly").disabled = true; // Turns button off, but I don't like the looks.
-
   zoom();
-
-
-
 }
 
 function zoom() {

@@ -68,21 +68,14 @@
     </nav>
 
 
-    <div class="container theme-showcase" role="main" style="padding-top: 70px; padding-bottom: 30px;"> 
+    <div class="container theme-showcase" role="main" style="padding-top: 70px; padding-bottom: 30px;">
 
       <div class="page-header">
-        <h1 id="typed-name">Type your name: <input type="text" id="name-input" autofocus="autofocus"></input></h1>
+          <h1 id="typed-name">Type your name: <input type="text" id="name-input" autofocus="autofocus"></input></h1>
+          <p><button id="reset" type="button" class="btn btn-lg btn-primary">Reset</button></p>
       </div>
 
       <div class="row">
-
-        <div class="col-md-2">
-<!--          <p><button id="view-points" type="button" class="btn btn-lg btn-primary">View Points</button></p> -->
-          <p><button id="view-poly" type="button" class="btn btn-lg btn-primary">View Polynomial</button></p>
-          <p><button id="delete-char" type="button" class="btn btn-lg btn-primary" disabled="true">Delete Letter</button></p>
-          <p><button id="add-char" type="button" class="btn btn-lg btn-primary" disabled="true">Add Letter</button></p>
-          <p><button onclick="newName()" type="button" class="btn btn-lg btn-primary">Reset</button></p>
-        </div>
 
         <div id="container" class="col-md-8">
           <div id="canvasElement"></div>
@@ -98,7 +91,7 @@
     </div>
 
 
-<!--      
+<!--
       <p>
         <button type="button" class="btn btn-lg btn-default">Default</button>
         <button type="button" class="btn btn-lg btn-primary">Primary</button>
@@ -111,7 +104,7 @@
       <p>
         <button type="button" class="btn btn-default">Default</button>
         <button type="button" class="btn btn-primary">Primary</button>
-        <button type="button" class="btn btn-success">Success</button>  
+        <button type="button" class="btn btn-success">Success</button>
         <button type="button" class="btn btn-info">Info</button>
         <button type="button" class="btn btn-warning">Warning</button>
         <button type="button" class="btn btn-danger">Danger</button>
@@ -152,15 +145,15 @@
     <script src="./lib/d3.js"></script>
     <script src="./lib/nouislider.min.js"></script>
     <script src="./lib/fraction.min.js"></script>
-    <script src="./src/main.js"></script>    
+    <script src="./src/main.js"></script>
 
 
 
     <!-- Start of StatCounter Code for Default Guide -->
     <script type="text/javascript">
-    var sc_project=11001640; 
-    var sc_invisible=1; 
-    var sc_security="dfe4f2ef"; 
+    var sc_project=11001640;
+    var sc_invisible=1;
+    var sc_security="dfe4f2ef";
     var scJsHost = (("https:" == document.location.protocol) ?
     "https://secure." : "http://www.");
     document.write("<sc"+"ript type='text/javascript' src='" +
