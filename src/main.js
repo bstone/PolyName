@@ -1,5 +1,7 @@
 
+//--------------
 // Global Vars
+//--------------
 
 //var usernameLabel = []; // initialize for labels
 var username = []; // initialize for labels
@@ -24,7 +26,9 @@ var colors = {
       xyz: 0x654321, // brown
       coeff: "#A9A9A9", // Gray
       ln: '#3090FF', // blue
+      lbl: 'white', // white
     }
+
 
 
 function newName() {
@@ -162,7 +166,7 @@ view.array({
       },
     })
     .label({
-      color: 'white', //'#30A0FF',
+      color: colors.lbl,//'#30A0FF',
       snap: false,
       size: window.innerWidth*0.023,
       offset: [0, 0],
@@ -182,56 +186,33 @@ function splitName(name) {
 
 
 function encodeName(nameArray) {
-	var points = [];
+//	var points = [];
 	// Shifting points to be displayed in initial grid
-    for (var i = 0; i < username.length; i++) {
-    	pointset.push([i,(username[i].charCodeAt()-96)]);          
+    for (var i = 0; i < nameArray.length; i++) {
+    	pointset.push([i,(nameArray[i].charCodeAt()-96)]);          
     }
-    return points;	
+//    return points;	
 }
 
 d3.select('#name-input').on('keyup', function(event){
-//    console.log(this.value.substr(this.value.length - 1).match(/[a-z]/i) != null);  
-//    if (this.value.substr(this.value.length - 1).match(/[a-z]/i)[0] != null) {
-        
-        username = this.value.toLowerCase();
         usernameToPrint = this.value;
+        username = splitName(usernameToPrint);
 
         console.log(username);
 
-//        username = splitName(this.value);
-//        usernameToPrint = this.value;
-//        usernameLabel = username;
+//       	encodeName(username);
 
-
-       
-        
-//        console.log(username[0].match(/[a-z]/i) != null);
-//    }
     });
 
 
-d3.select('#view-poly')
-    .on("click", function() {
-
-      username = username.match(/[a-z]/g);
-//      usernameLabel = username;
-
-//     //console.log(username.match(/[a-z]/g));
-      //username = username.match(/[a-z]/g);
-      //usernameLabel = username;
-      //usernameLabel = username;
-
+d3.select('#view-poly').on("click", function() {
       setupVis(username);
-
-//      console.log(usernameLabel);
-
 });
       
 
 
 function setupVis(nameArray) {
-	encodeName(nameArray)
+	encodeName(nameArray);
 //	console.log(pointset);
 //	console.log(usernameLabel);
 
@@ -268,7 +249,7 @@ function setupVis(nameArray) {
 
       d3.select("#view-poly").html("Success!").classed("btn btn-lg btn-success", true); 
 
-      d3.select("#typed-name").html(usernameToPrint+" = " + makePoly(pointset));
+      d3.select("#poly-name").html(usernameToPrint+" = " + makePoly(pointset));
 
 //      document.getElementById("delete-char").disabled = false; // Turns button off, but I don't like the looks.
 //      document.getElementById("add-char").disabled = false; // Turns button off, but I don't like the looks.
