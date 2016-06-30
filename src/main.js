@@ -227,41 +227,26 @@ function setupVis(nameArray) {
             },
           width: 512,
           channels: 2,
-//          history: 90,
           live: true, // allows for the delete letter and add letter feature
-//          factorX: 1,
-//          factorY: 1,
           }).line({
           width: window.innerWidth*0.004,
           color: colors.ln,
-//          color: 'white',
           });
-/*
-   view.vector({
-      color: 'red',//0x3080FF,
-      width: 30,
-      start: true,
-      end: false,
-    });
-*/
-  
-// console.log(maxVal);
+
 
       d3.select("#view-poly").html("Success!").classed("btn btn-lg btn-success", true); 
 
       d3.select("#poly-name").html(usernameToPrint+" = " + makePoly(pointset));
 
-//      document.getElementById("delete-char").disabled = false; // Turns button off, but I don't like the looks.
-//      document.getElementById("add-char").disabled = false; // Turns button off, but I don't like the looks.
+      document.getElementById("delete-char").disabled = false; // Turns button off, but I don't like the looks.
+      document.getElementById("add-char").disabled = false; // Turns button off, but I don't like the looks.
 
 //    d3.select("#add-char").attr( 'disabled', 'false'); // why doesn't this work? It seems to change it, but nothing happens.
 
       document.getElementById("view-poly").disabled = true; // Turns button off, but I don't like the looks.
-//    d3.select("#view-poly").attr( 'id', 'null');
-
-//    var n = -pointset[0][0];
 
 /*
+    // finds max/min values 
     var valIndex = pointset[0][0];
     var tmpLag;  
 
@@ -291,10 +276,8 @@ function setupVis(nameArray) {
     });
 //*/
 
-//mathbox.select('axis').set('color', 'black');
-
-
 }
+
 
 function endRangeX (points) {
 	var newRange = [];
@@ -310,10 +293,12 @@ function endRangeX (points) {
 	return newRange;
 }
 
+
 function endRangeY (points) {
 	var newRange = startRangeY;
 	return newRange;
 }
+
 
 function arrayProduct(a) {
     var p = 1;
@@ -321,7 +306,6 @@ function arrayProduct(a) {
       // s += array[i];  // sum
       p *= a[i];  //product
     }
-
     return p;
   }
 
@@ -511,138 +495,3 @@ function makePoly(points) {
 
   return polynomial;
 }
-
-/*
-//    var button = document.querySelector('#button');
-
-    var symbols =     [
-      'B',
-      'r',
-      'a',
-      'n',
-      'd',
-      'e',
-      'n',
-      '!',
-    ];
-
-
-    // Define VDOM handler to clone real DOM elements
-//   var clone = MathBox.DOM.createClass({
-//      render: function (el, props, children) {
-//        var button = children.cloneNode(true);
-//        return button;
-//      },
-//    });
-
-    // Define VDOM handler to format 'latex' into an HTML span
-    var latex = MathBox.DOM.createClass({
-      render: function (el) {
-        this.props.innerHTML = katex.renderToString(this.children);
-        return el('span', this.props);
-      }
-    });
-
-    mathbox = mathBox({
-      plugins: ['core', 'controls', 'cursor'],
-      controls: {
-        klass: THREE.OrbitControls,
-      },
-      loop: {
-        start: window == window.top,
-      },
-      camera: {
-        near: .01,
-        far: 1000,
-      }
-    });
-    three = mathbox.three;
-
-    three.camera.position.set(-1, 1, 2.5);
-    three.camera.lookAt(new THREE.Vector3())
-    three.renderer.setClearColor(new THREE.Color(0xFFFFFF), 1.0);
-
-    view = mathbox
-    .set({
-      scale: null,
-    })
-    .polar({
-      range: [[-2, 2], [-1, 1], [-1, 1]],
-      scale: [2, 1, 1],
-      bend: .25
-    });
-
-    view.interval({
-      width: 48,
-      expr: function (emit, x, i, t) {
-        y = Math.sin(x + t / 4) * .5 + .75;
-        emit(x, y);
-      },
-      channels: 2,
-    })
-    .line({
-      color: 0x30C0FF,
-      width: 16,
-    })
-    .resample({
-      width: 8,
-    })
-    .point({
-      color: 0x30C0FF,
-      size: 60,
-    })
-    .html({
-      width:  8,
-      height: 1,
-      expr: function (emit, el, i) {
-        // Emit Characters
-        var color = ['#30D0FF','#30A0FF'][i%2];
-        emit(el(latex, {style: {color: color}}, symbols[i]));
-      },
-    })
-    .dom({
-      snap: false,
-      offset: [0, 32],
-      depth: 0,
-      zoom: 1,
-      outline: 2,
-      size: 30,
-    });
-//*/
-
-
-/*
-  // This function will fire everytime a keypress occurs in the name input
-  // TODO: deal with copy/paste and other inputs.
-  d3.select('#name-input').on('keyup', function(event){
-    var dataset = this.value;
-
-    console.log(dataset);   
-
-
-      var circles = svg.selectAll("circle")
-          .data(dataset)
-          .enter()
-          .append("circle");
-
-      circles.attr("cx", function(d, i) {
-//          d = d.charCodeAt();
-            return (i * 50) + 25;
-          })
-           .attr("r", 9)
-           .attr("cy", function(d) {
-            d = d.charCodeAt();            
-            return d;
-           })
-           .attr("fill", "yellow")
-           .attr("stroke", "orange")
-           .attr("stroke-width", function(d) {
-            d = d.charCodeAt();            
-            return d/2;
-           });
-
-console.log(circles);
-  })
-*/  
-
-
