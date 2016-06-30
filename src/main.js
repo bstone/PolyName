@@ -206,8 +206,10 @@ function updateName(newName) {
 
 d3.select('#name-input').on('keyup', function(event){
   usernameToPrint = this.value;
-  updateName(usernameToPrint);
-  setupVis(username);
+  if(usernameToPrint.length > 0) {
+    updateName(usernameToPrint);
+    setupVis(username);
+  }
 
 });
 
