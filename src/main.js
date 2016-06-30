@@ -13,6 +13,8 @@ var minVal = 100;
 var startRangeX = [-1,19];
 var startRangeY = [-30,70];
 
+var play = null;
+
 var width  = Math.min(800,window.innerWidth);
 var height = width/2; //width/2; //window.innerHeight-100;
 
@@ -31,21 +33,21 @@ var colors = {
 
 
 
-function newName() {
-    location.reload();
-}
 
 
 d3.select('#delete-char')
   .on("click", function() {
-    username = username.slice(0,username.length-1);
+    var newName = usernameToPrint.slice(0,username.length-1);
+    updateName(newName)
+    //username = username.slice(0,username.length-1);
   });
 
 
 d3.select('#add-char')
   .on("click", function() {
     if (username.length < pointset.length) {
-      username = username+"a";
+      var newName = usernameToPrint + 'a';
+      updateName(newName)
     }
   });
 
@@ -87,7 +89,7 @@ document.getElementById('container').appendChild( divContainer );
 //console.log(width);
 //console.log(window.innerWidth);
 
-three.renderer.setSize( width, height); 
+three.renderer.setSize( width, height);
 divContainer.appendChild( three.renderer.domElement );
 
 
@@ -123,11 +125,11 @@ view
         width: 3,
       })
       .grid({
-        width: 2,  
+        width: 2,
         niceX: true,
-        niceY: true, 
+        niceY: true,
 //        divideX: 50,
-//        divideY: 25,        
+//        divideY: 25,
       });
 
 // Make axes black
@@ -176,106 +178,103 @@ view.array({
 
 
 view.select('#data').set('data', [ pointset]);
-//console.log(view.select('#data')); 
+//console.log(view.select('#data'));
 
 
 function splitName(name) {
-	var splitName = name.toLowerCase();
-	return splitName.match(/[a-z]/g);
+  var splitName = name.toLowerCase();
+  return splitName.match(/[a-z]/g);
 }
 
 
 function encodeName(nameArray) {
-//	var points = [];
-	// Shifting points to be displayed in initial grid
-    for (var i = 0; i < nameArray.length; i++) {
-    	pointset.push([i,(nameArray[i].charCodeAt()-96)]);          
-    }
-//    return points;	
+  var points = [];
+  // Shifting points to be displayed in initial grid
+  for (var i = 0; i < nameArray.length; i++) {
+    points.push([i,(nameArray[i].charCodeAt()-96)]);
+  }
+  return points;
+}
+
+function updateName(newName) {
+  console.log(newName)
+  usernameToPrint = newName;
+  username = splitName(usernameToPrint);
+  pointset = encodeName(username);
+  view.select('#data').set('data', [ pointset]);
 }
 
 d3.select('#name-input').on('keyup', function(event){
-        usernameToPrint = this.value;
-        username = splitName(usernameToPrint);
+  usernameToPrint = this.value;
+  updateName(usernameToPrint);
+  setupVis(username);
 
-        console.log(username);
-
-//       	encodeName(username);
-
-    });
+});
 
 
 d3.select('#view-poly').on("click", function() {
-      setupVis(username);
+  updateName(usernameToPrint);
+  setupVis(username);
 });
-      
+
 
 
 function setupVis(nameArray) {
-	encodeName(nameArray);
-//	console.log(pointset);
-//	console.log(usernameLabel);
 
-
-      var data =
-        view.interval({
-          expr: function (emit, x, i, time) {
-              var t = time/1.25 - 5;
-              if (x < t && x < nameArray.length) {
-                emit(x, lagrange(x));
-              }
-            },
-          width: 512,
-          channels: 2,
-          live: true, // allows for the delete letter and add letter feature
-          }).line({
-          width: window.innerWidth*0.004,
-          color: colors.ln,
-          });
-
-
-      d3.select("#view-poly").html("Success!").classed("btn btn-lg btn-success", true); 
-
-      d3.select("#poly-name").html(usernameToPrint+" = " + makePoly(pointset));
-
-      document.getElementById("delete-char").disabled = false; // Turns button off, but I don't like the looks.
-      document.getElementById("add-char").disabled = false; // Turns button off, but I don't like the looks.
-
-//    d3.select("#add-char").attr( 'disabled', 'false'); // why doesn't this work? It seems to change it, but nothing happens.
-
-      document.getElementById("view-poly").disabled = true; // Turns button off, but I don't like the looks.
-
-/*
-    // finds max/min values 
-    var valIndex = pointset[0][0];
-    var tmpLag;  
-
-      while (valIndex < Math.floor(username.length/2-1/2)) {
-        tmpLag = lagrange(valIndex);
-        if (tmpLag > maxVal) {maxVal = tmpLag};            
-        if (tmpLag < minVal) {minVal = tmpLag};                    
-        valIndex = valIndex + 1/2; // characters of name are spaced by one
+  view.interval({
+    expr: function (emit, x, i, time) {
+      var t = time/1.25 - 5;
+      if (x < t && x < nameArray.length) {
+        emit(x, lagrange(x));
       }
-//*/
+    },
+    width: 512,
+    channels: 2,
+    live: true, // allows for the delete letter and add letter feature
+  }).line({
+    width: window.innerWidth*0.004,
+    color: colors.ln,
+  });
 
-///*
-    var play = mathbox.play({
-      target: 'cartesian',
-      pace: 6,
-//      to: 2,
-      loop: false,
-      script: [
-//        {props: {factorX: 1, factorY: 1},
-        {props: {range: [startRangeX, startRangeY]}},        
-//        {props: {range: [[pointset[0][0]-3, -pointset[0][0]+3], [Math.floor(minVal)-200, Math.ceil(maxVal)+200]]}},        
-        {props: {range: [endRangeX(pointset), endRangeY(pointset)]}},        
-//        {props: {factorX: -pointset[0][0], factorY: maxVal},
-//        {props: {mathbox.select('point').set('color', 'red')}},        
-//        {props: {range: [[-2, 2], [-1, 1]]}},
-      ]
-    });
-//*/
 
+  d3.select("#view-poly").html("Success!").classed("btn btn-lg btn-success", true);
+
+  d3.select("#poly-name").html(usernameToPrint+" = " + makePoly(pointset));
+
+  document.getElementById("delete-char").disabled = false; // Turns button off, but I don't like the looks.
+  document.getElementById("add-char").disabled = false; // Turns button off, but I don't like the looks.
+
+  //    d3.select("#add-char").attr( 'disabled', 'false'); // why doesn't this work? It seems to change it, but nothing happens.
+
+  document.getElementById("view-poly").disabled = true; // Turns button off, but I don't like the looks.
+
+  zoom();
+
+
+
+}
+
+function zoom() {
+
+  if(play) {
+    play.remove();
+  }
+
+  play = mathbox.play({
+    target: 'cartesian',
+    pace: 6,
+    //      to: 2,
+    loop: false,
+    script: [
+      //        {props: {factorX: 1, factorY: 1},
+      {props: {range: [startRangeX, startRangeY]}},
+      //        {props: {range: [[pointset[0][0]-3, -pointset[0][0]+3], [Math.floor(minVal)-200, Math.ceil(maxVal)+200]]}},
+      {props: {range: [endRangeX(pointset), endRangeY(pointset)]}},
+      //        {props: {factorX: -pointset[0][0], factorY: maxVal},
+      //        {props: {mathbox.select('point').set('color', 'red')}},
+      //        {props: {range: [[-2, 2], [-1, 1]]}},
+    ]
+  });
 }
 
 
@@ -302,7 +301,7 @@ function endRangeY (points) {
 
 function arrayProduct(a) {
     var p = 1;
-    for (var i = 0; i < a.length; i += 1) {      
+    for (var i = 0; i < a.length; i += 1) {
       // s += array[i];  // sum
       p *= a[i];  //product
     }
@@ -312,28 +311,28 @@ function arrayProduct(a) {
 
 function arraySum(a) {
     var s = 0;
-    for (var i = 0; i < a.length; i += 1) {      
+    for (var i = 0; i < a.length; i += 1) {
        s += a[i];  // sum
       //p *= a[i];  //product
     }
 
     return s;
-  }  
+  }
 
 
 // Actual Lagrange Polynomial function
 function lagrange(x) {
-    var xfunBuilder=[];   
+    var xfunBuilder=[];
 
         for (var k = 0; k < username.length; k++) {
-          xfunBuilder.push([]); 
-          
+          xfunBuilder.push([]);
+
           for (var j = 0; j < username.length; j++) {
-            
+
             if (j != k) {
               xfunBuilder[k].push((x - pointset[j][0])/(pointset[k][0]-pointset[j][0]));
 //              console.log(pointset[j][0]);
-//              console.log(pointset[k][0]);              
+//              console.log(pointset[k][0]);
             }
 
           }
@@ -348,7 +347,7 @@ function lagrange(x) {
         return arraySum(xfunBuilder);
   }
 
-  
+
 // Creation of Vandermonde (Not Used)
 function vandermonde (a) {
 
@@ -404,12 +403,12 @@ function polyProd(A,B) {
 
 // Creates the polynomial to be displayed
 function makePoly(points) {
-  
+
   // Initial Vars
-  var numer = [];  
+  var numer = [];
   var denom = [];
   var L = []; // final polynomial array
-  var sign = [];  
+  var sign = [];
 
   // Initialize Vars
   for(var i = 0; i < points.length ; i++) {
@@ -423,8 +422,8 @@ function makePoly(points) {
   for(var j = 0; j < points.length ; j++) {
       for(var k = 0; k < points.length ; k++) {
         if (j!=k) {
-          numer[j] = polyProd(numer[j],[-points[k][0],1]);          
-          denom[j] = denom[j]*(points[j][0]-points[k][0]);          
+          numer[j] = polyProd(numer[j],[-points[k][0],1]);
+          denom[j] = denom[j]*(points[j][0]-points[k][0]);
         }
       }
   }
@@ -460,7 +459,7 @@ function makePoly(points) {
       } else {
 //        L[n] = "<sup>"+ L[n].n.toString()+"</sup>&frasl;<sub>"+L[n].d.toString()+"</sub>";
 //        L[n] = L[n].n.toString()+" &frasl; "+L[n].d.toString();
-        L[n] = L[n].n.toString()+"/"+L[n].d.toString();   
+        L[n] = L[n].n.toString()+"/"+L[n].d.toString();
       }
 
     } else {
@@ -480,7 +479,7 @@ function makePoly(points) {
       polynomial = "<span style='color:"+colors.coeff+"'>" + L[0] + "</span>";
     }
 
-  } 
+  }
 
   for (var q=1; q < points.length; q++) {
     if (L[q] != 0) {
