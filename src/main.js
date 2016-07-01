@@ -10,7 +10,7 @@ var pointset = [];
 var maxVal = -100;// help with scaling
 var minVal = 100;
 
-var startRangeX = [-1,19];
+var startRangeX = [-10,10];
 var startRangeY = [-30,70];
 
 var play = null;
@@ -156,12 +156,6 @@ view.array({
     }).swizzle({
       order: "xy"
     })
-/*
-    .transform({
-      scale: dataRanges.slice(0,3).map(function(d,i){return i ? 1/d : 2/d}),
-      position: dataScaledMinimums.slice(0,3).map(function(d,i){return i ? -d : -2*d}),
-    })
-*/
     .point({
       color: colors.x,
       size: window.innerWidth*0.016,
@@ -186,8 +180,7 @@ view.array({
     });
 
 
-view.select('#data').set('data', [ pointset]);
-//console.log(view.select('#data'));
+view.select('#data').set('data', [pointset]);
 
 
 function splitName(name) {
@@ -262,7 +255,7 @@ function zoom() {
   }
 
   play = mathbox.play({
-    delay: 5,
+//    delay: .5,
     target: 'cartesian',
     pace: 6,
     //      to: 2,
