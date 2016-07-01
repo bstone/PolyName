@@ -262,6 +262,7 @@ function zoom() {
   }
 
   play = mathbox.play({
+    delay: 5,
     target: 'cartesian',
     pace: 6,
     //      to: 2,
