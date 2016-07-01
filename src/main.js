@@ -12,6 +12,13 @@ var minVal = 100;
 
 var startRangeX = [-10,10];
 var startRangeY = [-30,70];
+var newRangeX = [startRangeX,startRangeX];
+var newRangeY = [startRangeY,startRangeY];
+var factorX = 0;
+var factorY = 1;
+
+var startScale = [2,1];
+//var newScale = [startScale,startScale];
 
 var play = null;
 
@@ -29,12 +36,13 @@ var colors = {
       coeff: "#A9A9A9", // Gray
       ln: '#3090FF', // blue
       lbl: 'white', // white
+      cnvs: 0xFFFFFF, // Clear/white
     }
 
 
 
 
-
+/*
 d3.select('#delete-char')
   .on("click", function() {
     var newName = usernameToPrint.slice(0,username.length-1);
@@ -54,23 +62,62 @@ d3.select('#add-char')
   function newName() {
     location.reload();
   }
+//*/
 
 d3.select('#reset')
   .on("click", function() {
-    newName();
+    location.reload();//    newName();
   });
 
 /*
 // Initialize sliders
-var scaleSlider = document.getElementById('scale-slider');
-noUiSlider.create(scaleSlider, {
-    start: [1500],
-    tooltips: true,
+var rangeXSlider = document.getElementById('rangex-slider');
+noUiSlider.create(rangeXSlider, {
+    start: [1],
+    tooltips: false,
     range: {
-  'min': [0],
-  'max': [6000]
+  'min': [-5],
+  'max': [20]
 }
 });
+
+
+
+rangeXSlider.noUiSlider.on('slide', updateRangeX);
+
+
+function updateRangeX(){
+    factorX = rangeXSlider.noUiSlider.get();
+    newRangeX[1] = [startRangeX[0]-factorX, startRangeX[1]+factorX];
+    scaleRangeX(newRangeX);
+    newRangeX[0] = newRangeX[1];
+
+    d3.select("#x-scale").html('x-Axis Scale: '+factorX);
+}
+
+function scaleRangeX(rangeArray) {
+
+  if(play) {
+    play.remove();
+  }
+
+  play = mathbox.play({
+    delay: 0,
+    target: 'cartesian',
+    pace: 1,
+    //      to: 2,
+    loop: false,
+    script: [
+      //        {props: {factorX: 1, factorY: 1},
+      {props: {range: [rangeArray[0],startRangeY]}},
+      //        {props: {range: [[pointset[0][0]-3, -pointset[0][0]+3], [Math.floor(minVal)-200, Math.ceil(maxVal)+200]]}},
+      {props: {range: [rangeArray[1],startRangeY]}},
+      //        {props: {factorX: -pointset[0][0], factorY: maxVal},
+      //        {props: {mathbox.select('point').set('color', 'red')}},
+      //        {props: {range: [[-2, 2], [-1, 1]]}},
+    ]
+  });
+}
 //*/
 
 
@@ -87,23 +134,13 @@ var mathbox = mathBox({
 if (mathbox.fallback) throw "WebGL not supported"
 
 var three = mathbox.three;
-three.renderer.setClearColor(new THREE.Color(0xFFFFFF), 1.0);
+three.renderer.setClearColor(new THREE.Color(colors.cnvs), 1.0);
 
-divContainer = document.getElementById( 'canvasElement');
+divContainer = document.getElementById( 'canvasElement' );
 document.getElementById('container').appendChild( divContainer );
-
-//three.renderer = new THREE.WebGLRenderer();
-
-
-//console.log(width);
-//console.log(window.innerWidth);
 
 three.renderer.setSize( width, height);
 divContainer.appendChild( three.renderer.domElement );
-
-
-//d3.selectAll('#canvasElement').append(three.renderer.domElement);
-//console.log(mathbox);
 
 
 // Place camera
@@ -120,7 +157,7 @@ var view =
       mathbox
       .cartesian({
         range: [startRangeX, startRangeY],
-        scale: [2, 1],
+        scale: startScale,
       });
 
 // Axes + grid
@@ -183,6 +220,7 @@ view.array({
 view.select('#data').set('data', [pointset]);
 
 
+
 function splitName(name) {
   var splitName = name.toLowerCase();
   return splitName.match(/[a-z]/g);
@@ -230,7 +268,7 @@ function setupVis(nameArray) {
     id:'vector',
     expr: function (emit, x, i, time) {
       var t = time/1.25 - 5;
-      if (x < t && x < nameArray.length) {
+      if (x < t && x < nameArray.length + 10) {
         emit(x, lagrange(x));
       }
     },
@@ -244,19 +282,19 @@ function setupVis(nameArray) {
 
   d3.select("#poly-name").html(usernameToPrint+" = " + makePoly(pointset));
 
-  zoom();
+  shiftView();
 }
 
-function zoom() {
+function shiftView() {
 
   if(play) {
     play.remove();
   }
 
   play = mathbox.play({
-//    delay: .5,
+    delay: .5,
     target: 'cartesian',
-    pace: 6,
+    pace: 3,
     //      to: 2,
     loop: false,
     script: [
