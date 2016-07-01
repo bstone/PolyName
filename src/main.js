@@ -212,7 +212,6 @@ d3.select('#name-input').on('keyup', function(event){
     updateName(usernameToPrint);
     setupVis(username);
   }
-
 });
 
 
