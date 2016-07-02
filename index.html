@@ -2,8 +2,12 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    
+    <script src="./lib/mathbox-bundle.js"></script>    
+    <link rel="stylesheet" href="./lib/mathbox.css">
+
     <meta name="viewport" content="width=device-width, initial-scale=1">
+
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <meta name="Generate a polynomial from your name" content="">
     <meta name="Branden Stone" content="">
@@ -13,29 +17,20 @@
 
     <!-- Bootstrap core CSS -->
     <link href="./css/bootstrap.min.css" rel="stylesheet">
+
     <!-- Bootstrap theme -->
-    <link href="./css/bootstrap-theme.min.css" rel="stylesheet">
-    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-    <link href="./css/ie10-viewport-bug-workaround.css" rel="stylesheet">
+<!--    <link href="./css/bootstrap-theme.min.css" rel="stylesheet"> -->
 
     <!-- Custom styles for this template -->
-    <link href="./css/theme.css" rel="stylesheet">
+<!--    <link href="./css/theme.css" rel="stylesheet"> -->
 
-    <link href="./css/nouislider.min.css" rel="stylesheet">
 
-    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-    <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
-
-    <link rel="stylesheet" href="./lib/mathbox.css">
 
     <style type="text/css">
 
       #canvasElement {
         background-color: #FFF;
-        cursor: default;
+        cursor: move;
         display:inline;
         z-index:2;
         padding-bottom: 10px;
@@ -44,7 +39,7 @@
     </style>
   </head>
 
-  <body role="document">
+  <body role="document" >
 
     <!-- Fixed navbar -->
     <nav class="navbar navbar-inverse navbar-fixed-top">
@@ -62,12 +57,15 @@
 
     </nav>
 
-
     <div class="container theme-showcase" role="main" style="padding-top: 30px; padding-bottom: 30px;">
 
       <div class="page-header">
-          <h1 id="typed-name">Type your name: <input type="text" id="name-input" autofocus="autofocus"></input></h1>
-          <p><button id="reset" type="button" class="btn btn-lg btn-primary">Reset</button></p>
+          <h1 id="typed-name">Type your name: <input type="text" id="name-input" autofocus="autofocus" autocomplete="off"></input> <button id="reset" type="button" class="btn btn-lg btn-primary" >Reset</button></h1>
+<!--          <h4>
+            <div class="noUi-extended"  id="rangex-slider" style=" width:200px"></div>
+            <span id="x-scale" style="padding-top: 30px;">x-Axis Scale:</span>
+          </h4>
+-->
       </div>
 
       <div class="row">
@@ -80,11 +78,38 @@
       <div class="row">
         <h4 id="poly-name"></h4>
       </div>
-<!--
-       <span style="display:inline-block; width:60px;">&#8202; Scale:</span><div class="noUi-extended" id="scale-slider" style="vertical-align:middle;"></div><br>
--->
     </div>
+<!---->    
+<!--
+    <div class="container theme-showcase" role="main" style="padding-top: 30px; padding-bottom: 30px;">
 
+      <div class="page-header">
+          <h1 id="typed-name">Type your name: <input type="text" id="name-input" autofocus="autofocus"></input></h1>
+          <div class="col-md-2">
+            <p><button id="reset" type="button" class="btn btn-lg btn-primary">Reset</button></p>
+          </div>
+        <div class="col-md-4">
+            <span style="display:inline-block; width:60px;">&#8202; Scale:</span>
+          </div> 
+          <div class="noUi-extended col-md-4" id="scale-slider" style=" width:200px"></div>
+      </div>
+
+      <div class="row">
+
+        <div id="container">
+          <div id="canvasElement"></div>
+        </div>
+
+      </div>
+
+      <div class="row">
+      
+        <h4 id="poly-name"></h4>
+      
+      </div>
+
+    </div>
+<!---->
 
 <!--
       <p>
@@ -131,14 +156,9 @@
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
 
-<!--    <script src="./lib/docs.min.js"></script>-->
 
-    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-    <script src="./lib/ie10-viewport-bug-workaround.js"></script>
-
-    <script src="./lib/mathbox-bundle.js"></script>
     <script src="./lib/d3.js"></script>
-    <script src="./lib/nouislider.min.js"></script>
+<!--    <script src="./lib/nouislider.min.js"></script> -->
     <script src="./lib/fraction.min.js"></script>
     <script src="./src/main.js"></script>
 
