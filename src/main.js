@@ -3,19 +3,22 @@
 // Global Vars
 //--------------
 
-//var usernameLabel = []; // initialize for labels
+// defines lines and points
 var username = []; // initialize for labels
 var usernameToPrint;
 var pointset = [];
-var maxVal = -100;// help with scaling
-var minVal = 100;
 
+// helps to find max/min values
+//var maxVal = -100;// help with scaling
+//var minVal = 100;
+
+// helps with rescaling the range with a slider 
 var startRangeX = [-10,10];
 var startRangeY = [-30,70];
-var newRangeX = [startRangeX,startRangeX];
-var newRangeY = [startRangeY,startRangeY];
-var factorX = 0;
-var factorY = 1;
+//var newRangeX = [startRangeX,startRangeX];
+//var newRangeY = [startRangeY,startRangeY];
+//var factorX = 0;
+//var factorY = 1;
 
 var startScale = [2,1];
 //var newScale = [startScale,startScale];
@@ -38,8 +41,6 @@ var colors = {
       lbl: 'white', // white
       cnvs: 0xFFFFFF, // Clear/white
     }
-
-
 
 
 /*
@@ -122,7 +123,8 @@ function scaleRangeX(rangeArray) {
 
 
 var mathbox = mathBox({
-      plugins: ['core', 'controls', 'cursor', 'mathbox'],
+      plugins: ['core', 'controls', 'mathbox'], // removed 'cursor' to fix cursor issue, 
+                                                // if we remove 'mathbox' then the thinking image happens (I don't like it)
       controls: {
         // Orbit controls, i.e. Euler angles, with gimbal lock
         klass: THREE.OrbitControls,
@@ -248,16 +250,26 @@ d3.select('#name-input').on('keyup', function(event){
   usernameToPrint = this.value;
   if(usernameToPrint.length > 0) {
     updateName(usernameToPrint);
-    setupVis(username);
+
+    // only letters reset and shift graph
+    if (d3.event.keyCode >= 65 && d3.event.keyCode <= 90) {
+      setupVis(username);
+      shiftView();
+    }
+
+    // delete changes graph and polynomial, but does not shift graph
+    if (d3.event.keyCode == 8) {
+      setupVis(username);
+    }
   }
 });
 
-
+/*
 d3.select('#view-poly').on("click", function() {
   updateName(usernameToPrint);
   setupVis(username);
 });
-
+*/
 
 
 function setupVis(nameArray) {
@@ -281,8 +293,6 @@ function setupVis(nameArray) {
   });
 
   d3.select("#poly-name").html(usernameToPrint+" = " + makePoly(pointset));
-
-  shiftView();
 }
 
 function shiftView() {
