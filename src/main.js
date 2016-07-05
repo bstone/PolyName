@@ -74,6 +74,7 @@ d3.select('#reset')
 d3.select('#make-pdf')
   .on("click", function() {
     var dataURL = three.renderer.domElement.toDataURL();
+    var polyString = usernameToPrint+ " = " + makePoly(pointset);
 
     console.log(dataURL);
 
@@ -81,7 +82,10 @@ d3.select('#make-pdf')
 
     doc.setFontSize(40);
     doc.text(35, 25, "Holy Crap it Worked!");
-    doc.addImage(dataURL, 'png', 15, 40, 180, 180);
+    doc.addImage(dataURL, 'png', 15, 40, 180, 90);
+    doc.fromHTML(d3.select('#poly-name').html(),15, 150, {
+      'width': 170, 
+      });
 
     doc.save('Test.pdf');
   });
