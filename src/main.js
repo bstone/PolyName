@@ -242,9 +242,22 @@ view.array({
       zIndex: 1,
     });
 
-
 view.select('#data').set('data', [pointset]);
 
+// axis are present but don't shift. Maybe try an overlay.
+view.array({
+      data: [[10+username.length,0], [0,70]],
+      channels: 2, // necessary
+      live: false,
+    }).text({
+      data: ["x", "y"],
+    }).label({
+      color: colors.z,
+      size: window.innerWidth*0.023,      
+      offset: [13, 20],
+      depth: .5,
+      zIndex: 1,
+    });
 
 
 function splitName(name) {
