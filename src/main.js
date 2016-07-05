@@ -5,8 +5,10 @@
 
 // defines lines and points
 var username = []; // initialize for labels
+var usernameUC = []; // decided to display upper case in points, did not want to rewrite code so made new var
 var usernameToPrint;
 var pointset = [];
+var pdfPolynomial = "";
 
 // helps to find max/min values
 //var maxVal = -100;// help with scaling
@@ -65,9 +67,31 @@ d3.select('#add-char')
   }
 //*/
 
+
 d3.select('#reset')
   .on("click", function() {
     location.reload();//    newName();
+  });
+
+d3.select('#make-pdf')
+  .on("click", function() {
+    var dataURL = three.renderer.domElement.toDataURL();
+
+    console.log(dataURL);
+
+    var doc = new jsPDF();
+
+    doc.setFontSize(40);
+    doc.text(35, 25, "Personal Polynomial!");
+    doc.addImage(dataURL, 'png', 15, 40, 180, 90);
+    doc.fromHTML(usernameToPrint + " = ",20, 150, {
+      'width': 170, 
+      });    
+    doc.fromHTML(pdfPolynomial,25, 155, {
+      'width': 165, 
+      });
+    var filename = usernameUC.join("");
+    doc.save(filename+'.pdf');
   });
 
 /*
@@ -206,7 +230,7 @@ view.array({
       height: 5,
       sdf: 0,
       expr: function (emit, i, j, time) {
-        emit(username[i]);
+        emit(usernameUC[i]);
       },
     })
     .label({
@@ -224,8 +248,8 @@ view.select('#data').set('data', [pointset]);
 
 
 function splitName(name) {
-  var splitName = name.toLowerCase();
-  return splitName.match(/[a-z]/g);
+  var splitNameLC = name.toLowerCase();
+  return [splitNameLC.match(/[a-z]/g),name.match(/[a-zA-Z]/g)]; // allows for printing user input
 }
 
 
@@ -241,7 +265,8 @@ function encodeName(nameArray) {
 function updateName(newName) {
   console.log(newName)
   usernameToPrint = newName;
-  username = splitName(usernameToPrint);
+  username = splitName(usernameToPrint)[0];
+  usernameUC = splitName(usernameToPrint)[1];
   pointset = encodeName(username);
   view.select('#data').set('data', [ pointset]);
 }
@@ -517,8 +542,10 @@ function makePoly(points) {
 
     if (sign[0] == " - ") {
       polynomial = sign[0] + "<span style='color:"+colors.coeff+"'>" + L[0] + "</span>";
+      pdfPolynomial = polynomial;
     } else {
       polynomial = "<span style='color:"+colors.coeff+"'>" + L[0] + "</span>";
+      pdfPolynomial = polynomial;
     }
 
   }
@@ -527,8 +554,10 @@ function makePoly(points) {
     if (L[q] != 0) {
       if (q == 1) {
         polynomial = polynomial + sign[q] + "<span style='color:"+colors.coeff+"'>" + L[q] + "</span> x ";
+        pdfPolynomial = pdfPolynomial + sign[q] + "<span style='color:"+colors.coeff+"'>" + L[q] + "</span> x ";        
       } else {
         polynomial = polynomial + sign[q] + "<span style='color:"+colors.coeff+"'>" + L[q] + "</span> x<sup>" + q + "</sup> ";
+        pdfPolynomial = pdfPolynomial + sign[q] + "<span style='color:"+colors.coeff+"'>" + L[q] + "</span> x^" + q;        
       }
     }
 
@@ -536,3 +565,6 @@ function makePoly(points) {
 
   return polynomial;
 }
+
+
+

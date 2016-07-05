@@ -2,10 +2,8 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    
-    <script src="./lib/mathbox-bundle.js"></script>    
-    <link rel="stylesheet" href="./lib/mathbox.css">
 
+    <link rel="stylesheet" href="./lib/mathbox.css">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
@@ -23,7 +21,6 @@
 
     <!-- Custom styles for this template -->
 <!--    <link href="./css/theme.css" rel="stylesheet"> -->
-
 
 
     <style type="text/css">
@@ -60,7 +57,7 @@
     <div class="container theme-showcase" role="main" style="padding-top: 30px; padding-bottom: 30px;">
 
       <div class="page-header">
-          <h1 id="typed-name">Type your name: <input type="text" id="name-input" autofocus="autofocus" autocomplete="off"></input> <button id="reset" type="button" class="btn btn-lg btn-primary" >Reset</button></h1>
+          <h1 id="typed-name">Type your name: <input type="text" id="name-input" autofocus="autofocus" autocomplete="off"></input> <button id="reset" type="button" class="btn btn-lg btn-primary" >Reset</button> <button id="make-pdf" type="button" class="btn btn-lg btn-primary">Make PDF</button></h1>
 <!--          <h4>
             <div class="noUi-extended"  id="rangex-slider" style=" width:200px"></div>
             <span id="x-scale" style="padding-top: 30px;">x-Axis Scale:</span>
@@ -156,11 +153,16 @@
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
 
-
+    <script type="text/javascript" src="./lib/jspdf.min.js"></script>  
     <script src="./lib/d3.js"></script>
 <!--    <script src="./lib/nouislider.min.js"></script> -->
     <script src="./lib/fraction.min.js"></script>
+    <script src="./lib/mathbox-bundle.js"></script>        
     <script src="./src/main.js"></script>
+
+
+
+
 
 
 

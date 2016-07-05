@@ -8,6 +8,6 @@ d3.select("#nav-bar").html(`
 	    <span class="icon-bar"></span>
 	  </button>
 	  <a class="navbar-brand" href="./index.html">Personal Polynomial</a>	  
-	  <a class="navbar-brand" href="./details.html">Polynomial Details</a>
+	  <a class="navbar-brand" href="./details.html">Make PDF</a>
 	</div>`
 	);
