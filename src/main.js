@@ -5,6 +5,7 @@
 
 // defines lines and points
 var username = []; // initialize for labels
+var usernameUC = []; // decided to display upper case in points, did not want to rewrite code so made new var
 var usernameToPrint;
 var pointset = [];
 var pdfPolynomial = "";
@@ -89,8 +90,8 @@ d3.select('#make-pdf')
     doc.fromHTML(pdfPolynomial,25, 155, {
       'width': 165, 
       });
-
-    doc.save('Test.pdf');
+    var filename = usernameUC.join("");
+    doc.save(filename+'.pdf');
   });
 
 /*
@@ -229,7 +230,7 @@ view.array({
       height: 5,
       sdf: 0,
       expr: function (emit, i, j, time) {
-        emit(username[i]);
+        emit(usernameUC[i]);
       },
     })
     .label({
@@ -247,8 +248,8 @@ view.select('#data').set('data', [pointset]);
 
 
 function splitName(name) {
-  var splitName = name.toLowerCase();
-  return splitName.match(/[a-z]/g);
+  var splitNameLC = name.toLowerCase();
+  return [splitNameLC.match(/[a-z]/g),name.match(/[a-zA-Z]/g)]; // allows for printing user input
 }
 
 
@@ -264,7 +265,8 @@ function encodeName(nameArray) {
 function updateName(newName) {
   console.log(newName)
   usernameToPrint = newName;
-  username = splitName(usernameToPrint);
+  username = splitName(usernameToPrint)[0];
+  usernameUC = splitName(usernameToPrint)[1];
   pointset = encodeName(username);
   view.select('#data').set('data', [ pointset]);
 }
