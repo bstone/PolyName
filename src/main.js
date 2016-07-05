@@ -7,6 +7,7 @@
 var username = []; // initialize for labels
 var usernameToPrint;
 var pointset = [];
+var pdfPolynomial = "";
 
 // helps to find max/min values
 //var maxVal = -100;// help with scaling
@@ -74,17 +75,19 @@ d3.select('#reset')
 d3.select('#make-pdf')
   .on("click", function() {
     var dataURL = three.renderer.domElement.toDataURL();
-    var polyString = usernameToPrint+ " = " + makePoly(pointset);
 
     console.log(dataURL);
 
     var doc = new jsPDF();
 
     doc.setFontSize(40);
-    doc.text(35, 25, "Holy Crap it Worked!");
+    doc.text(35, 25, "Personal Polynomial!");
     doc.addImage(dataURL, 'png', 15, 40, 180, 90);
-    doc.fromHTML(d3.select('#poly-name').html(),15, 150, {
+    doc.fromHTML(usernameToPrint + " = ",20, 150, {
       'width': 170, 
+      });    
+    doc.fromHTML(pdfPolynomial,25, 155, {
+      'width': 165, 
       });
 
     doc.save('Test.pdf');
@@ -537,8 +540,10 @@ function makePoly(points) {
 
     if (sign[0] == " - ") {
       polynomial = sign[0] + "<span style='color:"+colors.coeff+"'>" + L[0] + "</span>";
+      pdfPolynomial = polynomial;
     } else {
       polynomial = "<span style='color:"+colors.coeff+"'>" + L[0] + "</span>";
+      pdfPolynomial = polynomial;
     }
 
   }
@@ -547,8 +552,10 @@ function makePoly(points) {
     if (L[q] != 0) {
       if (q == 1) {
         polynomial = polynomial + sign[q] + "<span style='color:"+colors.coeff+"'>" + L[q] + "</span> x ";
+        pdfPolynomial = pdfPolynomial + sign[q] + "<span style='color:"+colors.coeff+"'>" + L[q] + "</span> x ";        
       } else {
         polynomial = polynomial + sign[q] + "<span style='color:"+colors.coeff+"'>" + L[q] + "</span> x<sup>" + q + "</sup> ";
+        pdfPolynomial = pdfPolynomial + sign[q] + "<span style='color:"+colors.coeff+"'>" + L[q] + "</span> x^" + q;        
       }
     }
 
