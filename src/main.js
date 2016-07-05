@@ -44,7 +44,6 @@ var colors = {
       cnvs: 0xFFFFFF, // Clear/white
     }
 
-
 /*
 d3.select('#delete-char')
   .on("click", function() {
@@ -66,7 +65,6 @@ d3.select('#add-char')
     location.reload();
   }
 //*/
-
 
 d3.select('#reset')
   .on("click", function() {
@@ -94,57 +92,6 @@ d3.select('#make-pdf')
     doc.save(filename+'.pdf');
   });
 
-/*
-// Initialize sliders
-var rangeXSlider = document.getElementById('rangex-slider');
-noUiSlider.create(rangeXSlider, {
-    start: [1],
-    tooltips: false,
-    range: {
-  'min': [-5],
-  'max': [20]
-}
-});
-
-
-
-rangeXSlider.noUiSlider.on('slide', updateRangeX);
-
-
-function updateRangeX(){
-    factorX = rangeXSlider.noUiSlider.get();
-    newRangeX[1] = [startRangeX[0]-factorX, startRangeX[1]+factorX];
-    scaleRangeX(newRangeX);
-    newRangeX[0] = newRangeX[1];
-
-    d3.select("#x-scale").html('x-Axis Scale: '+factorX);
-}
-
-function scaleRangeX(rangeArray) {
-
-  if(play) {
-    play.remove();
-  }
-
-  play = mathbox.play({
-    delay: 0,
-    target: 'cartesian',
-    pace: 1,
-    //      to: 2,
-    loop: false,
-    script: [
-      //        {props: {factorX: 1, factorY: 1},
-      {props: {range: [rangeArray[0],startRangeY]}},
-      //        {props: {range: [[pointset[0][0]-3, -pointset[0][0]+3], [Math.floor(minVal)-200, Math.ceil(maxVal)+200]]}},
-      {props: {range: [rangeArray[1],startRangeY]}},
-      //        {props: {factorX: -pointset[0][0], factorY: maxVal},
-      //        {props: {mathbox.select('point').set('color', 'red')}},
-      //        {props: {range: [[-2, 2], [-1, 1]]}},
-    ]
-  });
-}
-//*/
-
 
 var mathbox = mathBox({
       plugins: ['core', 'controls', 'mathbox'], // removed 'cursor' to fix cursor issue, 
@@ -153,8 +100,6 @@ var mathbox = mathBox({
         // Orbit controls, i.e. Euler angles, with gimbal lock
         klass: THREE.OrbitControls,
 
-        // Trackball controls, i.e. Free quaternion rotation
-        //klass: THREE.TrackballControls,
       },
     });
 if (mathbox.fallback) throw "WebGL not supported"
@@ -200,8 +145,6 @@ view
         width: 2,
         niceX: true,
         niceY: true,
-//        divideX: 50,
-//        divideY: 25,
       });
 
 // Make axes black
@@ -211,7 +154,6 @@ mathbox.select('axis').set('color', 'black');
 mathbox.set('focus', 3);
 
 view.array({
-//      items: 1,
       channels: 2,
       live: true,
       id: 'data',
@@ -225,7 +167,6 @@ view.array({
       zIndex: 1,
     }).text({
       font: 'Helvetica',
-//      style: 'bold',
       width:  50,
       height: 5,
       sdf: 0,
@@ -234,7 +175,7 @@ view.array({
       },
     })
     .label({
-      color: colors.lbl,//'#30A0FF',
+      color: colors.lbl,
       snap: false,
       size: window.innerWidth*0.023,
       offset: [0, 0],
@@ -246,7 +187,8 @@ view.select('#data').set('data', [pointset]);
 
 // axis are present but don't shift. Maybe try an overlay.
 view.array({
-      data: [[10+username.length,0], [0,70]],
+      data: [[10+username.length,0], [0,70]], // This isn't working :(
+      id: 'axisLabel',
       channels: 2, // necessary
       live: false,
     }).text({
@@ -292,6 +234,7 @@ d3.select('#name-input').on('keyup', function(event){
     // only letters reset and shift graph
     if (d3.event.keyCode >= 65 && d3.event.keyCode <= 90) {
       setupVis(username);
+      tabulate(username,username);
       shiftView();
     }
 
@@ -301,13 +244,6 @@ d3.select('#name-input').on('keyup', function(event){
     }
   }
 });
-
-/*
-d3.select('#view-poly').on("click", function() {
-  updateName(usernameToPrint);
-  setupVis(username);
-});
-*/
 
 
 function setupVis(nameArray) {
@@ -343,16 +279,21 @@ function shiftView() {
     delay: .5,
     target: 'cartesian',
     pace: 3,
-    //      to: 2,
     loop: false,
     script: [
-      //        {props: {factorX: 1, factorY: 1},
-      {props: {range: [startRangeX, startRangeY]}},
+      {
+        props: {
+          range: [startRangeX, startRangeY],
+//          view.select('#axisLabel').set('data', [[10,0], [0,70]]),
+        }
+      },
       //        {props: {range: [[pointset[0][0]-3, -pointset[0][0]+3], [Math.floor(minVal)-200, Math.ceil(maxVal)+200]]}},
-      {props: {range: [endRangeX(pointset), endRangeY(pointset)]}},
-      //        {props: {factorX: -pointset[0][0], factorY: maxVal},
-      //        {props: {mathbox.select('point').set('color', 'red')}},
-      //        {props: {range: [[-2, 2], [-1, 1]]}},
+      {
+        props: {
+          range: [endRangeX(pointset), endRangeY(pointset)],
+//          view.select('#axisLabel').set('data', [[10+username.length,0], [0,70]]),
+        }
+      },
     ]
   });
 }
@@ -411,8 +352,6 @@ function lagrange(x) {
 
             if (j != k) {
               xfunBuilder[k].push((x - pointset[j][0])/(pointset[k][0]-pointset[j][0]));
-//              console.log(pointset[j][0]);
-//              console.log(pointset[k][0]);
             }
 
           }
@@ -420,7 +359,6 @@ function lagrange(x) {
           xfunBuilder[k].push(pointset[k][1]);
 
           xfunBuilder[k] = arrayProduct(xfunBuilder[k]);
-
 
         }
 
@@ -537,8 +475,6 @@ function makePoly(points) {
         L[n] = L[n].n.toString();
 
       } else {
-//        L[n] = "<sup>"+ L[n].n.toString()+"</sup>&frasl;<sub>"+L[n].d.toString()+"</sub>";
-//        L[n] = L[n].n.toString()+" &frasl; "+L[n].d.toString();
         L[n] = L[n].n.toString()+"/"+L[n].d.toString();
       }
 
@@ -577,6 +513,42 @@ function makePoly(points) {
   }
 
   return polynomial;
+}
+
+// The table generation function
+function tabulate(data, columns) {
+    var table = d3.select("#nam-table").append("table")
+            .attr("style", "margin-left: 250px"),
+        thead = table.append("thead"),
+        tbody = table.append("tbody");
+
+    // append the header row
+    thead.append("tr")
+        .selectAll("th")
+        .data(columns)
+        .enter()
+        .append("th")
+            .text(function(column) { return column; });
+
+    // create a row for each object in the data
+    var rows = tbody.selectAll("tr")
+        .data(data)
+        .enter()
+        .append("tr");
+
+    // create a cell in each row for each column
+    var cells = rows.selectAll("td")
+        .data(function(row) {
+            return columns.map(function(column) {
+                return {column: column, value: row[column]};
+            });
+        })
+        .enter()
+        .append("td")
+        .attr("style", "font-family: Courier") // sets the font style
+            .html(function(d) { return d.value; });
+    console.log("hello it works");
+    return table;
 }
 
 
