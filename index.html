@@ -53,8 +53,8 @@
 
     </nav>
 
-    <div class="container theme-showcase" role="main" style="padding-top: 30px; padding-bottom: 30px;">
 
+    <div class="container" role="main" style="padding-top: 30px; padding-bottom: 30px;">
       <div class="page-header">
           <h1 id="typed-name">
             Type your name: <input type="text" id="name-input" autofocus="autofocus" autocomplete="off"></input>
@@ -63,27 +63,32 @@
           </h1>
       </div>
 
-      <div class="col-md-12">
-
+<!--      <div class="col-md-12"> 
+ -->
         <div class="row">
-          <div id="container" class="col-md-8">
+
+          <div id="container" class="col-md-9">
             <div id="canvasElement"></div>
           </div>
+<!--        -->
+
+          <div class="col-md-3">
+            <div id="name-table"></div>
+          </div>
+
         </div>
 
         <div class="row">
           <h4 id="poly-name"></h4>
         </div>
 
-      </div>
-
-      <div class="col-md-2">
-        <div id="name-table"></div>
-      </div>
-
-
     </div>
+
+
+
 <!--
+    </div>
+
       <p>
         <button type="button" class="btn btn-lg btn-default">Default</button>
         <button type="button" class="btn btn-lg btn-primary">Primary</button>
@@ -133,6 +138,7 @@
     <script src="./lib/fraction.min.js"></script>
     <script src="./lib/mathbox-bundle.js"></script>        
     <script src="./src/main.js"></script>
+    <script src="./src/makepdf.js"></script>    
 
 
     <!-- Start of StatCounter Code for Default Guide -->

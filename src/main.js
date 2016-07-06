@@ -27,7 +27,7 @@ var startScale = [2,1];
 
 var play = null;
 
-var width  = Math.min(800,window.innerWidth);
+var width  = 800 //Math.min(800,window.innerWidth);
 var height = width/2; //width/2; //window.innerHeight-100;
 
 var colors = {
@@ -71,26 +71,7 @@ d3.select('#reset')
     location.reload();//    newName();
   });
 
-d3.select('#make-pdf')
-  .on("click", function() {
-    var dataURL = three.renderer.domElement.toDataURL();
 
-    console.log(dataURL);
-
-    var doc = new jsPDF();
-
-    doc.setFontSize(40);
-    doc.text(35, 25, "Personal Polynomial!");
-    doc.addImage(dataURL, 'png', 15, 40, 180, 90);
-    doc.fromHTML(usernameToPrint + " = ",20, 150, { // this may not need the from HTML, it is just a string.
-      'width': 170, 
-      });    
-    doc.fromHTML(pdfPolynomial,25, 155, {
-      'width': 165, 
-      });
-    var filename = usernameUC.join("");
-    doc.save(filename+'.pdf');
-  });
 
 
 var mathbox = mathBox({
@@ -226,6 +207,7 @@ function updateName(newName) {
   view.select('#data').set('data', [ pointset]);
 }
 
+
 d3.select('#name-input').on('keyup', function(event){
   usernameToPrint = this.value;
   if(usernameToPrint.length > 0) {
@@ -234,16 +216,39 @@ d3.select('#name-input').on('keyup', function(event){
     // only letters reset and shift graph
     if (d3.event.keyCode >= 65 && d3.event.keyCode <= 90) {
       setupVis(username);
-      tabulate(username,username);
+      nameValues(usernameUC);
       shiftView();
     }
 
     // delete changes graph and polynomial, but does not shift graph
     if (d3.event.keyCode == 8) {
       setupVis(username);
+      deleteNameValues();      
+      nameValues(usernameUC);      
     }
   }
 });
+
+function nameValues(dataSet) {
+  d3.select("#name-table").selectAll("p")
+    .data(dataSet)
+    .enter()
+    .append("p")
+    .text(function(d) { 
+      var valueString = "";
+      var charValue = d.toLowerCase();
+
+      charValue = charValue.charCodeAt()-96;
+      valueString = d + " = " + charValue;
+
+      return valueString; 
+    });
+}
+
+function deleteNameValues() {
+    d3.select("#name-table").selectAll("p")
+      .remove("p");
+}
 
 
 function setupVis(nameArray) {
