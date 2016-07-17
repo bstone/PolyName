@@ -144,7 +144,7 @@ view.array({
     })
     .point({
       color: colors.x,
-      size: window.innerWidth*0.01,
+      size: 11,//window.innerWidth*0.01,
       zIndex: 1,
     }).text({
       font: 'Helvetica',
@@ -158,7 +158,7 @@ view.array({
     .label({
       color: colors.lbl,
       snap: false,
-      size: window.innerWidth*0.015,
+      size: 15,//window.innerWidth*0.015,
       offset: [0, 0],
       depth: .5,
       zIndex: 1,
@@ -178,7 +178,7 @@ view.array({
       data: ["x", "y"],
     }).label({
       color: colors.z,
-      size: window.innerWidth*0.021,      
+      size: 15,//window.innerWidth*0.021,      
       offset: [13, 20],
       depth: .5,
       zIndex: 1,
@@ -269,7 +269,7 @@ function setupVis(nameArray) {
     channels: 2,
     live: true, // allows for the delete letter and add letter feature
   }).line({
-    width: window.innerWidth*0.003,
+    width: 4,//window.innerWidth*0.003,
     color: colors.ln,
   });
 
