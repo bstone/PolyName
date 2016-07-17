@@ -116,14 +116,14 @@ var view =
 view
       .axis({
         axis: 1,
-        width: 3,
+        width: 2,
       })
       .axis({
         axis: 2,
-        width: 3,
+        width: 2,
       })
       .grid({
-        width: 2,
+        width: 1,
         niceX: true,
         niceY: true,
       });
@@ -144,7 +144,7 @@ view.array({
     })
     .point({
       color: colors.x,
-      size: window.innerWidth*0.016,
+      size: window.innerWidth*0.01,
       zIndex: 1,
     }).text({
       font: 'Helvetica',
@@ -158,11 +158,13 @@ view.array({
     .label({
       color: colors.lbl,
       snap: false,
-      size: window.innerWidth*0.023,
+      size: window.innerWidth*0.015,
       offset: [0, 0],
       depth: .5,
       zIndex: 1,
     });
+
+
 
 view.select('#data').set('data', [pointset]);
 
@@ -176,7 +178,7 @@ view.array({
       data: ["x", "y"],
     }).label({
       color: colors.z,
-      size: window.innerWidth*0.023,      
+      size: window.innerWidth*0.021,      
       offset: [13, 20],
       depth: .5,
       zIndex: 1,
@@ -267,7 +269,7 @@ function setupVis(nameArray) {
     channels: 2,
     live: true, // allows for the delete letter and add letter feature
   }).line({
-    width: window.innerWidth*0.004,
+    width: window.innerWidth*0.003,
     color: colors.ln,
   });
 
