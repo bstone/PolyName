@@ -514,11 +514,11 @@ function makePoly(points) {
     }
   } else {
     if (sign[topDeg] == " - ") {
-      polynomial = sign[topDeg] + "<span style='color:"+colors.coeff+"'>" + L[topDeg] + "</span> x <sup>" + topDeg + "</sup> ";
-      pdfPolynomial = polynomial;
+      polynomial = sign[topDeg] + "<span style='color:"+colors.coeff+"'>" + L[topDeg] + "</span> x<sup>" + topDeg + "</sup> ";
+      pdfPolynomial = sign[topDeg] + "<span style='color:"+colors.coeff+"'>" + L[topDeg] + "</span> x^" + topDeg;
     } else {
-      polynomial = "<span style='color:"+colors.coeff+"'>" + L[topDeg] + "</span> x <sup>" + topDeg + "</sup> ";
-      pdfPolynomial = polynomial;
+      polynomial = "<span style='color:"+colors.coeff+"'>" + L[topDeg] + "</span> x<sup>" + topDeg + "</sup> ";
+      pdfPolynomial = "<span style='color:"+colors.coeff+"'>" + L[topDeg] + "</span> x^" + topDeg;
     }
     for (var q=points.length-2; q>=0; q--) {    
       if (L[q] != 0) {
@@ -538,7 +538,6 @@ function makePoly(points) {
     }
   }
 //*/
-
 
 /*  
 // Polynomial in ascending degrees 
