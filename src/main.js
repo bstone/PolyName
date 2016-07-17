@@ -27,7 +27,7 @@ var startScale = [2,1];
 
 var play = null;
 
-var width  = Math.min(800,window.innerWidth);
+var width  = 800; //Math.min(800,window.innerWidth);
 var height = width/2; //width/2; //window.innerHeight-100;
 
 var colors = {
@@ -43,7 +43,6 @@ var colors = {
       lbl: 'white', // white
       cnvs: 0xFFFFFF, // Clear/white
     }
-
 
 /*
 d3.select('#delete-char')
@@ -73,100 +72,27 @@ d3.select('#reset')
     location.reload();//    newName();
   });
 
-d3.select('#make-pdf')
-  .on("click", function() {
-    var dataURL = three.renderer.domElement.toDataURL();
-
-    console.log(dataURL);
-
-    var doc = new jsPDF();
-
-    doc.setFontSize(40);
-    doc.text(35, 25, "Personal Polynomial!");
-    doc.addImage(dataURL, 'png', 15, 40, 180, 90);
-    doc.fromHTML(usernameToPrint + " = ",20, 150, {
-      'width': 170, 
-      });    
-    doc.fromHTML(pdfPolynomial,25, 155, {
-      'width': 165, 
-      });
-    var filename = usernameUC.join("");
-    doc.save(filename+'.pdf');
-  });
-
-/*
-// Initialize sliders
-var rangeXSlider = document.getElementById('rangex-slider');
-noUiSlider.create(rangeXSlider, {
-    start: [1],
-    tooltips: false,
-    range: {
-  'min': [-5],
-  'max': [20]
-}
-});
-
-
-
-rangeXSlider.noUiSlider.on('slide', updateRangeX);
-
-
-function updateRangeX(){
-    factorX = rangeXSlider.noUiSlider.get();
-    newRangeX[1] = [startRangeX[0]-factorX, startRangeX[1]+factorX];
-    scaleRangeX(newRangeX);
-    newRangeX[0] = newRangeX[1];
-
-    d3.select("#x-scale").html('x-Axis Scale: '+factorX);
-}
-
-function scaleRangeX(rangeArray) {
-
-  if(play) {
-    play.remove();
-  }
-
-  play = mathbox.play({
-    delay: 0,
-    target: 'cartesian',
-    pace: 1,
-    //      to: 2,
-    loop: false,
-    script: [
-      //        {props: {factorX: 1, factorY: 1},
-      {props: {range: [rangeArray[0],startRangeY]}},
-      //        {props: {range: [[pointset[0][0]-3, -pointset[0][0]+3], [Math.floor(minVal)-200, Math.ceil(maxVal)+200]]}},
-      {props: {range: [rangeArray[1],startRangeY]}},
-      //        {props: {factorX: -pointset[0][0], factorY: maxVal},
-      //        {props: {mathbox.select('point').set('color', 'red')}},
-      //        {props: {range: [[-2, 2], [-1, 1]]}},
-    ]
-  });
-}
-//*/
-
+var element = document.querySelector('#canvasElement');
 
 var mathbox = mathBox({
       plugins: ['core', 'controls', 'mathbox'], // removed 'cursor' to fix cursor issue, 
                                                 // if we remove 'mathbox' then the thinking image happens (I don't like it)
       controls: {
-        // Orbit controls, i.e. Euler angles, with gimbal lock
         klass: THREE.OrbitControls,
-
-        // Trackball controls, i.e. Free quaternion rotation
-        //klass: THREE.TrackballControls,
       },
+      element: element,
     });
+
 if (mathbox.fallback) throw "WebGL not supported"
 
 var three = mathbox.three;
 three.renderer.setClearColor(new THREE.Color(colors.cnvs), 1.0);
 
-divContainer = document.getElementById( 'canvasElement' );
-document.getElementById('container').appendChild( divContainer );
+//divContainer = document.getElementById( 'canvasElement' );
+//document.getElementById('container').appendChild( divContainer );
 
-three.renderer.setSize( width, height);
-divContainer.appendChild( three.renderer.domElement );
+//three.renderer.setSize( width, height);
+//divContainer.appendChild( three.renderer.domElement );
 
 
 // Place camera
@@ -190,18 +116,16 @@ var view =
 view
       .axis({
         axis: 1,
-        width: 3,
+        width: 2,
       })
       .axis({
         axis: 2,
-        width: 3,
+        width: 2,
       })
       .grid({
-        width: 2,
+        width: 1,
         niceX: true,
         niceY: true,
-//        divideX: 50,
-//        divideY: 25,
       });
 
 // Make axes black
@@ -211,7 +135,6 @@ mathbox.select('axis').set('color', 'black');
 mathbox.set('focus', 3);
 
 view.array({
-//      items: 1,
       channels: 2,
       live: true,
       id: 'data',
@@ -221,11 +144,10 @@ view.array({
     })
     .point({
       color: colors.x,
-      size: window.innerWidth*0.016,
+      size: 12,//window.innerWidth*0.01,
       zIndex: 1,
     }).text({
       font: 'Helvetica',
-//      style: 'bold',
       width:  50,
       height: 5,
       sdf: 0,
@@ -234,17 +156,33 @@ view.array({
       },
     })
     .label({
-      color: colors.lbl,//'#30A0FF',
+      color: colors.lbl,
       snap: false,
-      size: window.innerWidth*0.023,
+      size: 18,//window.innerWidth*0.015,
       offset: [0, 0],
       depth: .5,
       zIndex: 1,
     });
 
 
+
 view.select('#data').set('data', [pointset]);
 
+// axis are present but don't shift. Maybe try an overlay.
+view.array({
+      data: [[10+username.length,0], [0,70]], // This isn't working :(
+      id: 'axisLabel',
+      channels: 2, // necessary
+      live: false,
+    }).text({
+      data: ["x", "y"],
+    }).label({
+      color: colors.z,
+      size: 15,//window.innerWidth*0.021,      
+      offset: [13, 20],
+      depth: .5,
+      zIndex: 1,
+    });
 
 
 function splitName(name) {
@@ -257,7 +195,7 @@ function encodeName(nameArray) {
   var points = [];
   // Shifting points to be displayed in initial grid
   for (var i = 0; i < nameArray.length; i++) {
-    points.push([i,(nameArray[i].charCodeAt()-96)]);
+    points.push([i+1,(nameArray[i].charCodeAt()-96)]);
   }
   return points;
 }
@@ -271,6 +209,7 @@ function updateName(newName) {
   view.select('#data').set('data', [ pointset]);
 }
 
+
 d3.select('#name-input').on('keyup', function(event){
   usernameToPrint = this.value;
   if(usernameToPrint.length > 0) {
@@ -279,22 +218,41 @@ d3.select('#name-input').on('keyup', function(event){
     // only letters reset and shift graph
     if (d3.event.keyCode >= 65 && d3.event.keyCode <= 90) {
       setupVis(username);
+      nameValues(usernameUC);
       shiftView();
     }
 
     // delete changes graph and polynomial, but does not shift graph
     if (d3.event.keyCode == 8) {
       setupVis(username);
+      deleteNameValues();      
+      nameValues(usernameUC);      
     }
   }
 });
 
-/*
-d3.select('#view-poly').on("click", function() {
-  updateName(usernameToPrint);
-  setupVis(username);
-});
-*/
+
+function nameValues(dataSet) {
+  d3.select("#name-table").selectAll("p")
+    .data(dataSet)
+    .enter()
+    .append("p")
+    .text(function(d) { 
+      var valueString = "";
+      var charValue = d.toLowerCase();
+      var charIndex = dataSet.indexOf(d)+1;
+
+      charValue = charValue.charCodeAt()-96;
+      valueString = d + " = (" +  charIndex + "," + charValue + ")";
+
+      return valueString; 
+    });
+}
+
+function deleteNameValues() {
+    d3.select("#name-table").selectAll("p")
+      .remove("p");
+}
 
 
 function setupVis(nameArray) {
@@ -313,11 +271,22 @@ function setupVis(nameArray) {
     channels: 2,
     live: true, // allows for the delete letter and add letter feature
   }).line({
-    width: window.innerWidth*0.004,
+    width: 4,//window.innerWidth*0.003,
     color: colors.ln,
   });
 
   d3.select("#poly-name").html(usernameToPrint+" = " + makePoly(pointset));
+
+
+// make this not jQuery and turn into a function.
+      $('.fraction').each(function(key, value) {
+        $this = $(this)
+        var split = $this.html().split("/")
+        if( split.length == 2 ){
+            $this.html('<span class="top">'+split[0]+'</span><span class="bottom">'+split[1]+'</span>')
+        }    
+    });
+
 }
 
 function shiftView() {
@@ -330,16 +299,21 @@ function shiftView() {
     delay: .5,
     target: 'cartesian',
     pace: 3,
-    //      to: 2,
     loop: false,
     script: [
-      //        {props: {factorX: 1, factorY: 1},
-      {props: {range: [startRangeX, startRangeY]}},
+      {
+        props: {
+          range: [startRangeX, startRangeY],
+//          view.select('#axisLabel').set('data', [[10,0], [0,70]]),
+        }
+      },
       //        {props: {range: [[pointset[0][0]-3, -pointset[0][0]+3], [Math.floor(minVal)-200, Math.ceil(maxVal)+200]]}},
-      {props: {range: [endRangeX(pointset), endRangeY(pointset)]}},
-      //        {props: {factorX: -pointset[0][0], factorY: maxVal},
-      //        {props: {mathbox.select('point').set('color', 'red')}},
-      //        {props: {range: [[-2, 2], [-1, 1]]}},
+      {
+        props: {
+          range: [endRangeX(pointset), endRangeY(pointset)],
+//          view.select('#axisLabel').set('data', [[10+username.length,0], [0,70]]),
+        }
+      },
     ]
   });
 }
@@ -350,8 +324,8 @@ function endRangeX (points) {
 	var d = startRangeX[1] - startRangeX[0];
 
 //	if (d > points.length) {
-		newRange[0] = -d/2 + points.length/2;
-		newRange[1] =  d/2 + points.length/2;
+		newRange[0] = -d/2 + points.length/2+1;
+		newRange[1] =  d/2 + points.length/2+1;
 //	} else {
 
 //	}
@@ -398,8 +372,6 @@ function lagrange(x) {
 
             if (j != k) {
               xfunBuilder[k].push((x - pointset[j][0])/(pointset[k][0]-pointset[j][0]));
-//              console.log(pointset[j][0]);
-//              console.log(pointset[k][0]);
             }
 
           }
@@ -407,7 +379,6 @@ function lagrange(x) {
           xfunBuilder[k].push(pointset[k][1]);
 
           xfunBuilder[k] = arrayProduct(xfunBuilder[k]);
-
 
         }
 
@@ -524,8 +495,6 @@ function makePoly(points) {
         L[n] = L[n].n.toString();
 
       } else {
-//        L[n] = "<sup>"+ L[n].n.toString()+"</sup>&frasl;<sub>"+L[n].d.toString()+"</sub>";
-//        L[n] = L[n].n.toString()+" &frasl; "+L[n].d.toString();
         L[n] = L[n].n.toString()+"/"+L[n].d.toString();
       }
 
@@ -535,9 +504,54 @@ function makePoly(points) {
 
   }
 
+
+  // Reverse the list so that Polynomial is written from high powers of x to low powers.
+//  L = L.reverse();
+
   // Creates the polynomial to be viewed
   var polynomial = "";
 
+///*  
+// Polynomial in Decending Degrees
+  var topDeg = L.length-1;
+
+  if (topDeg == 0) {
+    if (sign[topDeg] == " - ") {
+      polynomial = sign[topDeg] + "<span class='fraction' style='color:"+colors.coeff+"'>" + L[topDeg] + "</span>";
+      pdfPolynomial = polynomial;
+    } else {
+      polynomial = "<span class='fraction' style='color:"+colors.coeff+"'>" + L[topDeg] + "</span>";
+      pdfPolynomial = polynomial;
+    }
+  } else {
+    if (sign[topDeg] == " - ") {
+      polynomial = sign[topDeg] + "<span class='fraction' style='color:"+colors.coeff+"'>" + L[topDeg] + "</span> x<sup>" + topDeg + "</sup> ";
+      pdfPolynomial = sign[topDeg] + "<span style='color:"+colors.coeff+"'>" + L[topDeg] + "</span> x^" + topDeg;
+    } else {
+      polynomial = "<span class='fraction' style='color:"+colors.coeff+"'>" + L[topDeg] + "</span> x<sup>" + topDeg + "</sup> ";
+      pdfPolynomial = "<span style='color:"+colors.coeff+"'>" + L[topDeg] + "</span> x^" + topDeg;
+    }
+    for (var q=points.length-2; q>=0; q--) {    
+      if (L[q] != 0) {
+        if (q == 1 || q ==0 ) {
+          if (q == 1) {
+            polynomial = polynomial + sign[q] + "<span class='fraction' style='color:"+colors.coeff+"'>" + L[q] + "</span> x ";
+            pdfPolynomial = pdfPolynomial + sign[q] + "<span style='color:"+colors.coeff+"'>" + L[q] + "</span> x ";        
+          } else {
+            polynomial = polynomial + sign[q] + "<span class='fraction' style='color:"+colors.coeff+"'>" + L[q] + "</span>";
+            pdfPolynomial = pdfPolynomial + sign[q] + "<span style='color:"+colors.coeff+"'>" + L[q] + "</span>";        
+          }
+        } else {
+          polynomial = polynomial + sign[q] + "<span class='fraction' style='color:"+colors.coeff+"'>" + L[q] + "</span> x<sup>" + q + "</sup> ";
+          pdfPolynomial = pdfPolynomial + sign[q] + "<span style='color:"+colors.coeff+"'>" + L[q] + "</span> x^" + q;        
+        }
+      }
+    }
+  }
+//*/
+
+/*  
+// Polynomial in ascending degrees 
   if (L[0] != 0) {
 
     if (sign[0] == " - ") {
@@ -550,7 +564,9 @@ function makePoly(points) {
 
   }
 
+
   for (var q=1; q < points.length; q++) {
+//  for (var q=points.length-2; q>=0; q--) {    
     if (L[q] != 0) {
       if (q == 1) {
         polynomial = polynomial + sign[q] + "<span style='color:"+colors.coeff+"'>" + L[q] + "</span> x ";
@@ -562,9 +578,10 @@ function makePoly(points) {
     }
 
   }
-
+//*/
   return polynomial;
 }
+
 
 
 
