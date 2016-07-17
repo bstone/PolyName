@@ -144,7 +144,7 @@ view.array({
     })
     .point({
       color: colors.x,
-      size: 11,//window.innerWidth*0.01,
+      size: 12,//window.innerWidth*0.01,
       zIndex: 1,
     }).text({
       font: 'Helvetica',
@@ -158,7 +158,7 @@ view.array({
     .label({
       color: colors.lbl,
       snap: false,
-      size: 15,//window.innerWidth*0.015,
+      size: 18,//window.innerWidth*0.015,
       offset: [0, 0],
       depth: .5,
       zIndex: 1,
@@ -497,7 +497,51 @@ function makePoly(points) {
 
   // Creates the polynomial to be viewed
   var polynomial = "";
+  console.log(L.length);
+  console.log(L[L.length-1]);
 
+///*  
+// Polynomial in Decending Degrees
+  var topDeg = L.length-1;
+
+  if (topDeg == 0) {
+    if (sign[topDeg] == " - ") {
+      polynomial = sign[topDeg] + "<span style='color:"+colors.coeff+"'>" + L[topDeg] + "</span>";
+      pdfPolynomial = polynomial;
+    } else {
+      polynomial = "<span style='color:"+colors.coeff+"'>" + L[topDeg] + "</span>";
+      pdfPolynomial = polynomial;
+    }
+  } else {
+    if (sign[topDeg] == " - ") {
+      polynomial = sign[topDeg] + "<span style='color:"+colors.coeff+"'>" + L[topDeg] + "</span> x <sup>" + topDeg + "</sup> ";
+      pdfPolynomial = polynomial;
+    } else {
+      polynomial = "<span style='color:"+colors.coeff+"'>" + L[topDeg] + "</span> x <sup>" + topDeg + "</sup> ";
+      pdfPolynomial = polynomial;
+    }
+    for (var q=points.length-2; q>=0; q--) {    
+      if (L[q] != 0) {
+        if (q == 1 || q ==0 ) {
+          if (q == 1) {
+            polynomial = polynomial + sign[q] + "<span style='color:"+colors.coeff+"'>" + L[q] + "</span> x ";
+            pdfPolynomial = pdfPolynomial + sign[q] + "<span style='color:"+colors.coeff+"'>" + L[q] + "</span> x ";        
+          } else {
+            polynomial = polynomial + sign[q] + "<span style='color:"+colors.coeff+"'>" + L[q] + "</span>";
+            pdfPolynomial = pdfPolynomial + sign[q] + "<span style='color:"+colors.coeff+"'>" + L[q] + "</span>";        
+          }
+        } else {
+          polynomial = polynomial + sign[q] + "<span style='color:"+colors.coeff+"'>" + L[q] + "</span> x<sup>" + q + "</sup> ";
+          pdfPolynomial = pdfPolynomial + sign[q] + "<span style='color:"+colors.coeff+"'>" + L[q] + "</span> x^" + q;        
+        }
+      }
+    }
+  }
+//*/
+
+
+/*  
+// Polynomial in ascending degrees 
   if (L[0] != 0) {
 
     if (sign[0] == " - ") {
@@ -509,6 +553,7 @@ function makePoly(points) {
     }
 
   }
+
 
   for (var q=1; q < points.length; q++) {
 //  for (var q=points.length-2; q>=0; q--) {    
@@ -523,7 +568,7 @@ function makePoly(points) {
     }
 
   }
-
+//*/
   return polynomial;
 }
 
