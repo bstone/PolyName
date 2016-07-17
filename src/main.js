@@ -276,6 +276,17 @@ function setupVis(nameArray) {
   });
 
   d3.select("#poly-name").html(usernameToPrint+" = " + makePoly(pointset));
+
+
+// make this not jQuery and turn into a function.
+      $('.fraction').each(function(key, value) {
+        $this = $(this)
+        var split = $this.html().split("/")
+        if( split.length == 2 ){
+            $this.html('<span class="top">'+split[0]+'</span><span class="bottom">'+split[1]+'</span>')
+        }    
+    });
+
 }
 
 function shiftView() {
@@ -499,8 +510,6 @@ function makePoly(points) {
 
   // Creates the polynomial to be viewed
   var polynomial = "";
-  console.log(L.length);
-  console.log(L[L.length-1]);
 
 ///*  
 // Polynomial in Decending Degrees
@@ -508,32 +517,32 @@ function makePoly(points) {
 
   if (topDeg == 0) {
     if (sign[topDeg] == " - ") {
-      polynomial = sign[topDeg] + "<span style='color:"+colors.coeff+"'>" + L[topDeg] + "</span>";
+      polynomial = sign[topDeg] + "<span class='fraction' style='color:"+colors.coeff+"'>" + L[topDeg] + "</span>";
       pdfPolynomial = polynomial;
     } else {
-      polynomial = "<span style='color:"+colors.coeff+"'>" + L[topDeg] + "</span>";
+      polynomial = "<span class='fraction' style='color:"+colors.coeff+"'>" + L[topDeg] + "</span>";
       pdfPolynomial = polynomial;
     }
   } else {
     if (sign[topDeg] == " - ") {
-      polynomial = sign[topDeg] + "<span style='color:"+colors.coeff+"'>" + L[topDeg] + "</span> x<sup>" + topDeg + "</sup> ";
+      polynomial = sign[topDeg] + "<span class='fraction' style='color:"+colors.coeff+"'>" + L[topDeg] + "</span> x<sup>" + topDeg + "</sup> ";
       pdfPolynomial = sign[topDeg] + "<span style='color:"+colors.coeff+"'>" + L[topDeg] + "</span> x^" + topDeg;
     } else {
-      polynomial = "<span style='color:"+colors.coeff+"'>" + L[topDeg] + "</span> x<sup>" + topDeg + "</sup> ";
+      polynomial = "<span class='fraction' style='color:"+colors.coeff+"'>" + L[topDeg] + "</span> x<sup>" + topDeg + "</sup> ";
       pdfPolynomial = "<span style='color:"+colors.coeff+"'>" + L[topDeg] + "</span> x^" + topDeg;
     }
     for (var q=points.length-2; q>=0; q--) {    
       if (L[q] != 0) {
         if (q == 1 || q ==0 ) {
           if (q == 1) {
-            polynomial = polynomial + sign[q] + "<span style='color:"+colors.coeff+"'>" + L[q] + "</span> x ";
+            polynomial = polynomial + sign[q] + "<span class='fraction' style='color:"+colors.coeff+"'>" + L[q] + "</span> x ";
             pdfPolynomial = pdfPolynomial + sign[q] + "<span style='color:"+colors.coeff+"'>" + L[q] + "</span> x ";        
           } else {
-            polynomial = polynomial + sign[q] + "<span style='color:"+colors.coeff+"'>" + L[q] + "</span>";
+            polynomial = polynomial + sign[q] + "<span class='fraction' style='color:"+colors.coeff+"'>" + L[q] + "</span>";
             pdfPolynomial = pdfPolynomial + sign[q] + "<span style='color:"+colors.coeff+"'>" + L[q] + "</span>";        
           }
         } else {
-          polynomial = polynomial + sign[q] + "<span style='color:"+colors.coeff+"'>" + L[q] + "</span> x<sup>" + q + "</sup> ";
+          polynomial = polynomial + sign[q] + "<span class='fraction' style='color:"+colors.coeff+"'>" + L[q] + "</span> x<sup>" + q + "</sup> ";
           pdfPolynomial = pdfPolynomial + sign[q] + "<span style='color:"+colors.coeff+"'>" + L[q] + "</span> x^" + q;        
         }
       }
