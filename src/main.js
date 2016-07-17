@@ -195,7 +195,7 @@ function encodeName(nameArray) {
   var points = [];
   // Shifting points to be displayed in initial grid
   for (var i = 0; i < nameArray.length; i++) {
-    points.push([i,(nameArray[i].charCodeAt()-96)]);
+    points.push([i+1,(nameArray[i].charCodeAt()-96)]);
   }
   return points;
 }
@@ -231,6 +231,7 @@ d3.select('#name-input').on('keyup', function(event){
   }
 });
 
+
 function nameValues(dataSet) {
   d3.select("#name-table").selectAll("p")
     .data(dataSet)
@@ -239,9 +240,10 @@ function nameValues(dataSet) {
     .text(function(d) { 
       var valueString = "";
       var charValue = d.toLowerCase();
+      var charIndex = dataSet.indexOf(d)+1;
 
       charValue = charValue.charCodeAt()-96;
-      valueString = d + " = " + charValue;
+      valueString = d + " = (" +  charIndex + "," + charValue + ")";
 
       return valueString; 
     });
@@ -311,8 +313,8 @@ function endRangeX (points) {
 	var d = startRangeX[1] - startRangeX[0];
 
 //	if (d > points.length) {
-		newRange[0] = -d/2 + points.length/2;
-		newRange[1] =  d/2 + points.length/2;
+		newRange[0] = -d/2 + points.length/2+1;
+		newRange[1] =  d/2 + points.length/2+1;
 //	} else {
 
 //	}
