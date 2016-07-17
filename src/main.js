@@ -27,7 +27,7 @@ var startScale = [2,1];
 
 var play = null;
 
-var width  = 800 //Math.min(800,window.innerWidth);
+var width  = 800; //Math.min(800,window.innerWidth);
 var height = width/2; //width/2; //window.innerHeight-100;
 
 var colors = {
@@ -66,33 +66,33 @@ d3.select('#add-char')
   }
 //*/
 
+
 d3.select('#reset')
   .on("click", function() {
     location.reload();//    newName();
   });
 
-
-
+var element = document.querySelector('#canvasElement');
 
 var mathbox = mathBox({
       plugins: ['core', 'controls', 'mathbox'], // removed 'cursor' to fix cursor issue, 
                                                 // if we remove 'mathbox' then the thinking image happens (I don't like it)
       controls: {
-        // Orbit controls, i.e. Euler angles, with gimbal lock
         klass: THREE.OrbitControls,
-
       },
+      element: element,
     });
+
 if (mathbox.fallback) throw "WebGL not supported"
 
 var three = mathbox.three;
 three.renderer.setClearColor(new THREE.Color(colors.cnvs), 1.0);
 
-divContainer = document.getElementById( 'canvasElement' );
-document.getElementById('container').appendChild( divContainer );
+//divContainer = document.getElementById( 'canvasElement' );
+//document.getElementById('container').appendChild( divContainer );
 
-three.renderer.setSize( width, height);
-divContainer.appendChild( three.renderer.domElement );
+//three.renderer.setSize( width, height);
+//divContainer.appendChild( three.renderer.domElement );
 
 
 // Place camera
@@ -489,6 +489,10 @@ function makePoly(points) {
 
   }
 
+
+  // Reverse the list so that Polynomial is written from high powers of x to low powers.
+//  L = L.reverse();
+
   // Creates the polynomial to be viewed
   var polynomial = "";
 
@@ -505,6 +509,7 @@ function makePoly(points) {
   }
 
   for (var q=1; q < points.length; q++) {
+//  for (var q=points.length-2; q>=0; q--) {    
     if (L[q] != 0) {
       if (q == 1) {
         polynomial = polynomial + sign[q] + "<span style='color:"+colors.coeff+"'>" + L[q] + "</span> x ";

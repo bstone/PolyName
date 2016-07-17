@@ -1,190 +1,87 @@
 <!DOCTYPE html>
-<html>
-<head>
-  <meta charset="utf-8">
-  <title>MathBox - Empty</title>
-  <script src="./lib/mathbox-bundle.js"></script>
-  <link rel="stylesheet" href="./lib/mathbox.css">
-  <meta name="viewport" content="initial-scale=1, maximum-scale=1">
-</head>
-<body>
-  <script>
-    var mathbox = mathBox({
-      plugins: ['core', 'controls', 'cursor', 'mathbox'],
-      controls: {
-        // Orbit controls, i.e. Euler angles, with gimbal lock
-        klass: THREE.OrbitControls,
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        // Trackball controls, i.e. Free quaternion rotation
-        //klass: THREE.TrackballControls,
-      },
-    });
-    if (mathbox.fallback) throw "WebGL not supported"
+    <meta name="Testing" content="">
+    <meta name="Author" content="">
 
-    var three = mathbox.three;
-    three.renderer.setClearColor(new THREE.Color(0xFFFFFF), 1.0);
+    <title>Canvas Test</title>
+  </head>
 
+  <body>
+    <div style="padding-top: 30px; padding-bottom: 30px; padding-left: 30px;">
+          <div id="container">
+            <div id="canvasElement" style="width:800px; height:400px;"></div>
+          </div>
+    </div>
 
+    <!-- JavaScript  ================================================== -->
+    <script src="./lib/mathbox-bundle.js"></script>  
 
-    // Do stuff with mathbox,
-    // for example: (see docs/intro.md)
+    <script type="text/javascript">
+      var startRangeX = [-10,10];
+      var startRangeY = [-30,70];
+      var startScale = [2,1];
+      var width  = 800; 
+      var height = width/2; 
+      var colors = {        
+        cnvs: 0xFFFFFF, // Clear/white
+        }
 
+      var element = document.querySelector('#canvasElement');
 
-    // Place camera
-    var camera =
-      mathbox
-      .camera({
-        proxy: true,
-        position: [0, 0, 3],
-      });
+      var mathbox = mathBox({
+            plugins: ['core', 'controls', 'mathbox'], 
+            controls: {
+              klass: THREE.OrbitControls,
+            },
+            element: element,
+          });
 
-    // 2D cartesian
-    var view =
-      mathbox
-      .cartesian({
-        range: [[-2, 2], [-1, 1]],
-        scale: [2, 1],
-      });
+      if (mathbox.fallback) throw "WebGL not supported"
 
-    // Axes + grid
-    view
-      .axis({
-        axis: 1,
-        width: 3,
-      })
-      .axis({
-        axis: 2,
-        width: 3,
-      })
-      .grid({
-        width: 2, 
-        niceX: true,
-        niceY: true, 
-//        divideX: 20,
-//        divideY: 10,        
-      });
+      var three = mathbox.three;
+      three.renderer.setClearColor(new THREE.Color(colors.cnvs), 1.0);
 
-    // Make axes black
-    mathbox.select('axis').set('color', 'black');
+      // Place camera
+      var camera =
+            mathbox
+            .camera({
+              proxy: true,
+              position: [0, 0, 2],
+            });
 
-    // Calibrate focus distance for units
-    mathbox.set('focus', 3);
+      // 2D cartesian
+      var view =
+            mathbox
+            .cartesian({
+              range: [startRangeX, startRangeY],
+              scale: startScale,
+            });
 
-    // Add some data
-    var data =
+      // Axes + grid
       view
-      .interval({
-        expr: function (emit, x, i, t) {
-          emit(x, Math.sin(x));
-//        emit(x, -Math.cos(x + t));                    
-        },
-        width: 64,
-        channels: 2,
-//        items:2,
-//        range: [-2,1]
-      });
+            .axis({
+              axis: 1,
+              width: 3,
+            })
+            .axis({
+              axis: 2,
+              width: 3,
+            })
+            .grid({
+              width: 2,
+              niceX: true,
+              niceY: true,
+            });
 
-    // Draw a curve
-    var curve =
-      view
-      .line({
-        width: 5,
-        color: 'white',
-      });
+      // Make axes black
+      mathbox.select('axis').set('color', 'black');
 
-    // Draw some points
-    var points =
-      view
-      .point({
-        size: 8,
-        color: '#3090FF',
-      });
-
-/*                      
-    // Draw vectors
-    var vector =
-      view.interval({
-        expr: function (emit, x, i, t) {
-          emit(x, 0);
-          emit(x, -Math.sin(x + t));
-        },
-        width: 64,
-        channels: 2,
-        items: 2,
-      })
-      .vector({
-        end: true,
-        width: 5,
-        color: '#50A000',
-      });
-//*/
-
-    // Draw ticks and labels
-    var scale =
-      view.scale({
-        divide: 10,
-      });
-    
-    var ticks =
-      view.ticks({
-        width: 5,
-        size: 15,
-        color: 'black',
-      });
-    
-    var format =
-      view.format({
-        digits: 2,
-        weight: 'bold',
-      });
-
-    var labels =
-      view.label({
-        color: 'red',
-        zIndex: 1,
-      });
-
-    // Animate
-    var play = mathbox.play({
-      target: 'cartesian',
-      pace: 5,
-      to: 2,
-      loop: false,
-      script: [
-        {props: {range: [[-2, 2], [-1, 1]]}},
-        {props: {range: [[-4, 4], [-2, 2]]}},
-//        {props: {line.set("color", "red")},        
-//        {props: {range: [[-2, 2], [-1, 1]]}},
-      ]
-    });
-curve.set('color', 'red');
-/*
-    view.interval({
-        expr: function (emit, x, i, t) {
-          emit(t-2, Math.sin(t-2));
-//          emit(x, Math.sin(x));          
-//        emit(x, -Math.cos(x + t));                    
-        },
-        width: 64,
-        channels: 2,
-        limit: 5,
-//        items:2,
-        range: [-2,2]
-      })
-      .line({
-        width: 55,
-        color: 'red',
-      })
-      .point({
-        size: 18,
-        color: 'red',
-      });
-
-
-            
-    //*/
-
-    
-  </script>
+      // Calibrate focus distance for units
+      mathbox.set('focus', 3);
+    </script>
 </body>
 </html>
