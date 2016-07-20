@@ -296,12 +296,8 @@ function endRangeX (points) {
 	var newRange = [];
 	var d = startRangeX[1] - startRangeX[0];
 
-//	if (d > points.length) {
-		newRange[0] = -d/2 + points.length/2+1;
-		newRange[1] =  d/2 + points.length/2+1;
-//	} else {
-
-//	}
+	newRange[0] = -d/2 + points.length/2+1;
+	newRange[1] =  d/2 + points.length/2+1;
 
 	return newRange;
 }
@@ -316,7 +312,6 @@ function endRangeY (points) {
 function arrayProduct(a) {
     var p = 1;
     for (var i = 0; i < a.length; i += 1) {
-      // s += array[i];  // sum
       p *= a[i];  //product
     }
     return p;
@@ -327,7 +322,6 @@ function arraySum(a) {
     var s = 0;
     for (var i = 0; i < a.length; i += 1) {
        s += a[i];  // sum
-      //p *= a[i];  //product
     }
 
     return s;
