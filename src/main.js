@@ -117,10 +117,12 @@ view
       .axis({
         axis: 1,
         width: 2,
+        end: true,
       })
       .axis({
         axis: 2,
         width: 2,
+        end: true,        
       })
       .grid({
         width: 1,
@@ -170,7 +172,7 @@ view.select('#data').set('data', [pointset]);
 
 // axis are present but don't shift. Maybe try an overlay.
 view.array({
-      data: [[10+username.length,0], [0,70]], // This isn't working :(
+//      data: [[10+username.length,0], [0,70]],
       id: 'axisLabel',
       channels: 2, // necessary
       live: false,
@@ -184,6 +186,7 @@ view.array({
       zIndex: 1,
     });
 
+view.select('#axisLabel').set('data', [[10+username.length,0], [0,70]]);
 
 function splitName(name) {
   var splitNameLC = name.toLowerCase();
@@ -207,6 +210,7 @@ function updateName(newName) {
   usernameUC = splitName(usernameToPrint)[1];
   pointset = encodeName(username);
   view.select('#data').set('data', [ pointset]);
+  view.select('#axisLabel').set('data', [[10+pointset.length/2+1,0], [0,70]]);  
 }
 
 
@@ -220,6 +224,8 @@ d3.select('#name-input').on('keyup', function(event){
       setupVis(username);
       nameValues(usernameUC);
       shiftView();
+//      shiftLabel();      
+// maybe fade the lables out and then fade them back when done?
     }
 
     // delete changes graph and polynomial, but does not shift graph
@@ -304,14 +310,11 @@ function shiftView() {
       {
         props: {
           range: [startRangeX, startRangeY],
-//          view.select('#axisLabel').set('data', [[10,0], [0,70]]),
         }
       },
-      //        {props: {range: [[pointset[0][0]-3, -pointset[0][0]+3], [Math.floor(minVal)-200, Math.ceil(maxVal)+200]]}},
       {
         props: {
           range: [endRangeX(pointset), endRangeY(pointset)],
-//          view.select('#axisLabel').set('data', [[10+username.length,0], [0,70]]),
         }
       },
     ]
