@@ -237,10 +237,10 @@ function nameValues(dataSet) {
     .data(dataSet)
     .enter()
     .append("p")
-    .text(function(d) { 
+    .text(function(d,i) { 
       var valueString = "";
       var charValue = d.toLowerCase();
-      var charIndex = dataSet.indexOf(d)+1;
+      var charIndex = i+1;
 
       charValue = charValue.charCodeAt()-96;
       valueString = d + " = (" +  charIndex + "," + charValue + ")";
