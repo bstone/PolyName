@@ -172,7 +172,7 @@ view.select('#data').set('data', [pointset]);
 
 // axis are present but don't shift. Maybe try an overlay.
 view.array({
-      data: [[10+username.length,0], [0,70]], // This isn't working :(
+//      data: [[10+username.length,0], [0,70]],
       id: 'axisLabel',
       channels: 2, // necessary
       live: false,
@@ -186,6 +186,7 @@ view.array({
       zIndex: 1,
     });
 
+view.select('#axisLabel').set('data', [[10+username.length,0], [0,70]]);
 
 function splitName(name) {
   var splitNameLC = name.toLowerCase();
@@ -209,6 +210,7 @@ function updateName(newName) {
   usernameUC = splitName(usernameToPrint)[1];
   pointset = encodeName(username);
   view.select('#data').set('data', [ pointset]);
+  view.select('#axisLabel').set('data', [[10+pointset.length/2+1,0], [0,70]]);  
 }
 
 
@@ -308,54 +310,15 @@ function shiftView() {
       {
         props: {
           range: [startRangeX, startRangeY],
-//          view.select('#axisLabel').set('data', [[10,0], [0,70]]),
         }
       },
-      //        {props: {range: [[pointset[0][0]-3, -pointset[0][0]+3], [Math.floor(minVal)-200, Math.ceil(maxVal)+200]]}},
       {
         props: {
           range: [endRangeX(pointset), endRangeY(pointset)],
-//          view.select('#axisLabel').set('data', [[10+username.length,0], [0,70]]),
         }
       },
     ]
   });
-}
-
-
-function shiftLabel() {
-
-//  if(play) {
-//    play.remove();
-//  }
-
-  play = mathbox.play({
-    delay: .5,
-    target: '#axisLabel',
-    pace: 3,
-    loop: false,
-    script: [
-      {
-        props: {
-          data: [[10,0], [0,70]], // This isn't working :(
-//          offset: [13, 20],
-//          range: [startRangeX, startRangeY],
-//          view.select('#axisLabel').set('data', [[10,0], [0,70]]),
-        }
-      },
-      //        {props: {range: [[pointset[0][0]-3, -pointset[0][0]+3], [Math.floor(minVal)-200, Math.ceil(maxVal)+200]]}},
-      {
-        props: {
-          data: [[10+username.length,0], [0,70]], // This isn't working :(
-//          offset: [13+5, 20],
-//          range: [endRangeX(pointset), endRangeY(pointset)],
-//          view.select('#axisLabel').set('data', [[10+username.length,0], [0,70]]),
-        }
-      },
-    ]
-  });
-
-  
 }
 
 
