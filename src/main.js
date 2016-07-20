@@ -44,28 +44,6 @@ var colors = {
       cnvs: 0xFFFFFF, // Clear/white
     }
 
-/*
-d3.select('#delete-char')
-  .on("click", function() {
-    var newName = usernameToPrint.slice(0,username.length-1);
-    updateName(newName)
-    //username = username.slice(0,username.length-1);
-  });
-
-
-d3.select('#add-char')
-  .on("click", function() {
-    if (username.length < pointset.length) {
-      var newName = usernameToPrint + 'a';
-      updateName(newName)
-    }
-  });
-
-  function newName() {
-    location.reload();
-  }
-//*/
-
 
 d3.select('#reset')
   .on("click", function() {
@@ -87,12 +65,6 @@ if (mathbox.fallback) throw "WebGL not supported"
 
 var three = mathbox.three;
 three.renderer.setClearColor(new THREE.Color(colors.cnvs), 1.0);
-
-//divContainer = document.getElementById( 'canvasElement' );
-//document.getElementById('container').appendChild( divContainer );
-
-//three.renderer.setSize( width, height);
-//divContainer.appendChild( three.renderer.domElement );
 
 
 // Place camera
@@ -186,7 +158,7 @@ view.array({
       zIndex: 1,
     });
 
-view.select('#axisLabel').set('data', [[10+username.length,0], [0,70]]);
+view.select('#axisLabel').set('data', [[10,0], [0,70]]);
 
 function splitName(name) {
   var splitNameLC = name.toLowerCase();
@@ -224,8 +196,6 @@ d3.select('#name-input').on('keyup', function(event){
       setupVis(username);
       nameValues(usernameUC);
       shiftView();
-//      shiftLabel();      
-// maybe fade the lables out and then fade them back when done?
     }
 
     // delete changes graph and polynomial, but does not shift graph
@@ -283,15 +253,15 @@ function setupVis(nameArray) {
 
   d3.select("#poly-name").html(usernameToPrint+" = " + makePoly(pointset));
 
-
-// make this not jQuery and turn into a function.
-      $('.fraction').each(function(key, value) {
-        $this = $(this)
-        var split = $this.html().split("/")
-        if( split.length == 2 ){
-            $this.html('<span class="top">'+split[0]+'</span><span class="bottom">'+split[1]+'</span>')
-        }    
-    });
+  // makes fractions into nicer fromat with horizontal bar
+  d3.selectAll('.fraction').each(function() {
+    var thisObject = d3.select(this);
+    var thisValue = thisObject.html();
+    var split = thisValue.split("/");
+    if( split.length == 2 ){
+            thisObject.html('<span class="top">'+split[0]+'</span><span class="bottom">'+split[1]+'</span>')
+    }
+  });
 
 }
 
