@@ -1,7 +1,7 @@
 {
   "name": "polyname",
-  "version": "1.0",
-  "description": "",
+  "version": "1.0.0",
+  "description": "A fun tool to convert your name to a polynomial.",
   "main": "index.html",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
