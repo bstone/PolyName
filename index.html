@@ -11,7 +11,6 @@
     <title>Polynomial from Name!</title>
 
     <!-- CSS -->
-    <link rel="stylesheet" href="./lib/mathbox.css">    
     <link href="./css/bootstrap.min.css" rel="stylesheet">
 
     <style type="text/css">
@@ -50,37 +49,70 @@
 
     </nav>
 
-
+    <!-- Content -->
     <div class="container" role="main" style="padding-top: 30px; padding-bottom: 30px;">
       <div class="page-header">
+
           <h1 id="typed-name">
             Type your name: <input type="text" id="name-input" autofocus="autofocus" autocomplete="off"></input>
-             <button id="reset" type="button" class="btn btn-lg btn-primary" >Reset</button> 
+             <button id="reset" type="button" class="btn btn-lg btn-primary">Reset</button> 
              <button id="make-pdf" type="button" class="btn btn-lg btn-primary">Make PDF</button>
           </h1>
+          
       </div>
 
-<!--      <div class="col-md-12"> 
- -->
-        <div class="row">
+      <div class="row">
 
-          <div id="container" class="col-md-10">
-            <div id="canvasElement" style="width:800px; height:400px;"></div>
-          </div>
-<!--        -->
-
-          <div class="col-md-2">
-            <div id="name-table"></div>
-          </div>
-
+        <div id="container" class="col-md-10">
+          <div id="canvasElement" style="width:800px; height:400px;"></div>
         </div>
 
-        <div class="row">
-          <h4 id="poly-name"></h4>
+        <div class="col-md-2">
+          <div id="name-table"></div>
         </div>
+
+      </div>
+
+      <div class="row">
+        <h4 id="poly-name"></h4>
+      </div>
 
     </div>
 
+
+    <!-- Core JavaScript -->
+    <!-- ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+
+    <script type="text/javascript" src="./lib/jspdf.min.js"></script>      
+    <script type="text/javascript" src="./lib/mathbox-bundle.min.js"></script>        
+    <script type="text/javascript" src="./lib/d3.min.js"></script>
+    <script type="text/javascript" src="./lib/fraction.min.js"></script>
+    <script type="text/javascript" src="./src/makepoly.js"></script>
+    <script type="text/javascript" src="./src/makepdf.js"></script>   
+
+
+
+    <!-- Start of StatCounter Code for Default Guide -->
+    <script type="text/javascript">
+    var sc_project=11001640;
+    var sc_invisible=1;
+    var sc_security="dfe4f2ef";
+    var scJsHost = (("https:" == document.location.protocol) ?
+    "https://secure." : "http://www.");
+    document.write("<sc"+"ript type='text/javascript' src='" +
+    scJsHost+
+    "statcounter.com/counter/counter.js'></"+"script>");
+    </script>
+    <noscript><div class="statcounter"><a title="shopify
+    analytics tool" href="http://statcounter.com/shopify/"
+    target="_blank"><img class="statcounter"
+    src="//c.statcounter.com/11001640/0/dfe4f2ef/1/"
+    alt="shopify analytics tool"></a></div></noscript>
+    <!-- End of StatCounter Code for Default Guide -->
+
+</body>
+</html>
 
 
 <!--
@@ -125,37 +157,3 @@
 -->
 
 
-
-    <!-- Bootstrap core JavaScript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-
-    <script type="text/javascript" src="./lib/jspdf.min.js"></script>  
-    <script type="text/javascript" src="./lib/d3.js"></script>
-    <script type="text/javascript" src="./lib/fraction.min.js"></script>
-    <script type="text/javascript" src="./lib/mathbox-bundle.js"></script>        
-    <script type="text/javascript" src="./src/main.js"></script>
-    <script type="text/javascript" src="./src/makepdf.js"></script>   
-
-
-
-    <!-- Start of StatCounter Code for Default Guide -->
-    <script type="text/javascript">
-    var sc_project=11001640;
-    var sc_invisible=1;
-    var sc_security="dfe4f2ef";
-    var scJsHost = (("https:" == document.location.protocol) ?
-    "https://secure." : "http://www.");
-    document.write("<sc"+"ript type='text/javascript' src='" +
-    scJsHost+
-    "statcounter.com/counter/counter.js'></"+"script>");
-    </script>
-    <noscript><div class="statcounter"><a title="shopify
-    analytics tool" href="http://statcounter.com/shopify/"
-    target="_blank"><img class="statcounter"
-    src="//c.statcounter.com/11001640/0/dfe4f2ef/1/"
-    alt="shopify analytics tool"></a></div></noscript>
-    <!-- End of StatCounter Code for Default Guide -->
-
-</body>
-</html>
