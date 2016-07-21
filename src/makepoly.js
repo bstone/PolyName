@@ -10,25 +10,16 @@ var usernameToPrint;
 var pointset = [];
 var pdfPolynomial = "";
 
-// helps to find max/min values
-//var maxVal = -100;// help with scaling
-//var minVal = 100;
-
-// helps with rescaling the range with a slider 
+// helps with rescaling the range
 var startRangeX = [-10,10];
 var startRangeY = [-30,70];
-//var newRangeX = [startRangeX,startRangeX];
-//var newRangeY = [startRangeY,startRangeY];
-//var factorX = 0;
-//var factorY = 1;
 
 var startScale = [2,1];
-//var newScale = [startScale,startScale];
 
 var play = null;
 
-var width  = 800; //Math.min(800,window.innerWidth);
-var height = width/2; //width/2; //window.innerHeight-100;
+var width  = 800; 
+var height = width/2; 
 
 var colors = {
       x: 0xFF4136,   // red
@@ -44,14 +35,18 @@ var colors = {
       cnvs: 0xFFFFFF, // Clear/white
     }
 
-
+// Reset Button
 d3.select('#reset')
   .on("click", function() {
-    location.reload();//    newName();
+    location.reload();
   });
 
+
+// Places mathbox element in div containter
 var element = document.querySelector('#canvasElement');
 
+
+// Creates mathbox 
 var mathbox = mathBox({
       plugins: ['core', 'controls', 'mathbox'], // removed 'cursor' to fix cursor issue, 
                                                 // if we remove 'mathbox' then the thinking image happens (I don't like it)
@@ -102,12 +97,16 @@ view
         niceY: true,
       });
 
+
 // Make axes black
 mathbox.select('axis').set('color', 'black');
+
 
 // Calibrate focus distance for units
 mathbox.set('focus', 3);
 
+
+// Defines points to display
 view.array({
       channels: 2,
       live: true,
@@ -138,13 +137,13 @@ view.array({
       zIndex: 1,
     });
 
-
-
+// binds data to points above
 view.select('#data').set('data', [pointset]);
 
-// axis are present but don't shift. Maybe try an overlay.
+
+// Defines axis labels
 view.array({
-//      data: [[10+username.length,0], [0,70]],
+      // data: is set below
       id: 'axisLabel',
       channels: 2, // necessary
       live: false,
@@ -158,14 +157,18 @@ view.array({
       zIndex: 1,
     });
 
+// binds data to lables above
 view.select('#axisLabel').set('data', [[10,0], [0,70]]);
 
+
+// Makes lowercase input and records user input, removes spaces
 function splitName(name) {
   var splitNameLC = name.toLowerCase();
   return [splitNameLC.match(/[a-z]/g),name.match(/[a-zA-Z]/g)]; // allows for printing user input
 }
 
 
+// assigns point values
 function encodeName(nameArray) {
   var points = [];
   // Shifting points to be displayed in initial grid
@@ -175,6 +178,8 @@ function encodeName(nameArray) {
   return points;
 }
 
+
+// Defines global vars from user input
 function updateName(newName) {
   console.log(newName)
   usernameToPrint = newName;
@@ -186,6 +191,7 @@ function updateName(newName) {
 }
 
 
+// Handles user input/deleting of points
 d3.select('#name-input').on('keyup', function(event){
   usernameToPrint = this.value;
   if(usernameToPrint.length > 0) {
@@ -208,6 +214,7 @@ d3.select('#name-input').on('keyup', function(event){
 });
 
 
+// Defines the table of points
 function nameValues(dataSet) {
   d3.select("#name-table").selectAll("p")
     .data(dataSet)
@@ -225,12 +232,15 @@ function nameValues(dataSet) {
     });
 }
 
+
+// removes points from table when deleted
 function deleteNameValues() {
     d3.select("#name-table").selectAll("p")
       .remove("p");
 }
 
 
+// Sets up the animation and polynomial in broswer
 function setupVis(nameArray) {
 
   view.select('#vector').remove();
@@ -253,7 +263,13 @@ function setupVis(nameArray) {
 
   d3.select("#poly-name").html(usernameToPrint+" = " + makePoly(pointset));
 
-  // makes fractions into nicer fromat with horizontal bar
+  formatFrac();
+
+}
+
+
+// makes items in fraction class into nicer fromat with horizontal bar
+function formatFrac(){
   d3.selectAll('.fraction').each(function() {
     var thisObject = d3.select(this);
     var thisValue = thisObject.html();
@@ -262,9 +278,10 @@ function setupVis(nameArray) {
             thisObject.html('<span class="top">'+split[0]+'</span><span class="bottom">'+split[1]+'</span>')
     }
   });
-
 }
 
+
+// Shifts the view so graph is centered
 function shiftView() {
 
   if(play) {
@@ -292,6 +309,7 @@ function shiftView() {
 }
 
 
+// Helps with range in shiftView
 function endRangeX (points) {
 	var newRange = [];
 	var d = startRangeX[1] - startRangeX[0];
@@ -303,12 +321,14 @@ function endRangeX (points) {
 }
 
 
+// Helps with range in shiftView
 function endRangeY (points) {
 	var newRange = startRangeY;
 	return newRange;
 }
 
 
+// product of all elements in array
 function arrayProduct(a) {
     var p = 1;
     for (var i = 0; i < a.length; i += 1) {
@@ -318,6 +338,7 @@ function arrayProduct(a) {
   }
 
 
+// sum of all elements in array
 function arraySum(a) {
     var s = 0;
     for (var i = 0; i < a.length; i += 1) {
@@ -351,41 +372,6 @@ function lagrange(x) {
 
         return arraySum(xfunBuilder);
   }
-
-
-// Creation of Vandermonde (Not Used)
-function vandermonde (a) {
-
-    var vand = [];
-
-    for(var k = 0; k < a.length; k++) {
-      vand.push([]);
-
-      for (var i = 0; i < a.length; i++) {
-        vand[k].push(Math.pow(a[k][0],a.length - i -1));
-      }
-
-    }
-
-    return vand;
-  }
-
-
-// Multiplication of Matrices (Not Used)
-function multiplyMatrices(m1, m2) {
-    var result = [];
-    for (var i = 0; i < m1.length; i++) {
-        result[i] = [];
-        for (var j = 0; j < m2[0].length; j++) {
-            var sum = 0;
-            for (var k = 0; k < m1[0].length; k++) {
-                sum += m1[i][k] * m2[k][j];
-            }
-            result[i][j] = sum;
-        }
-    }
-    return result;
-}
 
 
 // Multiplication of polynomials viewed as arrays
@@ -470,10 +456,6 @@ function makePoly(points) {
     }
 
   }
-
-
-  // Reverse the list so that Polynomial is written from high powers of x to low powers.
-//  L = L.reverse();
 
   // Creates the polynomial to be viewed
   var polynomial = "";
