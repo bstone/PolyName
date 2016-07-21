@@ -1,11 +1,11 @@
 # PolyName: Convert your name into a polynomial
 
-The repo is a fun project that creates a polynomial given the user's name. The code constructs the [https://en.wikipedia.org/wiki/Lagrange_polynomial](Lagrange Polynomial) using javascript and the following libraries:
+The repo is a fun project that creates a polynomial given the user's name. The code constructs the [Lagrange Polynomial](https://en.wikipedia.org/wiki/Lagrange_polynomial) using javascript and the following libraries:
 
-* [https://gitgud.io/unconed/mathbox/](MathBox) 
-* [https://github.com/d3/d3](D3.js)
-* [https://github.com/infusion/Fraction.js](Fraction.js)
-* [https://github.com/MrRio/jsPDF](jsPDF)
+* [MathBox](https://gitgud.io/unconed/mathbox/)
+* [D3.js](https://github.com/d3/d3)
+* [Fraction.js](https://github.com/infusion/Fraction.js)
+* [jsPDF](https://github.com/MrRio/jsPDF)
 
 You can view the code in action here, [http://b-stone.github.io/PolyName/](http://b-stone.github.io/PolyName/), or you can run the code locally following the instructions below.
 
