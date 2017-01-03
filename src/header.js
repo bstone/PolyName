@@ -14,8 +14,10 @@ d3.select("#nav-bar").html(`
 	);
 */
 
-d3.select("#fb-div").on("click",
-	d3.select("#fb-description").property(content="Did this work?")
+d3.select("#fb-div").on("click", function() {
+	d3.select("#fb-description").property(content="Did this work?");
+	d3.select("#test-id").html("it worked!!");
+	}
 	);
 
 //d3.select("#fb-image")
