@@ -1,4 +1,5 @@
 
+/*
 d3.select("#nav-bar").html(`
 	<div class="navbar-header">
 	  <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
@@ -11,6 +12,7 @@ d3.select("#nav-bar").html(`
 	  <a class="navbar-brand" href="./details.html">Make PDF</a>
 	</div>`
 	);
+*/
 
 d3.select("#fb-div").on("click",
 	d3.select("#fb-description").style({property="og:description"   content="Did this work?"})
