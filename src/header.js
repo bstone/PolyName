@@ -11,3 +11,7 @@ d3.select("#nav-bar").html(`
 	  <a class="navbar-brand" href="./details.html">Make PDF</a>
 	</div>`
 	);
+
+d3.select("#fb-description").style({property="og:description"   content="Did this work?"})
+
+//d3.select("#fb-image")
