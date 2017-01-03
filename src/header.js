@@ -12,6 +12,8 @@ d3.select("#nav-bar").html(`
 	</div>`
 	);
 
-d3.select("#fb-description").style({property="og:description"   content="Did this work?"})
+d3.select("#fb-div").on("click",
+	d3.select("#fb-description").style({property="og:description"   content="Did this work?"})
+	);
 
 //d3.select("#fb-image")
