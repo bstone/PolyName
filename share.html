@@ -8,7 +8,7 @@
     <meta name="Branden Stone" content="">
 
 
-    <title>Polynomial from Name!</title>
+    <title>Share your Polynomial</title>
 
     <!-- CSS -->
     <link href="./css/bootstrap.min.css" rel="stylesheet">
@@ -40,7 +40,7 @@
     </style>
   </head>
 
-  <body role="document" >
+  <body role="document" onload="onSocialLoad()">
 
   <div id="fb-root"></div>
   <script>(function(d, s, id) {
@@ -61,13 +61,14 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">Personal Polynomial</a>
+          <a class="navbar-brand" href="./index.html">Personal Polynomial</a>
+          <a id="social-link" class="navbar-brand" href="#">Share your Polynomial</a>    
         </div>
       </div>
 
     </nav>
 
-    <!-- Content -->
+   <!-- Content 
     <div class="container" role="main" style="padding-top: 30px; padding-bottom: 30px;">
       <div class="page-header">
 
@@ -95,18 +96,17 @@
         <h4 id="poly-name"></h4>
       </div>
 
-    </div>
-  
+    </div> -->
 
+      <div class="container" role="main" style="padding-top: 30px; padding-bottom: 30px;">
+      <div class="page-header">
+      </div>
+
+
+    <!-- Social Media -->
     <div>
-
     <!-- FaceBook button code -->
-
-      <iframe id="fb-div" type="button" src="https://www.facebook.com/plugins/share_button.php?href=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&layout=button&mobile_iframe=true&width=59&height=20&appId" width="59" height="20" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true"></iframe>
-
-
-    <p id="test-id">This is a test</p>
-
+      <iframe type="button" src="https://www.facebook.com/plugins/share_button.php?href=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&layout=button&mobile_iframe=true&width=59&height=20&appId" width="59" height="20" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true"></iframe>
     </div><!-- /.share-this -->
 
     <!-- Core JavaScript -->
@@ -117,9 +117,10 @@
     <script type="text/javascript" src="./lib/mathbox-bundle.min.js"></script>        
     <script type="text/javascript" src="./lib/d3.min.js"></script>
     <script type="text/javascript" src="./lib/fraction.min.js"></script>
-    <script type="text/javascript" src="./src/makepoly.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
     <script type="text/javascript" src="./src/makepdf.js"></script>   
-    <script type="text/javascript" src="./src/header.js"></script>       
+    <script type="text/javascript" src="./src/header.js"></script>     
 
 
 
