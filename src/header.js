@@ -15,6 +15,8 @@ d3.select("#nav-bar").html(`
 */
 //var testContent = "";
 
+
+
 d3.select("#social-link").on("click", function() {
 //	d3.select("#fb-description").property(content="Did this work?");
 	window.sessionStorage.setItem("testContent", "it worked!!");
@@ -83,8 +85,8 @@ function printHTML() {
           Myurl = "href=" + url + ""; // not assigning var??
           console.log(Myurl);
           console.log("Why no pring?");
-          $("body").append("<p id='get-url'><a href=" + url + ">" + url + "</a></p>")
-          $("body").append("<img src=" + url + ">")
+          $("body").append("<p id='get-url'><a href=" + url + ">" + url + "</a></p>");
+          $("body").append("<img src=" + url + ">");
         },
         error:function(shr, status, data){
           console.log("error " + data + " Status " + shr.status);

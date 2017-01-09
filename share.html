@@ -18,8 +18,10 @@
     <meta property="og:type"          content="website" />
     <meta property="og:title"         content="Your Website Title" />
     <meta id="fb-description" property="og:description"   content="" />
-    <meta id="fb-image" property="og:image"         content="" />
-
+    
+<script type="text/javascript">
+  document.write("<meta id='fb-image' property='og:image' content='' />");
+</script>
 
 
     <style type="text/css">
@@ -41,6 +43,8 @@
   </head>
 
   <body role="document" onload="onSocialLoad()">
+
+
 
   <div id="fb-root"></div>
   <script>(function(d, s, id) {
@@ -103,11 +107,18 @@
       </div>
 
 
+
     <!-- Social Media -->
     <div>
     <!-- FaceBook button code -->
-      <iframe type="button" src="https://www.facebook.com/plugins/share_button.php?href=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&layout=button&mobile_iframe=true&width=59&height=20&appId" width="59" height="20" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true"></iframe>
-    </div><!-- /.share-this -->
+
+      <div class="fb-share-button" 
+    data-href="http://b-stone.github.io/PolyName/" 
+    data-layout="button_count">
+  </div>
+
+
+</div><!-- /.share-this -->
 
     <!-- Core JavaScript -->
     <!-- ================================================== -->
