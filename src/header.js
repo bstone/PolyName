@@ -63,6 +63,21 @@ function onSocialLoad() {
 }
 
 var Myurl = "boo";
+var fbDataServer = "http://opengraph-meta-describer.herokuapp.com/map?";
+var fbDataCallback = "callback=http://aminariana.com&";
+var fbDataTitle = "title=I%20don't%20always%20meta-meta-describe%20my%20shared%20webpages&";
+var fbDataDescription = "description=But%20when%20I%20do,%20it's%20because%20I%20forgot%20to%20meta%20describe%20them%20in%20the%20original%20code&";
+var fbDataSiteName = "site_name=Amin%20Ariana&";
+var fbDataImage = "image=http://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/Jonathan_Goldsmith_2009.jpg/400px-Jonathan_Goldsmith_2009.jpg";
+
+var fbServer = "https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fopengraph-meta-describer.herokuapp.com%2Fmap%3F";
+//"callback%3Dhttp%253A%252F%252Faminariana.com%26";
+//"title%3DI%2Bdon%2527t%2Balways%2Bmeta-meta-describe%2Bmy%2Bshared%2B";
+//"webpages%26description%3DBut%2Bwhen%2BI%2Bdo%252C%2Bit%2527s%2Bbecause%2BI%2Bforgot%2Bto%2Bmeta%2Bdescribe%2Bthem%2Bin%2Bthe%2Boriginal%2Bcode%26";
+//"site_name%3DAmin%2BAriana%26";
+//"image%3Dhttp%253A%252F%252Fupload.wikimedia.org%252Fwikipedia%252Fcommons%252Fthumb%252F2%252F2a%252FJonathan_Goldsmith_2009.jpg%252F400px-Jonathan_Goldsmith_2009.jpg&amp;";
+//"src=sdkpreparse"
+
 function printHTML() {
 	  var imageData = window.sessionStorage.getItem("testImage");
 	  var imageDataRaw = imageData.replace(/^data:image\/\w+;base64,/, "");
@@ -83,10 +98,12 @@ function printHTML() {
           console.log(data);
           url = data['url'];
           Myurl = "href=" + url + ""; // not assigning var??
+//          var fbDataImage = "image="+url;
           console.log(Myurl);
           console.log("Why no pring?");
           $("body").append("<img src=" + url + ">");
-          $("body").append("<meta property='og:image' content='"+url+"' />");
+//          $("#fb-share").attr('data-href', fbDataServer+fbDataCallback+fbDataTitle+fbDataDescription+fbDataSiteName+fbDataImage);
+//          $("#fb-share").attr('href', fbServer+fbDataCallback+fbDataTitle+fbDataDescription+fbDataSiteName+fbDataImage);          
 //          $("body").append("<p id='get-url'><a href=" + url + ">" + url + "</a></p>");          
         },
         error:function(shr, status, data){
@@ -95,6 +112,7 @@ function printHTML() {
       });
 }
 
+/*
 function getHTML() {
 	console.log(Myurl);
 	Myurl = d3.select("#get-url").html();
@@ -125,5 +143,34 @@ function getHTML() {
         },
       });
 }
+*/
 
-//d3.select("#fb-image")
+d3.select("#dothis").on("click", function(){
+  var dothis = "do this now!";
+//  d3.select("fb-share").property("data-href", dothis );  
+//  document.getElementById("fb-share").style.datahref='do this now!';  
+//  console.log("do this pleasddde");
+  console.log(dothis);  
+//    $(".fb-share").attr('data-href',encodeURIComponent(location.href));
+  console.log(document.getElementById("fb-share"));
+});
+
+//  var dothis = "do this now!";
+//  d3.select("#fb-share").on("load", function() {
+//    $("#fb-share").attr('data-href',encodeURIComponent(location.href));
+//    console.log(Myurl);
+//    d3.select(this).property("data-href", dothis );
+//  });
+// http://opengraph-meta-describer.herokuapp.com/map?callback=http://aminariana.com&amp;title=Personal%20Polynomial&amp;description=This%20is%20my%20personal%20polynomial%20What%20is%20yours&amp;site_name=Personal%20Polynomial&amp;image=http://data-uri-to-img-url.herokuapp.com/TGdGx9AFiDU );  
+//  console.log("do this fb!!");
+//  console.log(Myurl);      
+
+//$(document).ready(function() {
+
+//  console.log(Myurl);
+//});
+
+//http://opengraph-meta-describer.herokuapp.com/map?callback=http://aminariana.com&title=I%20don't%20always%20meta-meta-describe%20my%20shared%20webpages&description=But%20when%20I%20do,%20it's%20because%20I%20forgot%20to%20meta%20describe%20them%20in%20the%20original%20code&site_name=Amin%20Ariana&image=http://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/Jonathan_Goldsmith_2009.jpg/400px-Jonathan_Goldsmith_2009.jpg
+
+
+
