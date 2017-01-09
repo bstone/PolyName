@@ -85,8 +85,8 @@ function printHTML() {
           Myurl = "href=" + url + ""; // not assigning var??
           console.log(Myurl);
           console.log("Why no pring?");
-          $("body").append("<p id='get-url'><a href=" + url + ">" + url + "</a></p>");
           $("body").append("<img src=" + url + ">");
+          $("body").append("<p id='get-url'><a href=" + url + ">" + url + "</a></p>");          
         },
         error:function(shr, status, data){
           console.log("error " + data + " Status " + shr.status);
