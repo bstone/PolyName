@@ -78,6 +78,14 @@ var fbServer = "https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fopengr
 //"image%3Dhttp%253A%252F%252Fupload.wikimedia.org%252Fwikipedia%252Fcommons%252Fthumb%252F2%252F2a%252FJonathan_Goldsmith_2009.jpg%252F400px-Jonathan_Goldsmith_2009.jpg&amp;";
 //"src=sdkpreparse"
 
+var fbIframeServer = "https://www.facebook.com/plugins/share_button.php?href=http%3A%2F%2Fopengraph-meta-describer.herokuapp.com%2Fmap%3F";
+var fbIframeCallBack = "callback%3Dhttp%3A%2F%2Faminariana.com%26";
+var fbIframeTitle = "title%3DI%2520don't%2520always%2520meta-meta-describe%2520my%2520shared%2520webpages%26";
+var fbIframeDescription = "description%3DBut%2520when%2520I%2520do%2C%2520it's%2520because%2520I%2520forgot%2520to%2520meta%2520describe%2520them%2520in%2520the%2520original%2520code%26";
+var fbIframeSiteName = "site_name%3DAmin%2520Ariana%26";
+var fbIframeImage = "image%3Dhttp%3A%2F%2F";
+var fbIframeLayout = "&layout=button&mobile_iframe=true&width=59&height=20&appId";
+
 function printHTML() {
 	  var imageData = window.sessionStorage.getItem("testImage");
 	  var imageDataRaw = imageData.replace(/^data:image\/\w+;base64,/, "");
@@ -99,9 +107,14 @@ function printHTML() {
           url = data['url'];
           Myurl = "href=" + url + ""; // not assigning var??
 //          var fbDataImage = "image="+url;
+          var iframeURL = url.replace(/^http:\/\//g,"");
+          iframeURL = iframeURL.replace(/\//g,"%2F");
           console.log(Myurl);
+          console.log(iframeURL);          
           console.log("Why no pring?");
-          $("body").append("<img src=" + url + ">");
+//          $("#fb-share").attr('src', fbIframeServer+fbIframeCallBack+fbDataTitle+fbIframeDescription+fbIframeSiteName+fbIframeImage+iframeURL+fbIframeLayout);
+          $("body").append('<iframe src="'+fbIframeServer+fbIframeCallBack+fbDataTitle+fbIframeDescription+fbIframeSiteName+fbIframeImage+iframeURL+fbIframeLayout+'" width="59" height="20" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true"></iframe>' );          
+          $("body").append("<img src=" + url + ">");          
 //          $("#fb-share").attr('data-href', fbDataServer+fbDataCallback+fbDataTitle+fbDataDescription+fbDataSiteName+fbDataImage);
 //          $("#fb-share").attr('href', fbServer+fbDataCallback+fbDataTitle+fbDataDescription+fbDataSiteName+fbDataImage);          
 //          $("body").append("<p id='get-url'><a href=" + url + ">" + url + "</a></p>");          
