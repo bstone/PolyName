@@ -113,7 +113,7 @@ function printHTML() {
           console.log(iframeURL);          
           console.log("Why no pring?");
 //          $("#fb-share").attr('src', fbIframeServer+fbIframeCallBack+fbDataTitle+fbIframeDescription+fbIframeSiteName+fbIframeImage+iframeURL+fbIframeLayout);
-          $("body").append('<iframe src="'+fbIframeServer+fbIframeCallBack+fbDataTitle+fbIframeDescription+fbIframeSiteName+fbIframeImage+iframeURL+fbIframeLayout+'" width="59" height="20" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true"></iframe>' );          
+//          $("body").append('<iframe src="'+fbIframeServer+fbIframeCallBack+fbDataTitle+fbIframeDescription+fbIframeSiteName+fbIframeImage+iframeURL+fbIframeLayout+'" width="59" height="20" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true"></iframe>' );          
           $("body").append("<img src=" + url + ">");          
 //          $("#fb-share").attr('data-href', fbDataServer+fbDataCallback+fbDataTitle+fbDataDescription+fbDataSiteName+fbDataImage);
 //          $("#fb-share").attr('href', fbServer+fbDataCallback+fbDataTitle+fbDataDescription+fbDataSiteName+fbDataImage);          
