@@ -132,7 +132,9 @@ function printHTML() {
 //          $("#social").append('<iframe id="fb-share" src="https://www.facebook.com/plugins/share_button.php?href=http%3A%2F%2Fopengraph-meta-describer.herokuapp.com%2Fmap%3Fcallback%3Dhttp%3A%2F%2Faminariana.com%26title%3DI%2520dont%2520always%2520meta-meta-describe%2520my%2520shared%2520webpages%26description%3DBut%2520when%2520I%2520do%2C%2520its%2520because%2520I%2520forgot%2520to%2520meta%2520describe%2520them%2520in%2520the%2520original%2520code%26site_name%3DAmin%2520Ariana%26image%3Dhttp%3A%2F%2F'+iframeURL+'&layout=button&mobile_iframe=true&width=59&height=20&appId" width="59" height="20" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true"></iframe>');          
           var fbIframe = fbIframeBegin+fbIframeServer+fbIframeCallBack+fbIframeTitle+fbIframeDescription+fbIframeSiteName+fbIframeImage+iframeURL+fbIframeLayout+fbIframeEnd;
           console.log(fbIframe);
-          $("#social").append(fbIframe);
+          $(document).ready(function(){
+            $("#social").append(fbIframe);
+          });
           $("#graph").append("<img src=" + url + ">");          
 //          $("#fb-share").attr('data-href', fbDataServer+fbDataCallback+fbDataTitle+fbDataDescription+fbDataSiteName+fbDataImage);
 //          $("#fb-share").attr('href', fbServer+fbDataCallback+fbDataTitle+fbDataDescription+fbDataSiteName+fbDataImage);          
