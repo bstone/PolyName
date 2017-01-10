@@ -13,8 +13,6 @@
     <!-- CSS -->
     <link href="./css/bootstrap.min.css" rel="stylesheet">
 
-    <!-- FaceBook Meta -->
-
     <style type="text/css">
       .fraction, .top, .bottom {
           padding: 1px;    
@@ -35,6 +33,18 @@
 
   <body role="document" onload="printHTML()">
 
+  <div id="fb-root"></div>
+
+  <script>(function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.8";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));</script>
+
+
+
     <!-- Fixed navbar -->
     <nav class="navbar navbar-inverse navbar-fixed-top">
       <div class="container">
@@ -52,45 +62,33 @@
 
     </nav>
 
-   <!-- Content 
     <div class="container" role="main" style="padding-top: 30px; padding-bottom: 30px;">
-      <div class="page-header">
 
-          <h1 id="typed-name">
-            Type your name: <input type="text" id="name-input" autofocus="autofocus" autocomplete="off"></input>
-             <button id="reset" type="button" class="btn btn-lg btn-primary">Reset</button> 
-             <button id="make-pdf" type="button" class="btn btn-lg btn-primary">Make PDF</button>
-          </h1>
-          
-      </div>
-
-      <div class="row">
-
-        <div id="container" class="col-md-10">
-          <div id="canvasElement" style="width:800px; height:400px;"></div>
-        </div>
-
-        <div class="col-md-2">
-          <div id="name-table"></div>
-        </div>
-
-      </div>
-
-      <div class="row">
-        <h4 id="poly-name"></h4>
-      </div>
-
-    </div> -->
-
-      <div class="container" role="main" style="padding-top: 30px; padding-bottom: 30px;">
-      <div class="page-header">
-      </div>
-
-  <!--
-<button id="dothis" type="button" class="btn btn-lg btn-primary">Make Prop</button> -->
+    <div class="page-header"></div>
 
     <!--  Social Media -->
-    <div id="social" class="container" ></div>
+    <div id="social" class="container" >
+
+<!--
+    <iframe id="fb-share" src="" width="59" height="20" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true"></iframe>
+
+
+    <script type="text/javascript">
+     var iframe = document.getElementById('fb-share');
+     console.log("now");
+     $(window).load = (console.log("now now"));
+    </script>
+
+
+    <script type="text/javascript">
+      var iframe = document.getElementById('fb-share'),src = iframe.src;
+      iframe.src = 'https://www.facebook.com/plugins/share_button.php?href=http%3A%2F%2Fopengraph-meta-describer.herokuapp.com%2Fmap%3Fcallback%3Dhttp%3A%2F%2Faminariana.com%26title%3DI%2520dont%2520always%2520meta-meta-describe%2520my%2520shared%2520webpages%26description%3DBut%2520when%2520I%2520do%2C%2520its%2520because%2520I%2520forgot%2520to%2520meta%2520describe%2520them%2520in%2520the%2520original%2520code%26site_name%3DAmin%2520Ariana%26image%3Dhttp%3A%2F%2Fdata-uri-to-img-url.herokuapp.com/dcoTHWo2Ibc&layout=button&mobile_iframe=true&width=59&height=20&appId';
+      document.onload =  function(){iframe.src = src;}
+    </script>
+-->
+
+    </div>
+
 
     <!--  Personal Graph image -->
     <div id="graph" class="container" ></div>
@@ -100,15 +98,13 @@
     <!-- ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
 
-    <script type="text/javascript" src="./lib/jspdf.min.js"></script>      
-    <script type="text/javascript" src="./lib/mathbox-bundle.min.js"></script>        
+    <script type="text/javascript" src="./lib/jspdf.min.js"></script>
+    <script type="text/javascript" src="./lib/mathbox-bundle.min.js"></script>
     <script type="text/javascript" src="./lib/d3.min.js"></script>
     <script type="text/javascript" src="./lib/fraction.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>        
     <script type="text/javascript" src="./src/makepdf.js"></script>   
     <script type="text/javascript" src="./src/header.js"></script>     
-
 
 
     <!-- Start of StatCounter Code for Default Guide -->
