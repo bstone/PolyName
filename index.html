@@ -32,9 +32,26 @@
       }      
     </style>
 
+  <meta property="og:url"           content="http://b-stone.github.io/PolyName/" />
+  <meta property="og:type"          content="website" />
+  <meta property="og:title"         content="Personal Polynomial" />
+  <meta property="og:description"   content="What is your personal polynomial?" />
+  <meta property="og:image"         content="./img/yourname-poly.png" />
+
+
   </head>
 
   <body role="document" >
+
+    <!-- Load Facebook SDK for JavaScript -->
+    <div id="fb-root"></div>
+    <script>(function(d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) return;
+      js = d.createElement(s); js.id = id;
+      js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.8";
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));</script>  
 
     <!-- Fixed navbar -->
     <nav class="navbar navbar-inverse navbar-fixed-top">
@@ -84,7 +101,12 @@
       <div class="page-footer; row">
       <hr>
 
-        <div class="col-md-10"></div>
+        <div class="col-md-10">
+          <div class="fb-share-button" 
+            data-href="http://b-stone.github.io/PolyName/" 
+            data-layout="button">
+          </div>          
+        </div>
 
         <div class="col-md-2">  
           <div class="row" style="padding-bottom: 5px"><img src="./img/globe_lettering-03.png" width="200"></img></div>
