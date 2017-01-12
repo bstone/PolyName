@@ -8,10 +8,12 @@
     <meta name="Branden Stone" content="">
 
 
-    <title>Polynomial from Name!</title>
+    <title>Personal Polynomial!</title>
 
     <!-- CSS -->
     <link href="./css/bootstrap.min.css" rel="stylesheet">
+
+
 
     <style type="text/css">
       .fraction, .top, .bottom {
@@ -29,6 +31,7 @@
           display: block;
       }      
     </style>
+
   </head>
 
   <body role="document" >
@@ -62,23 +65,33 @@
           
       </div>
 
-<div id="for-pdf">
-      <div class="row">
+      <div id="for-pdf" class="row">
+        <div class="col-md-9">
+          <div id="container" class="row">
+            <div id="canvasElement" style="width:800px; height:400px;"></div>
+          </div>
 
-        <div id="container" class="col-md-10">
-          <div id="canvasElement" style="width:800px; height:400px;"></div>
+          <div class="row" style="padding-left: 30px; padding-top: 30px;">
+            <h4 id="poly-name" style="font-size: 150%;"></h4>
+          </div>        
         </div>
 
         <div class="col-md-2">
-          <div id="name-table" style="font-size: 120%"></div>
+            <div id="name-table" class="well" style="font-size: 150%"></div>
+        </div>
+      </div>
+
+      <div class="page-footer; row">
+      <hr>
+
+        <div class="col-md-10"></div>
+
+        <div class="col-md-2">  
+          <div class="row" style="padding-bottom: 5px"><img src="./img/globe_lettering-03.png" width="200"></img></div>
+          <div class="row"><img src="./img/msri-logo.jpg" width="200"></img></div>
         </div>
 
       </div>
-
-      <div class="row" style="padding-left: 30px; padding-top: 30px; width: 900px">
-        <h4 id="poly-name"></h4>
-      </div>
-</div>
 
     </div>
   
