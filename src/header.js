@@ -21,6 +21,8 @@ d3.select("#social-link").on("click", function() {
 //	d3.select("#fb-description").property(content="Did this work?");
 	window.sessionStorage.setItem("testContent", "it worked!!");
 	window.sessionStorage.setItem("testImage", three.renderer.domElement.toDataURL("image/png", 1.0));
+//  var opened = window.open("./share.html","_self");
+//  opened.document.write(text);
 	}
 	);
 
@@ -151,19 +153,21 @@ function printHTML() {
           console.log("error " + data + " Status " + shr.status);
         },
       });
+
+//      getHTML();
 }
 
 /*
 function getHTML() {
 	console.log(Myurl);
-	Myurl = d3.select("#get-url").html();
+//	Myurl = d3.select("#get-url").html();
 	console.log(Myurl);	
       $.ajax({
         url: "http://opengraph-meta-describer.herokuapp.com/map?",
         type: "GET",
-        data: { 'title': 'This is a test',
-        		'image': Myurl,
-        		'callback': 'http://math.adelphi.edu'
+        data: { 'title':'This is a test',
+        		'image':'http://data-uri-to-img-url.herokuapp.com/4XbiL54vL3E',
+        		'callback':'http://localhost:8080/'
         	},
         xhrFields: {
           // The 'xhrFields' property sets additional fields on the XMLHttpRequest.
@@ -184,4 +188,4 @@ function getHTML() {
         },
       });
 }
-*/
+//*/
