@@ -94,8 +94,8 @@ function makePDF(dataURL,dataURIFrac){
 
 d3.select('#make-graph')
   .on("click", function() {
-    var dataURL = three.renderer.domElement.toDataURL("image/png", 1.0);
-    download(dataURL,usernameToPrint+"-Polynomial-Graph","png" )          
+    var graph = three.renderer.domElement.toDataURL("image/png", 1.0);
+    download(graph,usernameToPrint+"-Polynomial-Graph","png" )          
 //    downloadURI(dataURL,usernameToPrint+"-Polynomial-Graph.png");
 });
 
@@ -113,6 +113,24 @@ d3.select('#make-eqn')
         },
       });
 });
+
+///////////////////////////////////////////
+// Download Graph and Equation
+///////////////////////////////////////////
+
+d3.select('#make-graph-eqn')
+  .on("click", function() {
+      html2canvas(document.getElementById('poly-name'), {
+        onrendered: function(canvas) {
+          var graph = three.renderer.domElement//.toDataURL("image/png", 1.0)
+          canvas.getContext('2d').drawImage(graph, 500, 500, 500, 500);
+          eqn = canvas.toDataURL("image/png", 1.0);
+          download(eqn,usernameToPrint+"-Polynomial-Eqn","png" )          
+//          downloadURI(eqn,usernameToPrint+"-Polynomial-Eqn.png");        
+        },
+      });
+});
+
 
 // http://stackoverflow.com/a/15832662
 function downloadURI(uri, name) {
@@ -151,4 +169,38 @@ function isSafari(){
 
 // Blink engine detection
 //var isBlink = (isChrome || isOpera) && !!window.CSS;
+
+
+
+// TODO
+//1) Is it too complicated to have the user's graph and the equation in the same image, 
+//and that's why they are separate buttons? (Nothing to fix here as I know you've done 
+//so much already, I just want to understand the answer as I need to encourage people 
+//to share one or the other on social media, but they are interrelated.) 
+
+//(ME) It’s not too complicated. I just thought people would like to have an option of having 
+//just one. I can make a button to download both as well. 
+
+//2) Can the NMF and Global Math Week logos and site URL go on the PDF template, or that 
+//is also too complicated? (If people / teachers choose to print and share, it would be 
+//great if there was some obvious connection to the events!) - see attachment for one 
+//suggested layout that would let the file be something that could be printed and seen 
+//from more of a distance without adding many elements to what you have.
+
+//(ME) I can make the PDF look how you have. I will work on that this weekend. 
+
+//3) Can we rename the text on the download buttons to "Download PDF", "Download graph image", 
+//and "Download your equation”?  (In general, although I'd like to believe the website users to 
+//be sophisticated enough to get that the arrow symbol means "click to download", user experience 
+//feedback leads me to think that making it a bit more obvious would be helpful.)
+
+//(ME) I will do this. 
+
+//4) When do you need the final text for the page? If you're ready for us to send, I can work on 
+//this with James and share with David Eisenbud for a final check from MSRI's end.
+
+//(ME) I can put the final text on the sight whenever you want. That is the easy part. Once I have a 
+//link to the video and the text I will add that information. 
+
+
 

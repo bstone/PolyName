@@ -28,7 +28,10 @@
           border-top: 1px solid #000;
           display: block;
       }
-    </style>
+      canvas {
+        display: none;
+      }      
+    </style><!-- Cavas is trying to get equation and graph in the same image-->
 
     <!-- EDIT og:url and og:image in final version -->
     <meta property="og:url"           content="http://b-stone.github.io/PolyName/" />
@@ -97,9 +100,11 @@
              <button id="reset" type="button" class="btn btn-lg btn-primary">Reset</button> 
           </h1>
 
-          <button id="make-pdf" type="button" class="btn btn-info"><span class="glyphicon glyphicon-download-alt"></span> PDF</button>
-          <button id="make-graph" type="button" class="btn btn-info"><span class="glyphicon glyphicon-download-alt"></span> Graph</button>
-          <button id="make-eqn" type="button" class="btn btn-info"><span class="glyphicon glyphicon-download-alt"></span> Equation</button>            
+          <canvas width=100 height=100></canvas><!-- Cavas is trying to get equation and graph in the same image-->
+          <button id="make-pdf" type="button" class="btn btn-info"><span class="glyphicon glyphicon-download-alt"></span> Download PDF</button>
+          <button id="make-graph" type="button" class="btn btn-info"><span class="glyphicon glyphicon-download-alt"></span> Download Graph</button>
+          <button id="make-eqn" type="button" class="btn btn-info"><span class="glyphicon glyphicon-download-alt"></span> Download Equation</button>            
+          <button id="make-graph-eqn" type="button" class="btn btn-info"><span class="glyphicon glyphicon-download-alt"></span> Download Graph and Equation</button>                
       </div>
 
       <div id="for-pdf" class="row">
@@ -168,7 +173,7 @@
               </a>
             </div>
 
-        </div>
+          </div>
         </div>
 
       <!-- EDIT urlAddress in final version -->
