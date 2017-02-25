@@ -179,7 +179,7 @@ function isSafari(){
 //to share one or the other on social media, but they are interrelated.) 
 
 //(ME) It’s not too complicated. I just thought people would like to have an option of having 
-//just one. I can make a button to download both as well. 
+//just one. I can make a button to download both as well. (Seems hard right now)
 
 //2) Can the NMF and Global Math Week logos and site URL go on the PDF template, or that 
 //is also too complicated? (If people / teachers choose to print and share, it would be 
@@ -194,7 +194,7 @@ function isSafari(){
 //be sophisticated enough to get that the arrow symbol means "click to download", user experience 
 //feedback leads me to think that making it a bit more obvious would be helpful.)
 
-//(ME) I will do this. 
+//(ME) I will do this. (DONE)
 
 //4) When do you need the final text for the page? If you're ready for us to send, I can work on 
 //this with James and share with David Eisenbud for a final check from MSRI's end.
