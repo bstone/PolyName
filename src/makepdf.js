@@ -1,3 +1,66 @@
+// var getImadeData = function () {
+//     var i = arguments.length,
+//         tempCanvas = document.createElement("canvas"),
+//         ctx = tempCanvas.getContext("2d");
+// //     while (i--) {
+//         ctx.drawImage(arguments[0], 0, 0);
+//         ctx.drawImage(arguments[1], 20, 20);        
+// //    };
+//     return tempCanvas.toDataURL("image/png", 1.0);
+// };
+
+///////////////////////////////////////////
+// Download All The Things
+///////////////////////////////////////////  
+
+d3.select('#make-graph-eqn')
+  .on("click", function() {
+    var tempCanvas = document.createElement("canvas");
+    tempCanvas.width = 1200;
+    tempCanvas.height = 600;
+    var ctx = tempCanvas.getContext("2d");    
+    var img = new Image;
+
+    // html2canvas(document.getElementById('poly-name'), {
+    //   onrendered: function(canvas) {
+    //     eqn = canvas.toDataURL("image/png", 1.0);
+    //     img.src = eqn;        
+    //     ctx.drawImage(img,0,0);        
+    // console.log("one");        
+    //   },
+    // });
+
+    console.log(img.src);
+
+    var img2 = new Image;
+    html2canvas(document.getElementById('poly-name'), {
+      onrendered: function(canvas) {
+        console.log(canvas);
+        eqn = canvas.toDataURL("image/png", 1.0);
+        img2.src = eqn;        
+        ctx.drawImage(img2,20,20);          
+        var graph = tempCanvas.toDataURL("image/png", 1.0);        
+        download(graph,usernameToPrint+"-Did-It-Graph","png" );              
+        console.log("two");
+      },
+    });
+
+
+
+    // html2canvas(document.getElementById('poly-name'), {
+    //   onrendered: function(canvas) {
+    //     ctx.drawImage(canvas,200,200)
+    //   },
+    // });
+
+
+
+    console.log(tempCanvas)    
+
+
+});
+
+
 
 d3.select('#make-pdf')
   .on("click", function() {
@@ -118,18 +181,18 @@ d3.select('#make-eqn')
 // Download Graph and Equation
 ///////////////////////////////////////////
 
-d3.select('#make-graph-eqn')
-  .on("click", function() {
-      html2canvas(document.getElementById('poly-name'), {
-        onrendered: function(canvas) {
-          var graph = three.renderer.domElement//.toDataURL("image/png", 1.0)
-          canvas.getContext('2d').drawImage(graph, 500, 500, 500, 500);
-          eqn = canvas.toDataURL("image/png", 1.0);
-          download(eqn,usernameToPrint+"-Polynomial-Eqn","png" )          
-//          downloadURI(eqn,usernameToPrint+"-Polynomial-Eqn.png");        
-        },
-      });
-});
+// d3.select('#make-graph-eqn')
+//   .on("click", function() {
+//       html2canvas(document.getElementById('poly-name'), {
+//         onrendered: function(canvas) {
+//           var graph = three.renderer.domElement//.toDataURL("image/png", 1.0)
+//           canvas.getContext('2d').drawImage(graph, 500, 500, 500, 500);
+//           eqn = canvas.toDataURL("image/png", 1.0);
+//           download(eqn,usernameToPrint+"-Polynomial-Eqn","png" )          
+// //          downloadURI(eqn,usernameToPrint+"-Polynomial-Eqn.png");        
+//         },
+//       });
+// });
 
 
 // http://stackoverflow.com/a/15832662
