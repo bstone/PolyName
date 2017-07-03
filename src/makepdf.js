@@ -33,7 +33,7 @@ d3.select('#make-graph-eqn')
     console.log(img.src);
 
     var img2 = new Image;
-    html2canvas(document.getElementById('poly-name'), {
+    html2canvas(document.getElementById('testme'), {
       onrendered: function(canvas) {
         console.log(canvas);
         eqn = canvas.toDataURL("image/png", 1.0);
