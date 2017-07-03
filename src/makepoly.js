@@ -226,7 +226,7 @@ function nameValues(dataSet) {
       var charIndex = i+1;
 
       charValue = charValue.charCodeAt()-96;
-      valueString = d + " = (" +  charIndex + "," + charValue + ")";
+      valueString = "P (" +  charIndex + ") = " + charValue + " = " +d;
 
       return valueString; 
     });
@@ -261,7 +261,7 @@ function setupVis(nameArray) {
     color: colors.ln,
   });
 
-  d3.select("#poly-name").html(usernameToPrint+" = " + makePoly(pointset));
+  d3.select("#poly-name").html("P(x) = " + makePoly(pointset) + "<br>" + usernameToPrint);
   d3.select("#png-title").html(usernameToPrint + "\'s Personal Polynomial");  
 
   formatFrac();
