@@ -216,27 +216,73 @@ d3.select('#name-input').on('keyup', function(event){
 
 // Defines the table of points
 function nameValues(dataSet) {
-  d3.select("#name-table").selectAll("p")
+  // d3.select("#name-table").selectAll("p")
+  //   .data(dataSet)
+  //   .enter()
+  //   .append("p")
+  //   .text(function(d,i) { 
+  //     var valueString = "";
+  //     var charValue = d.toLowerCase();
+  //     var charIndex = i+1;
+
+  //     charValue = charValue.charCodeAt()-96;
+  //     valueString = "P(" +  charIndex + ") = " + charValue + " = " +d;
+
+  //     return valueString; 
+  //   });
+
+
+  var tr = d3.select("#name-tab").selectAll('tr')
     .data(dataSet)
     .enter()
-    .append("p")
+    .append('tr');
+
+  tr.append('td')
     .text(function(d,i) { 
       var valueString = "";
       var charValue = d.toLowerCase();
       var charIndex = i+1;
 
       charValue = charValue.charCodeAt()-96;
-      valueString = "P(" +  charIndex + ") = " + charValue + " = " +d;
+      valueString = "P(" +  charIndex + ")"; // = " + charValue + " = " +d;
+
+      return valueString; 
+    })
+
+  tr.append('td')
+    .text(function(d,i) { 
+      var valueString = "";
+      var charValue = d.toLowerCase();
+      var charIndex = i+1;
+
+      charValue = charValue.charCodeAt()-96;
+      valueString = "\xa0 = " + charValue; // + " = " +d;
 
       return valueString; 
     });
+
+  tr.append('td')
+    .text(function(d,i) { 
+      var valueString = "";
+      var charValue = d.toLowerCase();
+      var charIndex = i+1;
+
+      charValue = charValue.charCodeAt()-96;
+      valueString = "\xa0 = " +d;
+
+      return valueString; 
+    });
+
+
 }
 
 
 // removes points from table when deleted
 function deleteNameValues() {
-    d3.select("#name-table").selectAll("p")
-      .remove("p");
+//    d3.select("#name-table").selectAll("p")
+//      .remove("p");
+    d3.select("#name-tab").selectAll("tr")
+      .remove("tr");
 }
 
 
@@ -262,7 +308,13 @@ function setupVis(nameArray) {
   });
 
   d3.select("#poly-name").html("P(x) = " + makePoly(pointset) + "<br>" + usernameToPrint);
-  d3.select("#png-title").html(usernameToPrint + "\'s Personal Polynomial");  
+  console.log(usernameToPrint.slice(-1));
+  if(usernameToPrint.slice(-1) == 's'){
+    d3.select("#png-title").html(usernameToPrint + "\' Personal Polynomial");  
+  } else {
+    d3.select("#png-title").html(usernameToPrint + "\'s Personal Polynomial");  
+  }
+  
 
   formatFrac();
 

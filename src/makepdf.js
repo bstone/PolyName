@@ -27,7 +27,7 @@ d3.select('#make-graph-eqn')
 //        img.src = eqn;        
 //        ctx.drawImage(img,0,0);        
 //        var graph = tempCanvas.toDataURL("image/png", 1.0);        
-        download(eqn,usernameToPrint+"-Did-It-Graph","png" );                      
+        download(eqn,usernameToPrint+"-Personal-Polynomial","png" );                      
     console.log("one");        
       },
     });
