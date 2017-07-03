@@ -16,34 +16,46 @@
 d3.select('#make-graph-eqn')
   .on("click", function() {
     var tempCanvas = document.createElement("canvas");
-    tempCanvas.width = 1200;
-    tempCanvas.height = 600;
+//    tempCanvas.width = 1200;
+//    tempCanvas.height = 600;
     var ctx = tempCanvas.getContext("2d");    
-    var img = new Image;
+//    var img = new Image;
+
+    html2canvas(document.getElementById('for-pdf'), {
+      onrendered: function(canvas) {
+        eqn = canvas.toDataURL("image/png", 1.0);
+//        img.src = eqn;        
+//        ctx.drawImage(img,0,0);        
+//        var graph = tempCanvas.toDataURL("image/png", 1.0);        
+        download(eqn,usernameToPrint+"-Did-It-Graph","png" );                      
+    console.log("one");        
+      },
+    });
+
 
     // html2canvas(document.getElementById('poly-name'), {
     //   onrendered: function(canvas) {
     //     eqn = canvas.toDataURL("image/png", 1.0);
     //     img.src = eqn;        
-    //     ctx.drawImage(img,0,0);        
+    //     ctx.drawImage(img,20,500);        
     // console.log("one");        
     //   },
     // });
 
-    console.log(img.src);
+    // console.log(img.src);
 
-    var img2 = new Image;
-    html2canvas(document.getElementById('testme'), {
-      onrendered: function(canvas) {
-        console.log(canvas);
-        eqn = canvas.toDataURL("image/png", 1.0);
-        img2.src = eqn;        
-        ctx.drawImage(img2,20,20);          
-        var graph = tempCanvas.toDataURL("image/png", 1.0);        
-        download(graph,usernameToPrint+"-Did-It-Graph","png" );              
-        console.log("two");
-      },
-    });
+    // var img2 = new Image;
+    // html2canvas(document.getElementById('testme'), {
+    //   onrendered: function(canvas) {
+    //     console.log(canvas);
+    //     eqn = canvas.toDataURL("image/png", 1.0);
+    //     img2.src = eqn;        
+    //     ctx.drawImage(img2,800,20);          
+    //     var graph = tempCanvas.toDataURL("image/png", 1.0);        
+    //     download(graph,usernameToPrint+"-Did-It-Graph","png" );              
+    //     console.log("two");
+    //   },
+    // });
 
 
 
