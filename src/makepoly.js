@@ -226,7 +226,7 @@ function nameValues(dataSet) {
       var charIndex = i+1;
 
       charValue = charValue.charCodeAt()-96;
-      valueString = "P (" +  charIndex + ") = " + charValue + " = " +d;
+      valueString = "P(" +  charIndex + ") = " + charValue + " = " +d;
 
       return valueString; 
     });
