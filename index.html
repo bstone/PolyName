@@ -30,7 +30,7 @@
       }
 
       .png-background {
-        background-color: #ff9900;
+        background-color: #ee9c00;
       }
 
       .png-cell-background {
@@ -104,21 +104,24 @@
     <!-- Begin Content -->
     <div class="container" role="main" style="padding-top: 30px; padding-bottom: 30px;">
       <div class="page-header">
-          <h1 id="typed-name">
-            Type your name: <input type="text" id="name-input" autofocus="autofocus" autocomplete="off"></input>
-             <button id="reset" type="button" class="btn btn-lg btn-primary">Reset</button> 
-          </h1>
+        <h1 id="typed-name">
+          Type your name: <input type="text" id="name-input" autofocus="autofocus" autocomplete="off"></input>
+           <button id="reset" type="button" class="btn btn-lg btn-primary">Reset</button> 
+           <button id="make-graph-eqn" type="button" class="btn btn-lg btn-primary"><span class="glyphicon glyphicon-download-alt"></span> Download Image</button>  
+        </h1>
 
-<!--           <button id="make-pdf" type="button" class="btn btn-info"><span class="glyphicon glyphicon-download-alt"></span> Download PDF</button>
-          <button id="make-graph" type="button" class="btn btn-info"><span class="glyphicon glyphicon-download-alt"></span> Download Graph</button>
-          <button id="make-eqn" type="button" class="btn btn-info"><span class="glyphicon glyphicon-download-alt"></span> Download Equation</button>            
- -->
-           <button id="make-graph-eqn" type="button" class="btn btn-info"><span class="glyphicon glyphicon-download-alt"></span> Download Image</button>                
+        <div align="center">
+          <button id="background1" type="button" class="btn btn-info" style="background-color: #d40606; border-color: #d40606">Background Color</button>
+          <button id="background2" type="button" class="btn btn-info" style="background-color: #ee9c00; border-color: #ee9c00">Background Color</button>
+          <button id="background3" type="button" class="btn btn-info" style="background-color: #e3ff00; border-color: #e3ff00">Background Color</button>
+          <button id="background4" type="button" class="btn btn-info" style="background-color: #06bf00; border-color: #06bf00  ">Background Color</button>
+          <button id="background5" type="button" class="btn btn-info" style="background-color: #001a98; border-color: #001a98">Background Color</button>
+        </div>
       </div>
 
       <div id="for-png" class="png-background">
         <div class="row">
-          <h1 id="png-title" align="center">Personal Polynomial</h1>
+          <h1 id="png-title" align="center" >Personal Polynomial</h1>
         </div>
 
         <div class="row" style="padding-left: 30px;">
@@ -156,11 +159,11 @@
           <p style="font-size: 150%">The above polynomial is unique blah blah blah.....here is a video</p>
         </div>
 
-<!-- Comment out for dev
+
         <div class="col-md-6">
           <iframe width="560" height="315" align="middle" src="https://www.youtube.com/embed/FMC5wiG545Q" frameborder="0" allowfullscreen></iframe>
         </div>        
--->
+
       </div>
 
       <!-- Page Footer --> 
