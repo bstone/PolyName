@@ -32,6 +32,14 @@
       .png-background {
         background-color: #ff9900;
       }
+
+      .png-cell-background {
+        background-color: white;
+      }  
+
+      .copy-color {
+        color: #808080;
+      }    
     </style>
 
     <!-- EDIT og:url and og:image in final version -->
@@ -101,25 +109,36 @@
              <button id="reset" type="button" class="btn btn-lg btn-primary">Reset</button> 
           </h1>
 
-          <button id="make-pdf" type="button" class="btn btn-info"><span class="glyphicon glyphicon-download-alt"></span> Download PDF</button>
+<!--           <button id="make-pdf" type="button" class="btn btn-info"><span class="glyphicon glyphicon-download-alt"></span> Download PDF</button>
           <button id="make-graph" type="button" class="btn btn-info"><span class="glyphicon glyphicon-download-alt"></span> Download Graph</button>
           <button id="make-eqn" type="button" class="btn btn-info"><span class="glyphicon glyphicon-download-alt"></span> Download Equation</button>            
-          <button id="make-graph-eqn" type="button" class="btn btn-info"><span class="glyphicon glyphicon-download-alt"></span> Download Graph and Equation</button>                
+ -->
+           <button id="make-graph-eqn" type="button" class="btn btn-info"><span class="glyphicon glyphicon-download-alt"></span> Download Image</button>                
       </div>
 
-      <div id="for-pdf" class="row png-background">
-        <div class="col-md-9">
-          <div id="container" class="row" background-color="red">
-            <div id="canvasElement" style="width:800px; height:400px;"></div>
-          </div>
-
-          <div class="row" style="padding-left: 30px; padding-top: 30px;">
-            <h4 id="poly-name" style="font-size: 150%;"></h4>
-          </div>        
+      <div id="for-png" class="png-background">
+        <div class="row">
+          <h1 id="png-title" align="center">Personal Polynomial</h1>
         </div>
 
-        <div id="testme" class="col-md-2">
-            <div id="name-table" class="well" style="font-size: 150%"></div>
+        <div class="row" style="padding-left: 30px;">
+          <div class="col-md-9">
+            <div id="container" class="well png-cell-background">
+              <div id="canvasElement" style="width:800px; height:400px;"></div>
+            </div>
+
+            <div class="well png-cell-background" style="padding-left: 30px; padding-top: 30px;">
+              <h4 id="poly-name" style="font-size: 150%;"></h4>
+            </div>        
+          </div>
+
+          <div id="testme" class="col-md-2">
+              <div id="name-table" class="well png-cell-background" style="font-size: 150%"></div>
+          </div>
+        </div>
+
+        <div class="row" style="padding-right: 30px;">
+          <h5 align="right" class="copy-color" >Software to produce this by Branden Stone</h5>
         </div>
       </div>
 

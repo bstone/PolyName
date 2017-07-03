@@ -262,6 +262,7 @@ function setupVis(nameArray) {
   });
 
   d3.select("#poly-name").html(usernameToPrint+" = " + makePoly(pointset));
+  d3.select("#png-title").html(usernameToPrint + "\'s Personal Polynomial");  
 
   formatFrac();
 

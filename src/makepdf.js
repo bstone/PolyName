@@ -21,7 +21,7 @@ d3.select('#make-graph-eqn')
     var ctx = tempCanvas.getContext("2d");    
 //    var img = new Image;
 
-    html2canvas(document.getElementById('for-pdf'), {
+    html2canvas(document.getElementById('for-png'), {
       onrendered: function(canvas) {
         eqn = canvas.toDataURL("image/png", 1.0);
 //        img.src = eqn;        
