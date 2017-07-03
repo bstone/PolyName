@@ -1,3 +1,29 @@
+
+d3.select('#background1')
+  .on('click', function() {
+    d3.select('#for-png').style({'background-color': '#d40606'})
+  });
+
+d3.select('#background2')
+  .on('click', function() {
+    d3.select('#for-png').style({'background-color': '#ee9c00'})
+  });
+
+d3.select('#background3')
+  .on('click', function() {
+    d3.select('#for-png').style({'background-color': '#e3ff00'})
+  });
+
+d3.select('#background4')
+  .on('click', function() {
+    d3.select('#for-png').style({'background-color': '#06bf00'})
+  });
+
+d3.select('#background5')
+  .on('click', function() {
+    d3.select('#for-png').style({'background-color': '#001a98'})
+  });
+
 // var getImadeData = function () {
 //     var i = arguments.length,
 //         tempCanvas = document.createElement("canvas"),
@@ -27,7 +53,7 @@ d3.select('#make-graph-eqn')
 //        img.src = eqn;        
 //        ctx.drawImage(img,0,0);        
 //        var graph = tempCanvas.toDataURL("image/png", 1.0);        
-        download(eqn,usernameToPrint+"-Did-It-Graph","png" );                      
+        download(eqn,usernameToPrint+"-Personal-Polynomial","png" );                      
     console.log("one");        
       },
     });
