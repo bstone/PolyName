@@ -1,3 +1,78 @@
+// var getImadeData = function () {
+//     var i = arguments.length,
+//         tempCanvas = document.createElement("canvas"),
+//         ctx = tempCanvas.getContext("2d");
+// //     while (i--) {
+//         ctx.drawImage(arguments[0], 0, 0);
+//         ctx.drawImage(arguments[1], 20, 20);        
+// //    };
+//     return tempCanvas.toDataURL("image/png", 1.0);
+// };
+
+///////////////////////////////////////////
+// Download All The Things
+///////////////////////////////////////////  
+
+d3.select('#make-graph-eqn')
+  .on("click", function() {
+    var tempCanvas = document.createElement("canvas");
+//    tempCanvas.width = 1200;
+//    tempCanvas.height = 600;
+    var ctx = tempCanvas.getContext("2d");    
+//    var img = new Image;
+
+    html2canvas(document.getElementById('for-png'), {
+      onrendered: function(canvas) {
+        eqn = canvas.toDataURL("image/png", 1.0);
+//        img.src = eqn;        
+//        ctx.drawImage(img,0,0);        
+//        var graph = tempCanvas.toDataURL("image/png", 1.0);        
+        download(eqn,usernameToPrint+"-Did-It-Graph","png" );                      
+    console.log("one");        
+      },
+    });
+
+
+    // html2canvas(document.getElementById('poly-name'), {
+    //   onrendered: function(canvas) {
+    //     eqn = canvas.toDataURL("image/png", 1.0);
+    //     img.src = eqn;        
+    //     ctx.drawImage(img,20,500);        
+    // console.log("one");        
+    //   },
+    // });
+
+    // console.log(img.src);
+
+    // var img2 = new Image;
+    // html2canvas(document.getElementById('testme'), {
+    //   onrendered: function(canvas) {
+    //     console.log(canvas);
+    //     eqn = canvas.toDataURL("image/png", 1.0);
+    //     img2.src = eqn;        
+    //     ctx.drawImage(img2,800,20);          
+    //     var graph = tempCanvas.toDataURL("image/png", 1.0);        
+    //     download(graph,usernameToPrint+"-Did-It-Graph","png" );              
+    //     console.log("two");
+    //   },
+    // });
+
+
+
+    // html2canvas(document.getElementById('poly-name'), {
+    //   onrendered: function(canvas) {
+    //     ctx.drawImage(canvas,200,200)
+    //   },
+    // });
+
+
+
+    console.log(tempCanvas)    
+
+
+});
+
+
 
 d3.select('#make-pdf')
   .on("click", function() {
@@ -118,18 +193,18 @@ d3.select('#make-eqn')
 // Download Graph and Equation
 ///////////////////////////////////////////
 
-d3.select('#make-graph-eqn')
-  .on("click", function() {
-      html2canvas(document.getElementById('poly-name'), {
-        onrendered: function(canvas) {
-          var graph = three.renderer.domElement//.toDataURL("image/png", 1.0)
-          canvas.getContext('2d').drawImage(graph, 500, 500, 500, 500);
-          eqn = canvas.toDataURL("image/png", 1.0);
-          download(eqn,usernameToPrint+"-Polynomial-Eqn","png" )          
-//          downloadURI(eqn,usernameToPrint+"-Polynomial-Eqn.png");        
-        },
-      });
-});
+// d3.select('#make-graph-eqn')
+//   .on("click", function() {
+//       html2canvas(document.getElementById('poly-name'), {
+//         onrendered: function(canvas) {
+//           var graph = three.renderer.domElement//.toDataURL("image/png", 1.0)
+//           canvas.getContext('2d').drawImage(graph, 500, 500, 500, 500);
+//           eqn = canvas.toDataURL("image/png", 1.0);
+//           download(eqn,usernameToPrint+"-Polynomial-Eqn","png" )          
+// //          downloadURI(eqn,usernameToPrint+"-Polynomial-Eqn.png");        
+//         },
+//       });
+// });
 
 
 // http://stackoverflow.com/a/15832662
@@ -179,7 +254,7 @@ function isSafari(){
 //to share one or the other on social media, but they are interrelated.) 
 
 //(ME) It’s not too complicated. I just thought people would like to have an option of having 
-//just one. I can make a button to download both as well. 
+//just one. I can make a button to download both as well. (Seems hard right now)
 
 //2) Can the NMF and Global Math Week logos and site URL go on the PDF template, or that 
 //is also too complicated? (If people / teachers choose to print and share, it would be 
@@ -194,7 +269,7 @@ function isSafari(){
 //be sophisticated enough to get that the arrow symbol means "click to download", user experience 
 //feedback leads me to think that making it a bit more obvious would be helpful.)
 
-//(ME) I will do this. 
+//(ME) I will do this. (DONE)
 
 //4) When do you need the final text for the page? If you're ready for us to send, I can work on 
 //this with James and share with David Eisenbud for a final check from MSRI's end.
