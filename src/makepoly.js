@@ -167,7 +167,6 @@ function splitName(name) {
   return [splitNameLC.match(/[a-z]/g),name.match(/[a-zA-Z]/g)]; // allows for printing user input
 }
 
-
 // assigns point values
 function encodeName(nameArray) {
   var points = [];
@@ -231,7 +230,6 @@ function nameValues(dataSet) {
   //     return valueString; 
   //   });
 
-
   var tr = d3.select("#name-tab").selectAll('tr')
     .data(dataSet)
     .enter()
@@ -272,8 +270,6 @@ function nameValues(dataSet) {
 
       return valueString; 
     });
-
-
 }
 
 
@@ -583,7 +579,5 @@ function makePoly(points) {
 //*/
   return polynomial;
 }
-
-
 
 
