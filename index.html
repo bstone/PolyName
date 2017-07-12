@@ -40,6 +40,10 @@
       .copy-color {
         color: #808080;
       }    
+
+      .ptext {
+        font-size: 150%;
+      }
     </style>
 
     <!-- EDIT og:url and og:image in final version -->
@@ -102,6 +106,13 @@
 
     <!-- Begin Content -->
     <div class="container" role="main" style="padding-top: 30px; padding-bottom: 30px;">
+
+      <h1 class="page-header">The mathematical formula that spells your name!</h1>
+
+      <p class="ptext">The Global Math Project and the <a href="http://www.nationalmathfestival.org/">National Math Festival</a> have teamed up to celebrate <a href="https://www.theglobalmathproject.org/gmw">Global Math Week 2017</a> with fun formulas for everyone. Come get your very own Personal Polynomial!</p>
+      <p class="ptext">What’s a polynomial? Just a type of math expression.</p>
+      <p class="ptext">What’s your Personal Polynomial? Find out by typing your name below!</p>
+
       <!-- Text box and background buttons -->
       <div class="page-header">
         <h1 id="typed-name">
@@ -160,18 +171,56 @@
 
       <!-- Under the hood -->
       <div class="row">
-      <hr>
-        <h1>Under the Hood with James Tanton</h1>
+      
+        <h1 class="page-header">How to interpret your Personal Polynomial</h1>
         <div class="col-md-6">
-          <p style="font-size: 150%">Your personal polynomial is...well personal! Like you it is unique; no other polynomial of this degree (or smaller) will evaluate your name as it does above. As can be seen in the video, they are constructed to have this property and hence no other polynomial will do. </p>
+          <p class="ptext">Here's a very quick video giving a very quick overview</p>
+          <iframe src="https://drive.google.com/file/d/0B7Tlf1SRSECkSE0zTm9zLUZjMDg/preview" width="560" height="315"></iframe>
         </div>
 
 
         <div class="col-md-6">
+          <p class="ptext">Here's a less quick, but still quick, video going over the details a little more slowly</p>
           <iframe src="https://drive.google.com/file/d/0B7Tlf1SRSECkSE0zTm9zLUZjMDg/preview" width="560" height="315"></iframe>
         </div>        
 
       </div>
+
+      <div class="row" style="padding-top:30px;">
+        <p class="ptext">If you prefer to read, here’s a little description:</p>
+        <div style="padding-left:30px">
+          <p class="ptext">
+            Say your names is JAMES. (How coincidental! That is my name!) </p>
+          <p class="ptext">The Personal Polynomial for James is</p>
+          <!-- <img src="./img/james-poly.png">.</img> -->
+          <h4 align="center" class="ptext">P(x) = <span class="fraction" style="color:#A9A9A9"><span class="top">83</span><span class="bottom">24</span></span> x<sup>4</sup>  - <span class="fraction" style="color:#A9A9A9"><span class="top">497</span><span class="bottom">12</span></span> x<sup>3</sup>  + <span class="fraction" style="color:#A9A9A9"><span class="top">4141</span><span class="bottom">24</span></span> x<sup>2</sup>  - <span class="fraction" style="color:#A9A9A9"><span class="top">3463</span><span class="bottom">12</span></span> x  + <span class="fraction" style="color:#A9A9A9">164</span>.</h4>
+          <p class="ptext">And how does this spell James?</p>
+          <p class="ptext">Well, put in the value 1 for <b>x</b>, work out the arithmetic, and see that that value 10 results.  And what is the tenth letter of the alphabet? It’s J!</p>
+          <p class="ptext">Put in the value 2 for <b>x</b>, work out the arithmetic, and see that the value 1 results. And what is the first letter of the alphabet? It’s A!</p>
+          <p class="ptext">Keep doing this and see JAMES appear.</p>
+          <p><table align="center" class="ptext"><tr><td>P(1)</td><td>&nbsp; = 10</td><td>&nbsp; = J</td></tr><tr><td>P(2)</td><td>&nbsp; = 1</td><td>&nbsp; = a</td></tr><tr><td>P(3)</td><td>&nbsp; = 13</td><td>&nbsp; = m</td></tr><tr><td>P(4)</td><td>&nbsp; = 5</td><td>&nbsp; = e</td></tr><tr><td>P(5)</td><td>&nbsp; = 19</td><td>&nbsp; = s</td></tr></table></p>
+          <p class="ptext">Amaze your friends and family, and share your polynomial with the world!</p>
+        </div>
+      </div>
+
+      <div class="row">
+        <h1 class="page-header">The math behind the scenes</h1>
+        <div class="col-md-6">
+          <p class="ptext">Do you want to see how these polynomials are made? It’s school algebra. Click here for a third video that explains all the mathematics.</p>
+          <p class="ptext">Your Personal Polynomial is unique to you. No other polynomial of the same or smaller degree spells your name!</p>
+        </div>
+
+        <div class="col-md-6">
+          <iframe src="https://drive.google.com/file/d/0B7Tlf1SRSECkSE0zTm9zLUZjMDg/preview" width="560" height="315"></iframe>
+        </div>
+      </div>
+
+      <div class="row">
+        <h1 class="page-header">More math</h1>
+        <p class="ptext">See the <a href="http://www.nationalmathfestival.org/">National Math Festival</a> site for more math.</p>
+        <p class="ptext">Take part in the world’s biggest community math event, ever!  <a href="https://www.theglobalmathproject.org/gmw">Global Math Week 2017</a>.</p>
+      </div>      
+
 
       <!-- Page Footer --> 
       <div class="row">
