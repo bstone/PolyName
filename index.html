@@ -95,7 +95,6 @@
             <span class="icon-bar"></span>
           </button>
           <a class="navbar-brand" href="#">Personal Polynomial</a>
-<!--          <a id="social-link" class="navbar-brand" href="./share.html">Share your Polynomial</a>-->
         </div>
       </div>
 
@@ -103,11 +102,12 @@
 
     <!-- Begin Content -->
     <div class="container" role="main" style="padding-top: 30px; padding-bottom: 30px;">
+      <!-- Text box and background buttons -->
       <div class="page-header">
         <h1 id="typed-name">
           Type your name: <input type="text" id="name-input" autofocus="autofocus" autocomplete="off"></input>
            <button id="reset" type="button" class="btn btn-lg btn-primary">Reset</button> 
-           <button id="make-graph-eqn" type="button" class="btn btn-lg btn-primary"><span class="glyphicon glyphicon-download-alt"></span> Download Image</button>  
+           <button id="download-png" type="button" class="btn btn-lg btn-primary"><span class="glyphicon glyphicon-download-alt"></span> Download Image</button>
         </h1>
 
         <div align="center">
@@ -119,23 +119,28 @@
         </div>
       </div>
 
+      <!-- content exported to png -->
       <div id="for-png" class="png-background">
         <div class="row">
           <h1 id="png-title" align="center" >Personal Polynomial</h1>
         </div>
 
+        <!-- Images and polynomials -->
         <div class="row" style="padding-left: 30px;">
           <div class="col-md-9">
+            <!-- Canvas for graph -->
             <div id="container" class="well png-cell-background">
               <div id="canvasElement" style="width:800px; height:400px;"></div>
             </div>
 
+            <!-- Written Polynomial -->
             <div class="well png-cell-background" style="padding-left: 30px; padding-top: 30px;">
               <h4 id="poly-name" style="font-size: 150%;"></h4>
             </div>        
           </div>
 
-          <div id="testme" class="col-md-3">
+          <!-- Evaluation of polynomial -->
+          <div class="col-md-3">
             <div class="row">
               <div class ="col-md-10">
                 <div id="name-table" class="well png-cell-background" style="font-size: 150%">
@@ -147,8 +152,9 @@
           </div>
         </div>
 
+        <!-- Acknowledgments  -->
         <div class="row" style="padding-right: 30px;">
-          <h5 align="right" class="copy-color" >Software to produce this by Branden Stone in cooperatoin with the MSRI and the Global Math Project <img id="png-img" src="./img/gmp_balloon_gray.png" width="20"></img></h5> 
+          <h5 align="right" class="copy-color" >Designed by Branden Stone in cooperation with the MSRI and the Global Math Project <img id="png-img" src="./img/gmp_balloon_gray.png" width="20"></img></h5> 
         </div>
       </div>
 
@@ -163,8 +169,7 @@
 
         <div class="col-md-6">
           <iframe src="https://drive.google.com/file/d/0B7Tlf1SRSECkSE0zTm9zLUZjMDg/preview" width="560" height="315"></iframe>
-<!--      <iframe width="560" height="315" align="middle" src="https://www.youtube.com/embed/FMC5wiG545Q" frameborder="0" allowfullscreen></iframe>
- -->        </div>        
+        </div>        
 
       </div>
 
@@ -248,7 +253,6 @@
     <!-- Placed at the end of the document so the pages load faster -->
 
     <!-- lib JavaScript -->
-    <script type="text/javascript" src="./lib/jspdf.min.js"></script>      
     <script type="text/javascript" src="./lib/mathbox-bundle.min.js"></script>        
     <script type="text/javascript" src="./lib/d3.min.js"></script>    
     <script type="text/javascript" src="./lib/fraction.min.js"></script>
@@ -257,11 +261,11 @@
 
     <!-- src JavaScript -->
     <script type="text/javascript" src="./src/makepoly.js"></script>
-    <script type="text/javascript" src="./src/makepdf.js"></script>   
+    <script type="text/javascript" src="./src/makepng.js"></script>    
+
 
 
     <!-- Start of StatCounter Code for Default Guide -->
-    
     <script type="text/javascript">
     var sc_project=11001640;
     var sc_invisible=1;
@@ -277,54 +281,10 @@
     target="_blank"><img class="statcounter"
     src="//c.statcounter.com/11001640/0/dfe4f2ef/1/"
     alt="shopify analytics tool"></a></div></noscript>
-    
     <!-- End of StatCounter Code for Default Guide -->
 
 
 
 </body>
 </html>
-
-
-<!--
-    </div>
-
-      <p>
-        <button type="button" class="btn btn-lg btn-default">Default</button>
-        <button type="button" class="btn btn-lg btn-primary">Primary</button>
-        <button type="button" class="btn btn-lg btn-success">Success</button>
-        <button type="button" class="btn btn-lg btn-info">Info</button>
-        <button type="button" class="btn btn-lg btn-warning">Warning</button>
-        <button type="button" class="btn btn-lg btn-danger">Danger</button>
-        <button type="button" class="btn btn-lg btn-link">Link</button>
-      </p>
-      <p>
-        <button type="button" class="btn btn-default">Default</button>
-        <button type="button" class="btn btn-primary">Primary</button>
-        <button type="button" class="btn btn-success">Success</button>
-        <button type="button" class="btn btn-info">Info</button>
-        <button type="button" class="btn btn-warning">Warning</button>
-        <button type="button" class="btn btn-danger">Danger</button>
-        <button type="button" class="btn btn-link">Link</button>
-      </p>
-      <p>
-        <button type="button" class="btn btn-sm btn-default">Default</button>
-        <button type="button" class="btn btn-sm btn-primary">Primary</button>
-        <button type="button" class="btn btn-sm btn-success">Success</button>
-        <button type="button" class="btn btn-sm btn-info">Info</button>
-        <button type="button" class="btn btn-sm btn-warning">Warning</button>
-        <button type="button" class="btn btn-sm btn-danger">Danger</button>
-        <button type="button" class="btn btn-sm btn-link">Link</button>
-      </p>
-      <p>
-        <button type="button" class="btn btn-xs btn-default">Default</button>
-        <button type="button" class="btn btn-xs btn-primary">Primary</button>
-        <button type="button" class="btn btn-xs btn-success">Success</button>
-        <button type="button" class="btn btn-xs btn-info">Info</button>
-        <button type="button" class="btn btn-xs btn-warning">Warning</button>
-        <button type="button" class="btn btn-xs btn-danger">Danger</button>
-        <button type="button" class="btn btn-xs btn-link">Link</button>
-      </p>
--->
-
 

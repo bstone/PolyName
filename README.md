@@ -5,7 +5,8 @@ The repo is a fun project that creates a polynomial given the user's name. The c
 * [MathBox](https://gitgud.io/unconed/mathbox/)
 * [D3.js](https://github.com/d3/d3)
 * [Fraction.js](https://github.com/infusion/Fraction.js)
-* [jsPDF](https://github.com/MrRio/jsPDF)
+* [html2canvas.js](https://html2canvas.hertzen.com/)
+* [downlaod.js](http://danml.com/download.html)
 
 You can view the code in action here, [http://b-stone.github.io/PolyName/](http://b-stone.github.io/PolyName/), or you can run the code locally following the instructions below.
 
