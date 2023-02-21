@@ -8,14 +8,14 @@ The repo is a fun project that creates a polynomial given the user's name. The c
 * [html2canvas.js](https://html2canvas.hertzen.com/)
 * [downlaod.js](http://danml.com/download.html)
 
-You can view the code in action here, [http://b-stone.github.io/PolyName/](http://b-stone.github.io/PolyName/), or you can run the code locally following the instructions below.
+You can view the code in action here, [http://bstone.github.io/PolyName/](http://b-stone.github.io/PolyName/), or you can run the code locally following the instructions below.
 
 ## Running locally
 
 ### First Clone the Repository
 
 ```
-git clone https://github.com/b-stone/PolyName.git
+git clone https://github.com/bstone/PolyName.git
 cd PolyName
 ```
 
